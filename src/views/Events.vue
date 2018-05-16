@@ -21,9 +21,6 @@ export default {
       return this.$store.state.events
     },
     ...mapGetters(['totalEvents', 'largeEvents'])
-    // totalEvents() {
-    //   return this.$store.getters.totalEvents
-    // }
   }
 }
 </script>

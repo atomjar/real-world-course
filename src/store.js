@@ -60,6 +60,10 @@ export default new Vuex.Store({
       return state.events.filter(event => event.attendeeCount > 10)
     }
   },
-  mutations: {},
+  mutations: {
+    addEvent(state, event) {
+      state.events.push(event)
+    }
+  },
   actions: {}
 });
