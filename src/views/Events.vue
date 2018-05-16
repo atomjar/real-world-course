@@ -1,13 +1,15 @@
 <template>
   <div>
     <h1>Events Page</h1>
-    <EventCard v-for="event in events" :key="event.id" :events="{title: event.title, date: event.date, time: event.time, attendeeCount: event.attendeeCount}"/>
+    <h2>Total Events: {{ totalEvents }}</h2>
+    <EventCard v-for="event in largeEvents" :key="event.id" :events="{title: event.title, date: event.date, time: event.time, attendeeCount: event.attendeeCount}"/>
   </div>
 
 </template>
 
 <script>
 import EventCard from '@/components/EventCard.vue'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'Events',
@@ -17,7 +19,11 @@ export default {
   computed: {
     events() {
       return this.$store.state.events
-    }
+    },
+    ...mapGetters(['totalEvents', 'largeEvents'])
+    // totalEvents() {
+    //   return this.$store.getters.totalEvents
+    // }
   }
 }
 </script>

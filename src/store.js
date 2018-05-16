@@ -52,6 +52,14 @@ export default new Vuex.Store({
       }
     ]
   },
+  getters: {
+    totalEvents: state => {
+      return state.events.length
+    },
+    largeEvents: state => {
+      return state.events.filter(event => event.attendeeCount > 10)
+    }
+  },
   mutations: {},
   actions: {}
 });
