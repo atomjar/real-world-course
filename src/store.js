@@ -14,7 +14,7 @@ export default new Vuex.Store({
         timestamp: 1540749900,
         location: '132 N Magnolia Street, Orlando, Florida',
         description: "Let's cleanup this beach.",
-        organizer: 'Ádam Jahr',
+        organizer: 'Adam Jahr',
         category: {
           sustainability: true,
           nature: true
@@ -29,7 +29,7 @@ export default new Vuex.Store({
         timestamp: 1540748600,
         location: '132 N Magnolia Street, Orlando, Florida',
         description: "We're going to clean up this park.",
-        organizer: 'Ádam Jahr',
+        organizer: 'Adam Jahr',
         category: {
           sustainability: true,
           nature: true
@@ -44,7 +44,7 @@ export default new Vuex.Store({
         timestamp: 1540729600,
         location: '132 N Magnolia Street, Orlando, Florida',
         description: "We're going to cook great food.",
-        organizer: 'Ádam Jahr',
+        organizer: 'Adam Jahr',
         category: {
           homelessness: true
         },
