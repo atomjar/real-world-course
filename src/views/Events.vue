@@ -10,17 +10,33 @@
 <script>
 import EventCard from '@/components/EventCard.vue'
 import { mapGetters } from 'vuex'
+import axios from 'axios'
 
 export default {
   name: 'Events',
   components: {
     EventCard
   },
+  data() {
+    return {
+      events: []
+    }
+  },
+  mounted() {
+    axios
+      .get('http://localhost:3000/events')
+      .then(response => {
+        this.events = response.data
+      })
+      .catch(error => {
+        console.log('There was an error:', error.response)
+      })
+  },
   computed: {
-    events() {
-      return this.$store.state.events
-    },
-    ...mapGetters(['totalEvents', 'largeEvents'])
+    // events() {
+    //   return this.$store.state.events
+    // },
+    // ...mapGetters(['totalEvents', 'largeEvents'])
     // totalEvents() {
     //   return this.$store.getters.totalEvents
     // }

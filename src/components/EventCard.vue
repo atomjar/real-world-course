@@ -1,9 +1,11 @@
 <template>
-  <div>
-    <p>{{ events.title }}</p>
-    <p>{{ events.date }}</p>
-    <p>{{ events.time }}</p>
-    <p>{{ events.attendeeCount }}</p>
+  <div class="event-card -shadow">
+    <span class="eyebrow">@{{ events.time }} on {{ events.date }}</span>
+    <h4 class="title">{{ events.title }}</h4>
+    <span class="meta">
+      <svg class="icon" width="24" height="24">
+        <use xlink:href="feather-sprite.svg#users"/></svg>
+      {{ events.attendeeCount }} people going</span>
   </div>
 </template>
 
@@ -17,4 +19,10 @@ export default {
 </script>
 
 <style>
+.event-card {
+  padding: 20px;
+}
+.event-card > .title {
+  margin: 0;
+}
 </style>
