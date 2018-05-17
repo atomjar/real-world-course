@@ -15,7 +15,9 @@ export default {
   components: {
     EventCard
   },
-    events() {
+  data() {
+    return {
+      events: []
     }
   },
   mounted() {
