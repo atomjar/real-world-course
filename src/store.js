@@ -19,6 +19,9 @@ export default new Vuex.Store({
     },
     getCategoryByString: state => string => {
       return state.categories.find(cat => cat === string)
+    },
+    getLastEvent: state => {
+      return state.events[state.events.length - 1]
     }
   },
   mutations: {

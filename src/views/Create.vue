@@ -2,7 +2,6 @@
   <div>
     <h1>Create Page</h1>
 
-    <!-- <form  @submit.prevent="addEvent(event)"> -->
     <form  @submit.prevent="ADD_EVENT(event)">
       <h2>Tell us about your event</h2>
 
@@ -30,19 +29,24 @@
       <input type="submit" value="Submit"/>
     </form>
 
+    <snackbar v-if="success">
+      <h4 slot="header">Success!</h4>
+      <p slot="paragraph">Your event has been created.</p>
+    </snackbar>
+
   </div>
 </template>
 
 <script>
-// import { mapState } from 'vuex'
-import { mapGetters } from 'vuex'
-import { mapMutations } from 'vuex'
+import { mapGetters, mapMutations } from 'vuex'
 import Datepicker from 'vuejs-datepicker'
+import Snackbar from '@/components/Snackbar.vue'
 
 export default {
   name: 'Create',
   components: {
-    Datepicker
+    Datepicker,
+    Snackbar
   },
   data() {
     return {
@@ -60,13 +64,24 @@ export default {
     }
   },
   computed: {
-    // username() {
-    //   return this.$store.state.user
-    // },
     ...mapGetters({
       categoryLength: 'getCategoriesLength',
-      searchCategories: 'getCategoryByString'
-    })
+      searchCategories: 'getCategoryByString',
+      lastEvent: 'getLastEvent'
+    }),
+    success() {
+      console.log('success', this.lastEvent)
+      if (this.lastEvent === this.event) {
+        return true
+      } else {
+        return false
+      }
+    }
+  },
+  watch: {
+    newEvent() {
+      this.success = true
+    }
   },
   created() {
     var times = []
@@ -84,9 +99,6 @@ export default {
   },
   methods: {
     ...mapMutations(['ADD_EVENT'])
-    // addEvent() {
-    //   this.$store.commit('ADD_EVENT', this.event)
-    // }
   }
 }
 </script>
