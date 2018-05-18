@@ -22,6 +22,7 @@ body {
   line-height: 1.5;
 }
 #app {
+  box-sizing: border-box;
   width: 500px;
   padding: 0 20px;
   margin: 0 auto;
@@ -131,6 +132,7 @@ input,
 optgroup,
 select,
 textarea {
+  display: inline-flex;
   font-family: "Open sans", sans-serif;
   font-size: 100%;
   line-height: 1.15;
@@ -163,43 +165,19 @@ button:-moz-focusring,
 [type="submit"]:-moz-focusring {
   outline: 2px solid #39b982;
 }
-input,
-textarea {
-  box-sizing: border-box;
-  width: 100%;
-  border: solid 1px rgba(0,0,0,0.4);
-}
-textarea {
-  font-size: 20px;
-  overflow: auto;
-}
-input[type="text"] {
-  height: 52px;
-  padding: 0 10px;
-  font-size: 20px;
-}
-input[type="text"]:focus {
-  border-color: #39b982;
-}
 label {
   color: rgba(0,0,0,0.5);
   font-weight: 700;
 }
-.input-inline {
-  position: relative;
+input,
+textarea {
+  box-sizing: border-box;
+  border: solid 1px rgba(0,0,0,0.4);
 }
-.input-inline input {
-  position: relative;
-  padding-right: 70px;
-}
-.input-inline.-button-right button {
-  position: absolute;
-  top: 0;
-  right: 0;
-}
-.input-inline.-button-right button:hover {
-  -webkit-transform: scale(1);
-          transform: scale(1);
+textarea {
+  width: 100%;
+  overflow: auto;
+  font-size: 20px;
 }
 [type="checkbox"],
 [type="radio"] {
@@ -217,6 +195,19 @@ label {
 [type="search"]::-webkit-search-decoration {
   -webkit-appearance: none;
 }
+[type="text"],
+[type="number"],
+[type="search"] {
+  height: 52px;
+  width: 100%;
+  padding: 0 10px;
+  font-size: 20px;
+}
+[type="text"]:focus,
+[type="number"]:focus,
+[type="search"]:focus {
+  border-color: #39b982;
+}
 ::-webkit-file-upload-button {
   -webkit-appearance: button;
   font: inherit;
@@ -224,9 +215,48 @@ label {
 [hidden] {
   display: none;
 }
+select {
+  width: 100%;
+  height: 52px;
+  padding: 0 24px 0 10px;
+  vertical-align: middle;
+  background: #fff url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3E%3Cpath fill='%23343a40' d='M2 0L0 2h4zm0 5L0 3h4z'/%3E%3C/svg%3E") no-repeat right 12px center;
+  background-size: 8px 10px;
+  border: solid 1px rgba(0,0,0,0.4);
+  border-radius: 0;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+}
+select:focus {
+  border-color: #39b982;
+  outline: 0;
+}
+select:focus::ms-value {
+  color: #000;
+  background: #fff;
+}
+select::ms-expand {
+  opacity: 0;
+}
+.input-inline {
+  position: relative;
+}
+.input-inline input {
+  position: relative;
+  padding-right: 70px;
+}
+.input-inline.-button-right button {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.input-inline.-button-right button:hover {
+  -webkit-transform: scale(1);
+          transform: scale(1);
+}
 button,
 .button {
-  display: inline-flex;
   align-items: center;
   justify-content: space-between;
   height: 52px;
