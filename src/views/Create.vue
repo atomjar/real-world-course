@@ -2,7 +2,9 @@
   <div>
     <h1>Create Page</h1>
 
-    <form  @submit.prevent="ADD_EVENT(event)">
+    <!-- <form  @submit.prevent="ADD_EVENT(event)"> -->
+    <form  @submit.prevent="addEvent">
+
       <h2>Tell us about your event</h2>
 
       <label>Select a category</label>
@@ -38,7 +40,7 @@
 </template>
 
 <script>
-import { mapGetters, mapMutations } from 'vuex'
+// import { mapGetters, mapMutations } from 'vuex'
 import Datepicker from 'vuejs-datepicker'
 import Snackbar from '@/components/Snackbar.vue'
 
@@ -60,29 +62,16 @@ export default {
         time: ''
       },
       categories: [],
-      times: []
+      times: [],
+      success: false
     }
   },
-  computed: {
-    ...mapGetters({
-      categoryLength: 'getCategoriesLength',
-      searchCategories: 'getCategoryByString',
-      lastEvent: 'getLastEvent'
-    }),
-    success() {
-      console.log('success', this.lastEvent)
-      if (this.lastEvent === this.event) {
-        return true
-      } else {
-        return false
-      }
-    }
-  },
-  watch: {
-    newEvent() {
-      this.success = true
-    }
-  },
+  // computed: {
+  //   ...mapGetters({
+  //     categoryLength: 'getCategoriesLength',
+  //     searchCategories: 'getCategoryByString'
+  //   })
+  // },
   created() {
     var times = []
     for (var i = 1; i <= 24; i++) {
@@ -98,7 +87,11 @@ export default {
     this.categories = this.$store.state.categories
   },
   methods: {
-    ...mapMutations(['ADD_EVENT'])
+    // ...mapMutations(['ADD_EVENT'])
+    addEvent() {
+      this.$store.dispatch('addEvent', this.event)
+      this.success = true
+    }
   }
 }
 </script>

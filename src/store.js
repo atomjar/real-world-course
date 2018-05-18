@@ -20,13 +20,14 @@ export default new Vuex.Store({
     getCategoryByString: state => string => {
       return state.categories.find(cat => cat === string)
     },
-    getLastEvent: state => {
-      return state.events[state.events.length - 1]
+    getLastEvent: state => event => {
+      return state.events.includes(event)
     }
   },
   mutations: {
     ADD_EVENT(state, event) {
       state.events.push(event)
+
     },
     STORE_EVENTS(state, events) {
       events.map(event => {
@@ -43,7 +44,11 @@ export default new Vuex.Store({
         .catch(error => {
           console.log('There was an error:', error.response)
         })
+    },
+    addEvent({ commit }, event) {
+      commit('ADD_EVENT', event)
     }
   }
+
 });
 
