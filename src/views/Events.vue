@@ -8,7 +8,6 @@
 
 <script>
 import EventCard from '@/components/EventCard.vue'
-// import { mapGetters } from 'vuex'
 import axios from 'axios'
 
 export default {
@@ -16,27 +15,20 @@ export default {
   components: {
     EventCard
   },
-  // data() {
-  //   return {
-  //     events: []
-  //   }
-  // },
+  data() {
+    return {
+      events: []
+    }
+  },
   mounted() {
     axios
       .get('http://localhost:3000/events')
       .then(response => {
-        this.$store.commit(STORE_EVENTS(response.data))
-        // this.events = response.data
-        // console.log(this.$store.state.events)
+        this.events = response.data
       })
       .catch(error => {
         console.log('There was an error:', error.response)
       })
-  },
-  computed: {
-    events() {
-      return this.$store.state.events
-    }
   }
 }
 </script>

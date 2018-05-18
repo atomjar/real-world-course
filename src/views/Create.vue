@@ -71,10 +71,12 @@ export default {
   created() {
     var times = []
     for (var i = 1; i <= 24; i++) {
-      i += ':00'
       times.push(i)
     }
-    this.times = times
+    times.map(time => {
+      time += ':00'
+      this.times.push(time)
+    })
   },
   mounted() {
     this.event.organizer = this.$store.state.user
