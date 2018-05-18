@@ -1,8 +1,7 @@
 <template>
   <div>
     <h1>Events Page</h1>
-    <h2>Total Events: {{ totalEvents }}</h2>
-    <EventCard v-for="event in largeEvents" :key="event.id" :events="{title: event.title, date: event.date, time: event.time, attendeeCount: event.attendeeCount}"/>
+    <EventCard v-for="event in events" :key="event.id" :events="{title: event.title, date: event.date, time: event.time, attendeeCount: event.attendeeCount}"/>
   </div>
 
 </template>
@@ -17,25 +16,27 @@ export default {
   components: {
     EventCard
   },
-  data() {
-    return {
-      events: []
-    }
-  },
+  // data() {
+  //   return {
+  //     events: []
+  //   }
+  // },
   mounted() {
     axios
       .get('http://localhost:3000/events')
       .then(response => {
-        this.events = response.data
+        this.$store.commit(STORE_EVENTS(response.data))
+        // this.events = response.data
+        // console.log(this.$store.state.events)
       })
       .catch(error => {
         console.log('There was an error:', error.response)
       })
   },
   computed: {
-    // events() {
-    //   return this.$store.state.events
-    // }
+    events() {
+      return this.$store.state.events
+    }
   }
 }
 </script>
