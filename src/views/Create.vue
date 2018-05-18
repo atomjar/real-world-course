@@ -1,33 +1,51 @@
 <template>
   <div>
-    <h1>Create Page</h1>
+    <h1>Create an Event</h1>
 
     <!-- <form  @submit.prevent="addEvent(event)"> -->
     <form  @submit.prevent="ADD_EVENT(event)">
       <h2>Tell us about your event</h2>
 
-      <label>Select a category</label>
-      <select v-model="event.category">
-        <option v-for="cat in categories" :key="cat">{{ cat }}</option>
-      </select>
+      <BaseField>
+        <label>Select a category</label>
+        <select v-model="event.category">
+          <option v-for="cat in categories" :key="cat">{{ cat }}</option>
+        </select>
+      </BaseField>
 
       <h3>Name & describe your event</h3>
-      <input v-model="event.title" type="text" placeholder="Add an event title"/>
-      <input v-model="event.description" type="text" placeholder="Add a description"/>
+      <BaseField>
+        <label>Title</label>
+        <BaseInput v-model="event.title" placeholder="Add an event title" />
+      </BaseField>
+
+      <BaseField>
+        <label>Description</label>
+        <BaseInput v-model="event.description" placeholder="Add a description" />
+      </BaseField>
 
       <h3>Where is your event?</h3>
-      <input v-model="event.location" type="text" placeholder="Add a location"/>
+
+      <BaseField>
+        <label>Location</label>
+        <BaseInput v-model="event.location" placeholder="Add a location" />
+      </BaseField>
 
       <h3>When is your event?</h3>
 
-      <datepicker v-model="event.date" placeholder="Select a date"/>
+      <BaseField>
+        <label>Date</label>
+        <datepicker v-model="event.date" placeholder="Select a date"/>
+      </BaseField>
 
-      <label>Select a time</label>
-      <select v-model="event.time">
-        <option v-for="time in times" :key="time">{{ time }}</option>
-      </select>
+      <BaseField>
+        <label>Select a time</label>
+        <select v-model="event.time">
+          <option v-for="time in times" :key="time">{{ time }}</option>
+        </select>
+      </BaseField>
 
-      <input type="submit" value="Submit"/>
+      <input type="submit" class="button -fill-gradient" value="Submit"/>
     </form>
 
   </div>
@@ -37,11 +55,15 @@
 // import { mapState } from 'vuex'
 import { mapGetters } from 'vuex'
 import { mapMutations } from 'vuex'
+import BaseField from '../components/FormFields/BaseField'
+import BaseInput from '../components/FormFields/BaseInput'
 import Datepicker from 'vuejs-datepicker'
 
 export default {
   name: 'Create',
   components: {
+    BaseField,
+    BaseInput,
     Datepicker
   },
   data() {
