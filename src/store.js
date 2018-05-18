@@ -6,7 +6,8 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     user: { firstName: 'Adam', lastName: 'Jahr' },
-    categories: ['sustainability', 'nature', 'animal welfare', 'housing', 'education', 'food', 'community']
+    categories: ['sustainability', 'nature', 'animal welfare', 'housing', 'education', 'food', 'community'],
+    events: []
   },
   getters: {
     getFirstName: state => {
@@ -20,7 +21,7 @@ export default new Vuex.Store({
     }
   },
   mutations: {
-    addEvent(state, event) {
+    ADD_EVENT(state, event) {
       state.events.push(event)
     }
   },
