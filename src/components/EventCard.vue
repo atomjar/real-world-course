@@ -21,6 +21,7 @@ export default {
 <style>
 .event-card {
   padding: 20px;
+  margin-bottom: 24px;
 }
 .event-card > .title {
   margin: 0;

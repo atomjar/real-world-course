@@ -1,7 +1,8 @@
 <template>
   <div>
-    <h1>Events Page</h1>
-    <EventCard v-for="event in events" :key="event.id" :events="{title: event.title, date: event.date, time: event.time, attendeeCount: event.attendeeCount}"/>
+    <h1>Events</h1>
+    <SearchInput placeholder="Search by category"/>
+    <EventList :events="events"/>
   </div>
 
 </template>
@@ -9,11 +10,15 @@
 <script>
 import EventCard from '@/components/EventCard.vue'
 import axios from 'axios'
+import EventList from '@/components/EventList.vue'
+import SearchInput from '@/components/SearchInput.vue'
 
 export default {
   name: 'Events',
   components: {
-    EventCard
+    EventCard,
+    EventList,
+    SearchInput
   },
   data() {
     return {
