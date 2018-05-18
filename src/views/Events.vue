@@ -8,19 +8,12 @@
 
 <script>
 import EventCard from '@/components/EventCard.vue'
-// import { mapGetters } from 'vuex'
-// import axios from 'axios'
 
 export default {
   name: 'Events',
   components: {
     EventCard
   },
-  // data() {
-  //   return {
-  //     events: []
-  //   }
-  // },
   mounted() {
     this.$store.dispatch('fetchEvents')
   },

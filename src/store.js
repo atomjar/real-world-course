@@ -26,14 +26,15 @@ export default new Vuex.Store({
       state.events.push(event)
     },
     STORE_EVENTS(state, events) {
-      state.events.concat(events)
+      events.map(event => {
+        state.events.push(event)
+      })
     }
   },
   actions: {
     fetchEvents({ commit }) {
       axios.get('http://localhost:3000/events')
         .then(response => {
-          console.log('response:', response.data)
           commit('STORE_EVENTS', response.data)
         })
         .catch(error => {
