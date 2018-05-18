@@ -1,5 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import axios from 'axios'
 
 Vue.use(Vuex);
 
@@ -28,5 +29,17 @@ export default new Vuex.Store({
       state.events.concat(events)
     }
   },
-  actions: {}
+  actions: {
+    fetchEvents({ commit }) {
+      axios.get('http://localhost:3000/events')
+        .then(response => {
+          console.log('response:', response.data)
+          commit('STORE_EVENTS', response.data)
+        })
+        .catch(error => {
+          console.log('There was an error:', error.response)
+        })
+    }
+  }
 });
+

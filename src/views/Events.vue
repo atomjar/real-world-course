@@ -9,7 +9,7 @@
 <script>
 import EventCard from '@/components/EventCard.vue'
 // import { mapGetters } from 'vuex'
-import axios from 'axios'
+// import axios from 'axios'
 
 export default {
   name: 'Events',
@@ -22,16 +22,7 @@ export default {
   //   }
   // },
   mounted() {
-    axios
-      .get('http://localhost:3000/events')
-      .then(response => {
-        this.$store.commit(STORE_EVENTS(response.data))
-        // this.events = response.data
-        // console.log(this.$store.state.events)
-      })
-      .catch(error => {
-        console.log('There was an error:', error.response)
-      })
+    this.$store.dispatch('fetchEvents')
   },
   computed: {
     events() {
