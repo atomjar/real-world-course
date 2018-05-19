@@ -7,28 +7,32 @@
 
       <h2>Tell us about your event</h2>
 
-      <label>Select a category</label>
+      <option-select v-model="event.category" label="Select a category" :options="categories"></option-select>
+
+      <!-- <label>Select a category</label>
       <select v-model="event.category">
         <option v-for="cat in categories" :key="cat">{{ cat }}</option>
-      </select>
+      </select> -->
 
       <h3>Name & describe your event</h3>
-      <input v-model="event.title" type="text" placeholder="Add an event title"/>
-      <input v-model="event.description" type="text" placeholder="Add a description"/>
+      <!-- This is a custom input component -->
+      <!-- v-model is syntactic sugar for :value="" and @input="" on the element -->
+      <input-field v-model="event.title" type="text" placeholder="Add an event title" required></input-field>
+      <!-- This is a normal input component -->
+      <!-- <input v-model="event.title" type="text" placeholder="Add an event title"/> -->
+      <input-field v-model="event.description" type="text" placeholder="Add a description"></input-field>
 
       <h3>Where is your event?</h3>
-      <input v-model="event.location" type="text" placeholder="Add a location"/>
+      <input-field v-model="event.location" type="text" placeholder="Add a location" required></input-field>
 
       <h3>When is your event?</h3>
 
       <datepicker v-model="event.date" placeholder="Select a date"/>
 
-      <label>Select a time</label>
-      <select v-model="event.time">
-        <option v-for="time in times" :key="time">{{ time }}</option>
-      </select>
-
-      <input type="submit" value="Submit"/>
+      <option-select v-model="event.time" label="Select a time" :options="times"></option-select>
+    
+      <!-- <input type="submit" value="Submit"/> -->
+      <base-button>Submit</base-button>
     </form>
 
     <snackbar v-if="success">
@@ -42,12 +46,16 @@
 <script>
 // import { mapGetters, mapMutations } from 'vuex'
 import Datepicker from 'vuejs-datepicker'
+import InputField from '@/components/InputField.vue'
+import OptionSelect from '@/components/OptionSelect.vue'
 import Snackbar from '@/components/Snackbar.vue'
 
 export default {
   name: 'Create',
   components: {
     Datepicker,
+    InputField,
+    OptionSelect,
     Snackbar
   },
   data() {
