@@ -1,7 +1,11 @@
 <template>
   <div class="field">
-    <input :value="value" v-bind="$attrs" @input="onInput">
-    <!-- <input :value="value" v-bind="$attrs" @input="$emit('input', $event.target.value)"> -->
+    <!-- <input :value="value" v-bind="$attrs" @input="onInput"> -->
+    <input
+      :value="value"
+      v-bind="$attrs"
+      @input="$emit('input', $event.target.value)"
+    />
   </div>
 </template>
 

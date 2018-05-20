@@ -18,7 +18,7 @@ export default {
     }
   },
   watch: {
-    filter(value) {
+    value(value) {
       this.$emit('input', value.trim())
     }
   }

@@ -1,13 +1,13 @@
 <template>
   <div class="event-card -shadow">
-    <span class="eyebrow">@{{ events.time }} on {{ events.date }}</span>
-    <!-- <h4 class="title">{{ events.title | exclaimation  }}</h4> -->
-   <h4  class="title">{{ events.title }}</h4>
+    <span class="eyebrow">@{{ time }} on {{ date }}</span>
+    <!-- <h4 class="title">{{ title | exclaimation  }}</h4> -->
+   <h4 class="title">{{ title }}</h4>
 
     <span class="meta">
       <svg class="icon" width="24" height="24">
         <use xlink:href="feather-sprite.svg#users"/></svg>
-      {{ events.attendeeCount }} people going</span>
+      {{ attendeeCount }} people going</span>
   </div>
 </template>
 
@@ -15,7 +15,16 @@
 export default {
   name: 'EventCard',
   props: {
-    events: Object
+    time: {
+      type: String,
+      required: true
+    },
+    date: Date,
+    title: String,
+    attendeeCount: {
+      type: Number,
+      default: 0
+    }
   }
   // filters: {
   //   exclaimation(title) {
