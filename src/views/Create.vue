@@ -23,7 +23,7 @@
       <datepicker v-model="event.date" placeholder="Select a date"/>
 
       <option-select v-model="event.time" label="Select a time" :options="times"></option-select>
-    
+
       <!-- <input type="submit" value="Submit"/> -->
       <base-button>Submit</base-button>
     </form>
@@ -41,6 +41,16 @@ import Datepicker from 'vuejs-datepicker'
 import InputField from '@/components/InputField.vue'
 import OptionSelect from '@/components/OptionSelect.vue'
 import Snackbar from '@/components/Snackbar.vue'
+
+const EMPTY_EVENT = {
+  category: '',
+  organizer: {},
+  title: '',
+  description: '',
+  location: '',
+  date: '',
+  time: ''
+}
 
 export default {
   name: 'Create',
@@ -90,6 +100,7 @@ export default {
     addEvent() {
       this.$store.dispatch('addEvent', this.event)
       this.success = true
+      this.event = { ...EMPTY_EVENT }
     }
   }
 }

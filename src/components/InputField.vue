@@ -1,10 +1,10 @@
+<template>
+  <div class="field">
+    <input :value="value" v-bind="$attrs" @input="onInput">
+    <!-- <input :value="value" v-bind="$attrs" @input="$emit('input', $event.target.value)"> -->
+  </div>
+</template>
 
-<template> 
-  <div class="field"> 
-    <input :value="value" v-bind="$attrs" @input="onInput($event.target.value)"> 
-  </div> 
-</template> 
- 
 <script>
 export default {
   name: 'Input',
@@ -19,13 +19,13 @@ export default {
     value: String
   },
   methods: {
-    onInput(value) {
-      this.$emit('input', value)
+    onInput(event) {
+      this.$emit('input', event.target.value)
     }
   }
 }
-</script> 
- 
+</script>
+
 <style scoped>
 .field {
   margin-bottom: 24px;

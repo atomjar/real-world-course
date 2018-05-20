@@ -1,25 +1,25 @@
 <template>
   <div>
-    <input v-model="filter" 
-           type="text" 
+    <input v-model="value"
+           type="text"
            :placeholder="placeholder">
   </div>
 </template>
 
 <script>
 export default {
-  name: 'FilterInput',
+  name: 'InputComponent',
   props: {
     placeholder: String
   },
   data() {
     return {
-      filter: ''
+      value: ''
     }
   },
   watch: {
-    filter(newFilter) {
-      this.$emit('filter-emitted', newFilter.trim())
+    filter(value) {
+      this.$emit('input', value.trim())
     }
   }
 }

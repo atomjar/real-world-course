@@ -24,8 +24,7 @@ export default {
   },
   data() {
     return {
-      filter: '',
-      errorMessage: ''
+      filter: ''
     }
   },
   mounted() {
@@ -49,12 +48,14 @@ export default {
             .includes(this.filter.toLowerCase())
 
           if (titleMatches === 0) {
-            this.errorMessage = 'Nope'
           } else {
             return titleMatches + categoryMatches
           }
         })
       }
+    },
+    errorMessage() {
+      return this.filteredEvents.length || !this.filter ? '' : 'Nope'
     }
   },
   methods: {

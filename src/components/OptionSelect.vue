@@ -1,7 +1,7 @@
 <template>
   <div class="field">
-    <label v-if="label">{{label}}</label>
-    <select v-model="selected" @change="onChange" v-bind="$attrs">
+    <label v-if="label">{{ label }}</label>
+    <select :value="value" @change="onChange" v-bind="$attrs">
       <option v-for="option in options" :value="option" :key="option">{{ option }}</option>
     </select>
   </div>
@@ -18,22 +18,6 @@ export default {
       required: true
     },
     label: String
-  },
-  data() {
-    return {
-      /*
-      if this component's v-model has a pre-selected value
-      and we cant set the v-model of the above select element to 
-      the prop 'value' as props are unidirectional and should not be modified
-      */
-      selected: this.value
-    }
-  },
-  watch: {
-    //whenever value changes the 'selected' data property is updated
-    value: function(newValue) {
-      this.selected = newValue
-    }
   },
   methods: {
     onChange(ev) {

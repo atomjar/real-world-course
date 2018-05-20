@@ -1,20 +1,29 @@
-import Vue from "vue";
-import Vuex from "vuex";
+import Vue from 'vue'
+import Vuex from 'vuex'
 import axios from 'axios'
 
-Vue.use(Vuex);
+Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
     user: { firstName: 'Adam', lastName: 'Jahr' },
-    categories: ['sustainability', 'nature', 'animal welfare', 'housing', 'education', 'food', 'community'],
+    categories: [
+      'sustainability',
+      'nature',
+      'animal welfare',
+      'housing',
+      'education',
+      'food',
+      'community'
+    ],
     events: []
   },
   getters: {},
   mutations: {
     ADD_EVENT(state, event) {
-      state.events.push(event)
-
+      state.events.push({
+        ...event
+      })
     },
     STORE_EVENTS(state, events) {
       state.events = events
@@ -22,7 +31,8 @@ export default new Vuex.Store({
   },
   actions: {
     fetchEvents({ commit }) {
-      axios.get('http://localhost:3000/events')
+      axios
+        .get('http://localhost:3000/events')
         .then(response => {
           commit('STORE_EVENTS', response.data)
         })
@@ -34,6 +44,4 @@ export default new Vuex.Store({
       commit('ADD_EVENT', event)
     }
   }
-
-});
-
+})
