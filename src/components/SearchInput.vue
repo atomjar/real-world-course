@@ -13,10 +13,6 @@
       <p v-if="errorMessage && search">{{ errorMessage }}</p>
     </div>
 
-    <div v-if="category" class="tag">
-      <span>{{ category }}</span>
-    </div>
-
   </div>
 </template>
 
@@ -37,10 +33,11 @@ export default {
   methods: {
     clickCategory(cat) {
       this.search = cat
+      this.emitCategory(cat)
     },
     emitCategory() {
       this.$emit('category-emitted', this.search)
-      this.value = ''
+      // this.search = ''
     }
   },
   computed: {
@@ -72,10 +69,4 @@ export default {
   border: solid 2px #16c0b0;
   height: 30px;
 }
-/* .tag {
-  color: white;
-  background-color: #16c0b0;
-  margin-top: 15px;
-  width: 50px;
-} */
 </style>

@@ -1,8 +1,12 @@
 <template>
   <div>
     <h1>Events</h1>
-    <SearchInput placeholder="Search by category"/>
-    <EventList :events="events"/>
+    <SearchInput @category-emitted="updateSearch" placeholder="Search by category"/>
+
+    <!-- <EventList :events="events"/> -->
+
+    <div v-for="event in filteredEvents">{{ event }}</div>
+
   </div>
 
 </template>
@@ -22,7 +26,9 @@ export default {
   },
   data() {
     return {
-      events: []
+      events: [],
+      eventss: ['a', 'b', 'nature', 'nature2'],
+      search: ''
     }
   },
   mounted() {
@@ -34,6 +40,19 @@ export default {
       .catch(error => {
         console.log('There was an error:', error.response)
       })
+  },
+  computed: {
+    filteredEvents() {
+      return this.eventss.filter(event => {
+        event === this.search
+      })
+    }
+  },
+  methods: {
+    updateSearch(cat) {
+      this.search = cat
+      console.log('this.search is', this.search)
+    }
   }
 }
 </script>
