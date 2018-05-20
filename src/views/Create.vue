@@ -21,9 +21,8 @@
       <h3>When is your event?</h3>
 
       <datepicker v-model="event.date" placeholder="Select a date"/>
-
-      <option-select v-model="event.time" label="Select a time" :options="times"></option-select>
-    
+      <!-- used $options.$times in options prop -->
+      <option-select v-model="event.time" label="Select a time" :options="$options.$times"></option-select>
       <!-- <input type="submit" value="Submit"/> -->
       <base-button>Submit</base-button>
     </form>
@@ -38,6 +37,7 @@
 
 <script>
 import Datepicker from 'vuejs-datepicker'
+import times from '@/timesUtil'
 import InputField from '@/components/InputField.vue'
 import OptionSelect from '@/components/OptionSelect.vue'
 import Snackbar from '@/components/Snackbar.vue'
@@ -50,6 +50,10 @@ export default {
     OptionSelect,
     Snackbar
   },
+  /*this is custom option which can be accessed using vm.$options.$times
+    since the times array stays static there is no need for it to be data option
+  */
+  $times: times,
   data() {
     return {
       event: {
@@ -62,7 +66,7 @@ export default {
         time: ''
       },
       categories: [],
-      times: [],
+      // times: [],
       success: false
     }
   },
@@ -72,16 +76,6 @@ export default {
   //     searchCategories: 'getCategoryByString'
   //   })
   // },
-  created() {
-    var times = []
-    for (var i = 1; i <= 24; i++) {
-      times.push(i)
-    }
-    times.map(time => {
-      time += ':00'
-      this.times.push(time)
-    })
-  },
   mounted() {
     this.event.organizer = this.$store.state.user
     this.categories = this.$store.state.categories
