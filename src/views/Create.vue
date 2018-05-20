@@ -2,24 +2,17 @@
   <div>
     <h1>Create Page</h1>
 
-    <!-- <form  @submit.prevent="ADD_EVENT(event)"> -->
     <form  @submit.prevent="addEvent">
 
       <h2>Tell us about your event</h2>
 
       <option-select v-model="event.category" label="Select a category" :options="categories"></option-select>
 
-      <!-- <label>Select a category</label>
-      <select v-model="event.category">
-        <option v-for="cat in categories" :key="cat">{{ cat }}</option>
-      </select> -->
 
       <h3>Name & describe your event</h3>
-      <!-- This is a custom input component -->
-      <!-- v-model is syntactic sugar for :value="" and @input="" on the element -->
+
       <input-field v-model="event.title" type="text" placeholder="Add an event title" required></input-field>
-      <!-- This is a normal input component -->
-      <!-- <input v-model="event.title" type="text" placeholder="Add an event title"/> -->
+
       <input-field v-model="event.description" type="text" placeholder="Add a description"></input-field>
 
       <h3>Where is your event?</h3>
@@ -44,7 +37,6 @@
 </template>
 
 <script>
-// import { mapGetters, mapMutations } from 'vuex'
 import Datepicker from 'vuejs-datepicker'
 import InputField from '@/components/InputField.vue'
 import OptionSelect from '@/components/OptionSelect.vue'
@@ -95,7 +87,6 @@ export default {
     this.categories = this.$store.state.categories
   },
   methods: {
-    // ...mapMutations(['ADD_EVENT'])
     addEvent() {
       this.$store.dispatch('addEvent', this.event)
       this.success = true
