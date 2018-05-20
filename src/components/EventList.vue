@@ -1,6 +1,11 @@
 <template>
   <div>
-    <EventCard v-for="event in events" :key="event.id"/>
+    <EventCard v-for="event in events" 
+              :events="{ time: event.time, 
+                         date: event.date, 
+                         title: event.title, 
+                         attendeeCount: event.attendeeCount }"
+              :key="event.title"/>
   </div>
 </template>
 

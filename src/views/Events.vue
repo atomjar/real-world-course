@@ -1,57 +1,65 @@
 <template>
   <div>
     <h1>Events</h1>
-    <SearchInput @category-emitted="updateSearch" placeholder="Search by category"/>
+    <FilterInput @filter-emitted="updateFilter" placeholder="Type to filter events"/>
 
-    <!-- <EventList :events="events"/> -->
+    <p v-show="errorMessage">{{ errorMessage }}</p>
 
-    <div v-for="event in filteredEvents">{{ event }}</div>
+    <EventList :events="filteredEvents"/>
 
   </div>
-
 </template>
 
 <script>
 import EventCard from '@/components/EventCard.vue'
-import axios from 'axios'
 import EventList from '@/components/EventList.vue'
-import SearchInput from '@/components/SearchInput.vue'
+import FilterInput from '@/components/FilterInput.vue'
 
 export default {
   name: 'Events',
   components: {
     EventCard,
     EventList,
-    SearchInput
+    FilterInput
   },
   data() {
     return {
-      events: [],
-      eventss: ['a', 'b', 'nature', 'nature2'],
-      search: ''
+      filter: '',
+      errorMessage: ''
     }
   },
   mounted() {
-    axios
-      .get('http://localhost:3000/events')
-      .then(response => {
-        this.events = response.data
-      })
-      .catch(error => {
-        console.log('There was an error:', error.response)
-      })
+    this.$store.dispatch('fetchEvents')
   },
   computed: {
+    events() {
+      return this.$store.state.events
+    },
     filteredEvents() {
-      return this.eventss.filter(event => {
-        event === this.search
-      })
+      if (!this.filter) {
+        return this.events
+      } else {
+        return this.events.filter(event => {
+          var titleMatches = event.title
+            .toLowerCase()
+            .includes(this.filter.toLowerCase())
+
+          var categoryMatches = event.category
+            .toLowerCase()
+            .includes(this.filter.toLowerCase())
+
+          if (titleMatches === 0) {
+            this.errorMessage = 'Nope'
+          } else {
+            return titleMatches + categoryMatches
+          }
+        })
+      }
     }
   },
   methods: {
-    updateSearch(cat) {
-      this.search = cat
-      console.log('this.search is', this.search)
+    updateFilter(filter) {
+      this.filter = filter
     }
   }
 }

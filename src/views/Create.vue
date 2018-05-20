@@ -2,44 +2,53 @@
   <div>
     <h1>Create Page</h1>
 
-    <form  @submit.prevent="addEvent(event)">
+    <form  @submit.prevent="addEvent">
+
       <h2>Tell us about your event</h2>
 
-      <label>Select a category</label>
-      <select v-model="event.category">
-        <option v-for="cat in categories" :key="cat">{{ cat }}</option>
-      </select>
+      <option-select v-model="event.category" label="Select a category" :options="categories"></option-select>
+
 
       <h3>Name & describe your event</h3>
-      <input v-model="event.title" type="text" placeholder="Add an event title"/>
-      <input v-model="event.description" type="text" placeholder="Add a description"/>
+
+      <input-field v-model="event.title" type="text" placeholder="Add an event title" required></input-field>
+
+      <input-field v-model="event.description" type="text" placeholder="Add a description"></input-field>
 
       <h3>Where is your event?</h3>
-      <input v-model="event.location" type="text" placeholder="Add a location"/>
+      <input-field v-model="event.location" type="text" placeholder="Add a location" required></input-field>
 
       <h3>When is your event?</h3>
 
       <datepicker v-model="event.date" placeholder="Select a date"/>
 
-      <label>Select a time</label>
-      <select v-model="event.time">
-        <option v-for="time in times" :key="time">{{ time }}</option>
-      </select>
-
-      <input type="submit" value="Submit"/>
+      <option-select v-model="event.time" label="Select a time" :options="times"></option-select>
+    
+      <!-- <input type="submit" value="Submit"/> -->
+      <base-button>Submit</base-button>
     </form>
+
+    <snackbar v-if="success">
+      <h4 slot="header">Success!</h4>
+      <p slot="paragraph">Your event has been created.</p>
+    </snackbar>
 
   </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
 import Datepicker from 'vuejs-datepicker'
+import InputField from '@/components/InputField.vue'
+import OptionSelect from '@/components/OptionSelect.vue'
+import Snackbar from '@/components/Snackbar.vue'
 
 export default {
   name: 'Create',
   components: {
-    Datepicker
+    Datepicker,
+    InputField,
+    OptionSelect,
+    Snackbar
   },
   data() {
     return {
@@ -53,18 +62,16 @@ export default {
         time: ''
       },
       categories: [],
-      times: []
+      times: [],
+      success: false
     }
   },
-  computed: {
-    // username() {
-    //   return this.$store.state.user
-    // },
-    ...mapGetters({
-      categoryLength: 'getCategoriesLength',
-      searchCategories: 'getCategoryByString'
-    })
-  },
+  // computed: {
+  //   ...mapGetters({
+  //     categoryLength: 'getCategoriesLength',
+  //     searchCategories: 'getCategoryByString'
+  //   })
+  // },
   created() {
     var times = []
     for (var i = 1; i <= 24; i++) {
@@ -81,7 +88,8 @@ export default {
   },
   methods: {
     addEvent() {
-      this.$store.commit('ADD_EVENT', this.event)
+      this.$store.dispatch('addEvent', this.event)
+      this.success = true
     }
   }
 }
