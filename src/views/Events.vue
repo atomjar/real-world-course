@@ -49,7 +49,7 @@ export default {
             .includes(this.filter.toLowerCase())
 
           if (titleMatches === 0) {
-            this.errorMessage = 'Nope'
+            this.errorMessage = 'No events match that search' //why not working?
           } else {
             return titleMatches + categoryMatches
           }

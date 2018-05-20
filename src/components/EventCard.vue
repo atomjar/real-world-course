@@ -1,7 +1,6 @@
 <template>
   <div class="event-card -shadow">
     <span class="eyebrow">@{{ events.time }} on {{ events.date }}</span>
-    <!-- <h4 class="title">{{ events.title | exclaimation  }}</h4> -->
    <h4  class="title">{{ events.title }}</h4>
 
     <span class="meta">
@@ -17,11 +16,6 @@ export default {
   props: {
     events: Object
   }
-  // filters: {
-  //   exclaimation(title) {
-  //     return title + '!!!'
-  //   }
-  // }
 }
 </script>
 
