@@ -1,17 +1,23 @@
 <template>
-  <div class="field">
+  <Field>
+    <label :for="label" v-if="label">{{ label }}</label>
     <!-- <input :value="value" v-bind="$attrs" @input="onInput"> -->
     <input
+      :id="label"
       :value="value"
       v-bind="$attrs"
-      @input="$emit('input', $event.target.value)"
+      @input="onInput"
     />
-  </div>
+    <span @click="dismissError" v-if="error && errorDisplayed">{{ error }}</span>
+  </Field>
 </template>
 
 <script>
+import inputFieldMixin from '@/mixins/inputFieldMixin'
+
 export default {
   name: 'Input',
+  mixins: [inputFieldMixin],
   /*any attrributs added to this component that are not registered
     as props will not be added to the root element of this component
     It will be added to element bound with $attrs which is input element in this case.
@@ -19,9 +25,6 @@ export default {
     bind the event listeners this way if you think its not much complicated.
   */
   inheritAttrs: false,
-  props: {
-    value: String
-  },
   methods: {
     onInput(event) {
       this.$emit('input', event.target.value)
@@ -29,9 +32,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-.field {
-  margin-bottom: 24px;
-}
-</style>

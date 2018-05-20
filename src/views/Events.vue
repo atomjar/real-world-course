@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>Events</h1>
-    <InputField v-model="filter" placeholder="Type to filter events"/>
+    <TextField v-model="filter" placeholder="Type to filter events"/>
 
     <p v-show="errorMessage">{{ errorMessage }}</p>
     <button
@@ -34,14 +34,14 @@
 <script>
 import EventCard from '@/components/EventCard.vue'
 import EventList from '@/components/EventList.vue'
-import InputField from '@/components/InputField.vue'
+import TextField from '@/components/TextField.vue'
 
 export default {
   name: 'Events',
   components: {
     EventCard,
     EventList,
-    InputField
+    TextField
   },
   data() {
     return {

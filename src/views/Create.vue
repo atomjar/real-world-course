@@ -6,23 +6,28 @@
 
       <h2>Tell us about your event</h2>
 
-      <option-select v-model="event.category" label="Select a category" :options="categories"></option-select>
+      <SelectField v-model="event.category" label="Select a category" :options="categories"/>
 
 
       <h3>Name & describe your event</h3>
 
-      <input-field v-model="event.title" type="text" placeholder="Add an event title" required></input-field>
+      <TextField
+        v-model="event.title"
+        label="title"
+        placeholder="Add an event title"
+        required
+      />
 
-      <input-field v-model="event.description" type="text" placeholder="Add a description"></input-field>
+      <TextField v-model="event.description" type="text" placeholder="Add a description"/>
 
       <h3>Where is your event?</h3>
-      <input-field v-model="event.location" type="text" placeholder="Add a location" required></input-field>
+      <TextField v-model="event.location" type="text" placeholder="Add a location" required error="This is an imaginary location"/>
 
       <h3>When is your event?</h3>
 
-      <datepicker v-model="event.date" placeholder="Select a date"/>
+      <Datepicker v-model="event.date" placeholder="Select a date"/>
 
-      <option-select v-model="event.time" label="Select a time" :options="times"></option-select>
+      <SelectField v-model="event.time" label="Select a time" :options="times"/>
 
       <!-- <input type="submit" value="Submit"/> -->
       <base-button>Submit</base-button>
@@ -37,9 +42,9 @@
 </template>
 
 <script>
+import TextField from '@/components/TextField.vue'
+import SelectField from '@/components/SelectField.vue'
 import Datepicker from 'vuejs-datepicker'
-import InputField from '@/components/InputField.vue'
-import OptionSelect from '@/components/OptionSelect.vue'
 import Snackbar from '@/components/Snackbar.vue'
 
 const EMPTY_EVENT = {
@@ -55,10 +60,10 @@ const EMPTY_EVENT = {
 export default {
   name: 'Create',
   components: {
-    Datepicker,
-    InputField,
-    OptionSelect,
-    Snackbar
+    TextField,
+    SelectField,
+    Snackbar,
+    Datepicker
   },
   data() {
     return {

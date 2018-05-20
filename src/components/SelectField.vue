@@ -1,23 +1,25 @@
 <template>
-  <div class="field">
+  <Field>
     <label v-if="label">{{ label }}</label>
     <select :value="value" @change="onChange" v-bind="$attrs">
       <option v-for="option in options" :value="option" :key="option">{{ option }}</option>
     </select>
-  </div>
+    <span @click="dismissError" v-if="error && errorDisplayed">{{ error }}</span>
+  </Field>
 </template>
 
 <script>
+import inputFieldMixin from '@/mixins/inputFieldMixin'
+
 export default {
   name: 'Select',
+  mixins: [inputFieldMixin],
   inheritAttrs: false,
   props: {
-    value: [String, Number],
     options: {
       type: Array,
       required: true
-    },
-    label: String
+    }
   },
   methods: {
     onChange(ev) {
@@ -26,9 +28,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-.field {
-  margin-bottom: 24px;
-}
-</style>
