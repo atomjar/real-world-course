@@ -2,8 +2,7 @@
   <div>
     <h1>Create an Event</h1>
 
-    <!-- <form  @submit.prevent="addEvent(event)"> -->
-    <form  @submit.prevent="ADD_EVENT(event)">
+    <form  @submit.prevent="addEvent(event)">
       <h2>Tell us about your event</h2>
 
       <BaseField>
@@ -52,7 +51,6 @@
 </template>
 
 <script>
-// import { mapState } from 'vuex'
 import { mapGetters } from 'vuex'
 import { mapMutations } from 'vuex'
 import BaseField from '../components/FormFields/BaseField'
@@ -105,10 +103,9 @@ export default {
     this.categories = this.$store.state.categories
   },
   methods: {
-    ...mapMutations(['ADD_EVENT'])
-    // addEvent() {
-    //   this.$store.commit('ADD_EVENT', this.event)
-    // }
+    addEvent() {
+      this.$store.commit('ADD_EVENT', this.event)
+    }
   }
 }
 </script>
