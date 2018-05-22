@@ -90,8 +90,12 @@ small {
 .-text-base {
   color: #000;
 }
+.-text-gray {
+  color: rgba(0,0,0,0.5);
+}
 .-shadow {
   box-shadow: 0 1px 2px 0 rgba(0,0,0,0.2), 0 1px 5px 0 rgba(0,0,0,0.13);
+  border: 0;
 }
 .icon {
   stroke: currentColor;
@@ -250,10 +254,12 @@ select::ms-expand {
   position: absolute;
   top: 0;
   right: 0;
+  cursor: pointer;
 }
 .input-inline.-button-right button:hover {
-  -webkit-transform: scale(1);
-          transform: scale(1);
+  -webkit-transform: inherit;
+          transform: inherit;
+  box-shadow: none;
 }
 button,
 .button {
