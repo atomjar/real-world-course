@@ -1,5 +1,5 @@
 <template>
-  <div class="event-card -shadow">
+  <div @click="expandEvent(id)" class="event-card -shadow">
     <span class="eyebrow">@{{ time }} on {{ date }}</span>
     <!-- <h4 class="title">{{ title | exclaimation  }}</h4> -->
    <h4 class="title">{{ title }}</h4>
@@ -21,9 +21,15 @@ export default {
     },
     date: [Date, String],
     title: String,
+    id: Number,
     attendeeCount: {
       type: Number,
       default: 0
+    }
+  },
+  methods: {
+    expandEvent(id) {
+      this.$router.push({ name: 'attend', params: { id } })
     }
   }
   // filters: {

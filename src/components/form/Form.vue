@@ -81,7 +81,8 @@ export default {
         description: '',
         location: '',
         date: '',
-        time: ''
+        time: '',
+        attendees: {}
       },
       categories: [],
       times: [],

@@ -18,7 +18,11 @@ export default new Vuex.Store({
     ],
     events: []
   },
-  getters: {},
+  getters: {
+    getEvent: (state) => (id) => {
+      return state.events.filter(event => event.id === id)
+    }
+  },
   mutations: {
     ADD_EVENT(state, event) {
       state.events.push({ ...event })
