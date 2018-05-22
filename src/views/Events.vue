@@ -51,7 +51,9 @@ export default {
     }
   },
   mounted() {
-    this.$store.dispatch('fetchEvents')
+    if (!this.$store.state.events.length) {
+      this.$store.dispatch('fetchEvents')
+    }
   },
   computed: {
     events() {

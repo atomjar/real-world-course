@@ -21,9 +21,7 @@ export default new Vuex.Store({
   getters: {},
   mutations: {
     ADD_EVENT(state, event) {
-      state.events.push({
-        ...event
-      })
+      state.events.push({ ...event })
     },
     STORE_EVENTS(state, events) {
       state.events = events
