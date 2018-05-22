@@ -1,10 +1,11 @@
 
-<template> 
-  <div class="field"> 
-    <input :value="value" v-bind="$attrs" @input="onInput($event.target.value)"> 
-  </div> 
-</template> 
- 
+<template>
+  <div class="field">
+    <label>{{ label }}</label>
+    <input :value="value" v-bind="$attrs" @input="onInput($event.target.value)">
+  </div>
+</template>
+
 <script>
 export default {
   name: 'Input',
@@ -16,7 +17,8 @@ export default {
   */
   inheritAttrs: false,
   props: {
-    value: String
+    value: String,
+    label: String
   },
   methods: {
     onInput(value) {
@@ -24,8 +26,8 @@ export default {
     }
   }
 }
-</script> 
- 
+</script>
+
 <style scoped>
 .field {
   margin-bottom: 24px;
