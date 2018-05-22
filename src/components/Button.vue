@@ -1,5 +1,5 @@
 <template>
-  <button class="button primary" :class="buttonClass">
+  <button :class="buttonClass">
     <!-- default content displayed will be text 'Buttton' -->
     <slot>Button</slot>
   </button>
@@ -24,15 +24,6 @@ export default {
 </script>
 
 <style scoped>
-.button {
-  padding: 0.75em 1em;
-  color: white;
-}
-
-.button.primary {
-  background: #42b883;
-}
-
 .button.error {
   background: #c1093a;
 }
