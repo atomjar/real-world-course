@@ -1,34 +1,66 @@
 <template>
   <div>
-    <h1>Events Page</h1>
-    <EventCard v-for="event in events" :key="event.id" :events="{title: event.title, date: event.date, time: event.time, attendeeCount: event.attendeeCount}"/>
-  </div>
+    <h1>Events</h1>
+    <FilterInput @filter-emitted="updateFilter" placeholder="Type to filter events"/>
 
+    <p v-show="errorMessage">{{ errorMessage }}</p>
+
+    <EventList :events="filteredEvents"/>
+
+  </div>
 </template>
 
 <script>
 import EventCard from '@/components/EventCard.vue'
-import axios from 'axios'
+import EventList from '@/components/EventList.vue'
+import FilterInput from '@/components/FilterInput.vue'
 
 export default {
   name: 'Events',
   components: {
-    EventCard
+    EventCard,
+    EventList,
+    FilterInput
   },
   data() {
     return {
-      events: []
+      filter: '',
+      errorMessage: ''
     }
   },
   mounted() {
-    axios
-      .get('http://localhost:3000/events')
-      .then(response => {
-        this.events = response.data
-      })
-      .catch(error => {
-        console.log('There was an error:', error.response)
-      })
+    this.$store.dispatch('fetchEvents')
+  },
+  computed: {
+    events() {
+      return this.$store.state.events
+    },
+    filteredEvents() {
+      if (!this.filter) {
+        return this.events
+      } else {
+        return this.events.filter(event => {
+          var titleMatches = event.title
+            .toLowerCase()
+            .includes(this.filter.toLowerCase())
+
+          var categoryMatches = event.category
+            .toLowerCase()
+            .includes(this.filter.toLowerCase())
+
+          if (titleMatches === 0) {
+            this.errorMessage = 'No events match that search' //why not working?
+          } else {
+            return titleMatches + categoryMatches
+          }
+        })
+      }
+    }
+  },
+  methods: {
+    updateFilter(filter) {
+      this.filter = filter
+    }
   }
 }
 </script>

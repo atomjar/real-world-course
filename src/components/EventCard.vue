@@ -1,7 +1,8 @@
 <template>
   <div class="event-card -shadow">
     <span class="eyebrow">@{{ events.time }} on {{ events.date }}</span>
-    <h4 class="title">{{ events.title }}</h4>
+   <h4  class="title">{{ events.title }}</h4>
+
     <span class="meta">
       <svg class="icon" width="24" height="24">
         <use xlink:href="feather-sprite.svg#users"/></svg>
@@ -21,6 +22,7 @@ export default {
 <style>
 .event-card {
   padding: 20px;
+  margin-bottom: 24px;
 }
 .event-card > .title {
   margin: 0;
