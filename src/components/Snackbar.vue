@@ -15,6 +15,6 @@ export default {
 .snackbar {
   border-width: 1px;
   border-style: solid;
-  background-color: aquamarine;
+  background-color: green;
 }
 </style>

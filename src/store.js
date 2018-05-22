@@ -4,11 +4,9 @@ import axios from 'axios'
 
 Vue.use(Vuex)
 
-let id = 0
-
 export default new Vuex.Store({
   state: {
-    user: { firstName: 'Adam', lastName: 'Jahr' },
+    user: { id: 'a', username: 'Adam Jahr' },
     categories: [
       'sustainability',
       'nature',
@@ -24,11 +22,7 @@ export default new Vuex.Store({
   mutations: {
     ADD_EVENT(state, event) {
       state.events.push({
-        ...event,
-        id: id++,
-        owner: {
-          id: id++
-        }
+        ...event
       })
     },
     STORE_EVENTS(state, events) {

@@ -1,4 +1,4 @@
-import Field from '@/components/Field'
+import Field from '@/components/form/Field'
 
 export default {
   components: { Field },

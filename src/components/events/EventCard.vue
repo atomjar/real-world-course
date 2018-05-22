@@ -19,7 +19,7 @@ export default {
       type: String,
       required: true
     },
-    date: Date,
+    date: [Date, String],
     title: String,
     attendeeCount: {
       type: Number,

@@ -1,30 +1,33 @@
 <template>
   <div>
     <h1>Events</h1>
-    <TextField v-model="filter" placeholder="Type to filter events"/>
+    <TextInput 
+      v-model="filter" 
+      placeholder="Type to filter events"/>
 
     <p v-show="errorMessage">{{ errorMessage }}</p>
+
     <button
       @click="selectedType = 'all'"
       type="button"
       :class="{ 'active': selectedType === 'all' }"
       name="button">
         All Events
-      </button>
+    </button>
     <button
       @click="selectedType = 'my'"
       type="button"
       :class="{ 'active': selectedType === 'my' }"
       name="button">
         My Events
-      </button>
+    </button>
     <button
       @click="selectedType = 'attending'"
       type="button"
       :class="{ 'active': selectedType === 'attending' }"
       name="button">
         Attending
-      </button>
+    </button>
 
     <EventList :events="filteredEvents"/>
 
@@ -32,25 +35,19 @@
 </template>
 
 <script>
-import EventCard from '@/components/EventCard.vue'
-import EventList from '@/components/EventList.vue'
-import TextField from '@/components/TextField.vue'
+import EventCard from '@/components/events/EventCard.vue'
+import EventList from '@/components/events/EventList.vue'
 
 export default {
   name: 'Events',
   components: {
     EventCard,
-    EventList,
-    TextField
+    EventList
   },
   data() {
     return {
       filter: '',
-      selectedType: 'all',
-      user: {
-        id: 1,
-        attendingEvents: [{ id: 1 }]
-      }
+      selectedType: 'all'
     }
   },
   mounted() {
@@ -61,14 +58,16 @@ export default {
       return this.$store.state.events
     },
     myEvents() {
-      return this.events.filter(event => event.owner.id === this.user.id)
+      return this.events.filter(
+        event => event.organizer === this.$store.state.user.username
+      )
     },
     attendingEvents() {
-      return this.events.filter(event =>
-        this.user.attendingEvents.find(
-          attendingEvent => event.id === attendingEvent.id
-        )
-      )
+      return this.events.filter(event => {
+        const attendeesIds = Object.keys(event.attendees)
+
+        return attendeesIds.indexOf(this.$store.state.user.id) !== -1
+      })
     },
     filteredEvents() {
       switch (this.selectedType) {

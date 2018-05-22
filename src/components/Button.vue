@@ -1,7 +1,6 @@
 <template>
   <button class="button primary" :class="buttonClass">
-    <!-- default content displayed will be text 'Buttton' -->
-    <slot>Button</slot>
+    <slot>Button</slot> <!-- default content: 'Buttton' -->
   </button>
 </template>
 
