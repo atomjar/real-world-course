@@ -23,6 +23,9 @@
 
     <h2>Event details</h2>
     <p>{{ event.description }}</p>
+
+    <h2>Attendees</h2>
+
   </div>
 
   </div>
@@ -42,26 +45,11 @@ export default {
   },
   data() {
     return {
-      event: {
-        id: 1,
-        title: "Beach Cleanup",
-        date: "Aug 28 2018",
-        time: "10:00",
-        location: "Daytona Beach",
-        description: "Let's clean up this beach.",
-        organizer: "Adam Jahr",
-        category: "sustainability",
-        attendeeCount: 10,
-        attendees: {
-          a: "Adam Jahr",
-          b: "Gregg Pollack"
-        }
-      }
+      event: {}
     }
   },
   mounted() {
-    // this.event = this.$store.getters.getEvent(this.$route.params.id)[0]
-    console.log('event is', this.event)
+    this.event = this.$store.getters.getEvent(this.$route.params.id)[0]
   }
 }
 </script>
