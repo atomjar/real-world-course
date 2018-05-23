@@ -3,17 +3,17 @@
     <span class="eyebrow">@{{ time }} on {{ date }}</span>
     <!-- <h4 class="title">{{ title | exclaimation  }}</h4> -->
    <h4 class="title">{{ title }}</h4>
-
-    <span class="meta">
-      <svg class="icon" width="24" height="24">
-        <use xlink:href="feather-sprite.svg#users"/></svg>
-      {{ attendeeCount }} people going</span>
+   <meta-field iconName="users">{{ attendeeCount }} people going</meta-field>
   </div>
 </template>
 
 <script>
+import MetaField from '@/components/MetaField'
 export default {
   name: 'EventCard',
+  components: {
+    MetaField
+  },
   props: {
     time: {
       type: String,
@@ -44,6 +44,12 @@ export default {
 .event-card {
   padding: 20px;
   margin-bottom: 24px;
+  transition: all 0.2s linear;
+  cursor: pointer;
+}
+.event-card:hover {
+  transform: scale(1.01);
+  box-shadow: 0 3px 12px 0 rgba(0, 0, 0, 0.20), 0 1px 15px 0 rgba(0, 0, 0, 0.19);
 }
 .event-card > .title {
   margin: 0;
