@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Create Page</h1>
+    <h1>Create an Event</h1>
 
     <form  @submit.prevent="addEvent">
 
@@ -18,9 +18,17 @@
       <h3>Where is your event?</h3>
       <input-field v-model="event.location" type="text" placeholder="Add a location" required></input-field>
 
+      <BaseField>
+        <label>Location</label>
+        <BaseInput v-model="event.location" placeholder="Add a location" />
+      </BaseField>
+
       <h3>When is your event?</h3>
 
-      <datepicker v-model="event.date" placeholder="Select a date"/>
+      <BaseField>
+        <label>Date</label>
+        <datepicker v-model="event.date" placeholder="Select a date"/>
+      </BaseField>
 
       <option-select v-model="event.time" label="Select a time" :options="times"></option-select>
     
