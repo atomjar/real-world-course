@@ -1,8 +1,7 @@
 <template>
   <div>
     <h1>Events Page</h1>
-    <h2>Total Events: {{ totalEvents }}</h2>
-    <EventCard v-for="event in largeEvents" :key="event.id" :events="{title: event.title, date: event.date, time: event.time, attendeeCount: event.attendeeCount}"/>
+    <EventCard v-for="event in events" :key="event.id" :events="{title: event.title, date: event.date, time: event.time, attendeeCount: event.attendeeCount}"/>
   </div>
 
 </template>
