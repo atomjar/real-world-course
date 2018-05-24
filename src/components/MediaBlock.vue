@@ -1,6 +1,8 @@
 <template>
   <div class="media-block">
-    <img v-if="imageUrl" src="imageUrl" class="media">
+    <div class="media">
+      <img v-if="imagePath" :src="imagePath">
+    </div>
     <div class="body">
       <slot name="header"></slot>
       <slot name="paragraph"></slot>
@@ -12,7 +14,7 @@
 export default {
   name: 'MediaBlock',
   props: {
-    imageUrl: String
+    imagePath: String
   }
 }
 </script>
@@ -21,8 +23,12 @@ export default {
 .media-block {
   display: flex;
 }
+.media-block.-img-circle > .media > img {
+  border-radius: 50%;
+}
 .media-block > .media {
-  min-width: 40px;
+  max-width: 60px;
+  max-height: 60px;
   margin-right: 1em;
 }
 .media-block > .body {
@@ -32,5 +38,8 @@ export default {
 .media-block > .body * {
   margin-top: 0;
   margin-bottom: 0.5em;
+}
+.media-block > .body *:last-child {
+  margin-bottom: 0;
 }
 </style>

@@ -24,9 +24,18 @@
     <h2>Event details</h2>
     <p>{{ event.description }}</p>
 
-    <h2>Attendees</h2>
-    <ul>
-      <li v-for="attendee in attendees">{{ attendee }}</li>
+    <h2>Attendees
+      <span class="badge -fill-gradient">10</span></h2>
+    <ul class="list-group">
+      <li v-for="attendee in attendees" class="list-item">
+        <media-block :imagePath="attendee.avatar" class="-img-circle">
+          <h5 slot="header">{{ attendee.name }}</h5>
+          <meta-field slot="paragraph" iconName="user-check">
+            <!-- iconName (type === organizer ? award : user-check) -->
+            {{ attendee.type }} <!-- organizer || member -->
+          </meta-field>
+        </media-block>
+      </li>
     </ul>
 
   </div>
