@@ -29,6 +29,7 @@
         Attending
     </button>
 
+    <!-- ??? EVAN: Do you have feedback on how we're handling the filtered tab-based event lists? See computed properties below. -->
     <EventList :events="filteredEvents"/>
 
   </div>

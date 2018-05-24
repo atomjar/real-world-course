@@ -1,6 +1,6 @@
 <template>
   <div>
-   <form  @submit.prevent="addEvent">
+   <form>
       <SelectInput 
         v-model="event.category" 
         label="Select a category" 
@@ -38,10 +38,11 @@
       <SelectInput 
         v-model="event.time" 
         label="Select a time" 
-        :options="times"
+        :options="$options.$times"
         required/>
-
-      <Button>Submit</Button>
+        
+      <!-- ??? EVAN: What is your preferred way to handle a Button component triggering a submit event?-->
+      <Button :onClick.prevent="addEvent">Submit</Button>
     </form>
 
     <snackbar v-if="success">
@@ -55,6 +56,7 @@
 import SelectInput from './SelectInput.vue'
 import Datepicker from 'vuejs-datepicker'
 import Snackbar from '@/components/Snackbar.vue'
+import times from '../../timesUtil'
 
 const EMPTY_EVENT = {
   category: '',
@@ -64,7 +66,7 @@ const EMPTY_EVENT = {
   location: '',
   date: '',
   time: ''
-}
+} /// ??? EVAN: Thoughts on resetting the event data with a const like this?
 
 export default {
   components: {
@@ -72,6 +74,7 @@ export default {
     Datepicker,
     Snackbar
   },
+  $times: times, // ??? EVAN: Do you recommend using custom options like this, and if so why or why not?
   data() {
     return {
       event: {
@@ -85,19 +88,8 @@ export default {
         attendees: {}
       },
       categories: [],
-      times: [],
       success: false
     }
-  },
-  created() {
-    var times = []
-    for (var i = 1; i <= 24; i++) {
-      times.push(i)
-    }
-    times.map(time => {
-      time += ':00'
-      this.times.push(time)
-    })
   },
   mounted() {
     this.event.organizer = this.$store.state.user

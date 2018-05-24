@@ -32,6 +32,7 @@ export default {
       this.$router.push({ name: 'attend', params: { id } })
     }
   }
+  // Simple filter example
   // filters: {
   //   exclaimation(title) {
   //     return title + '!!!'
@@ -49,7 +50,7 @@ export default {
 }
 .event-card:hover {
   transform: scale(1.01);
-  box-shadow: 0 3px 12px 0 rgba(0, 0, 0, 0.20), 0 1px 15px 0 rgba(0, 0, 0, 0.19);
+  box-shadow: 0 3px 12px 0 rgba(0, 0, 0, 0.2), 0 1px 15px 0 rgba(0, 0, 0, 0.19);
 }
 .event-card > .title {
   margin: 0;

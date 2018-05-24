@@ -29,7 +29,7 @@
     <ul class="list-group">
       <li v-for="attendee in attendees" class="list-item">
         <media-block :imagePath="attendee.avatar" class="-img-circle">
-          <h5 slot="header">{{ attendee.name }}</h5>
+          <h5 slot="header">{{ attendee }}</h5>
           <meta-field slot="paragraph" iconName="user-check">
             <!-- iconName (type === organizer ? award : user-check) -->
             {{ attendee.type }} <!-- organizer || member -->
@@ -74,7 +74,7 @@ export default {
         user: this.$store.state.user
       })
       this.attendees.push(this.$store.state.user.username)
-      // EVAN: What is best practice for updating the list of attendees when a user clicks "yes" and adds themself as an attendee? Should we *get* new attendee list from the store, or is this way fine?
+      // ??? EVAN: What is best practice for updating the list of attendees when a user clicks "yes" and adds themself as an attendee? Should we *get* new attendee list from the store, or is this way fine?
     },
     notAttending() {
       console.log('Not attending')
