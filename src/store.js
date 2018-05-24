@@ -29,6 +29,12 @@ export default new Vuex.Store({
     },
     STORE_EVENTS(state, events) {
       state.events = events
+    },
+    ADD_ATTENDEE(state, { eventId, user }) {
+      console.log('eventId in mutation is', eventId)
+      const event = state.events.filter(event => event.id === eventId)
+
+      event[0].attendees[user.id] = user.username
     }
   },
   actions: {

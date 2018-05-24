@@ -1,5 +1,5 @@
 <template>
-  <button :class="buttonClass">
+  <button @click="onClick" :class="buttonClass">
     <slot>Button</slot> <!-- default content: 'Buttton' -->
   </button>
 </template>
@@ -10,6 +10,9 @@ export default {
     error: {
       type: Boolean,
       default: false
+    },
+    onClick: {
+      type: Function
     }
   },
   computed: {
