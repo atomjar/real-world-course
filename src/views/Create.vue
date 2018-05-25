@@ -46,7 +46,7 @@ const EMPTY_EVENT = {
   location: '',
   date: '',
   time: '',
-  attendeeCount: 1
+  attendees: {}
 }
 
 export default {
@@ -64,18 +64,18 @@ export default {
         location: '',
         date: '',
         time: '',
-        attendeeCount: 1
+        attendees: {}
       },
       categories: [],
       times: []
     }
   },
-  computed: {
-    ...mapGetters({
-      categoryLength: 'getCategoriesLength',
-      searchCategories: 'getCategoryByString'
-    })
-  },
+  // computed: {
+  //   ...mapGetters({
+  //     categoryLength: 'getCategoriesLength',
+  //     searchCategories: 'getCategoryByString'
+  //   })
+  // },
   /// ??? EVAN: Is *created* the ideal hook to perform some logic a component depends on like this?
   created() {
     var times = []
@@ -85,7 +85,11 @@ export default {
     this.times = times
   },
   mounted() {
+    /// ??? EVAN: Thoughts on doing this in *mounted* vs. a computed property?
     this.event.organizer = this.$store.state.user
+    this.event.attendees[
+      this.$store.state.user.id
+    ] = this.$store.state.user.username
     this.categories = this.$store.state.categories
   },
   methods: {

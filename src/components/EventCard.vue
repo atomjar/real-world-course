@@ -5,7 +5,7 @@
     <span class="meta">
       <svg class="icon" width="24" height="24">
         <use xlink:href="feather-sprite.svg#users"/></svg>
-      {{ event.attendeeCount }} attending</span>
+      {{ Object.values(event.attendees).length }} attending</span>
   </div>
 </template>
 
