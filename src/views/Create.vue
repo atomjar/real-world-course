@@ -97,6 +97,7 @@ export default {
     addEvent() {
       this.$store.commit('ADD_EVENT', this.event)
       this.event = { ...EMPTY_EVENT }
+      /// ??? EVAN: Thoughts on clearing this.event out like this?
     }
   }
 }
