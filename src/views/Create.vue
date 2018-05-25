@@ -64,6 +64,7 @@ export default {
       searchCategories: 'getCategoryByString'
     })
   },
+  /// ??? EVAN: Is *created* the ideal hook to perform some logic a component depends on like this?
   created() {
     var times = []
     for (var i = 1; i <= 24; i++) {
