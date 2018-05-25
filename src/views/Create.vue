@@ -2,8 +2,8 @@
   <div>
     <h1>Create Page</h1>
 
-    <!-- <form  @submit.prevent="addEvent(event)"> -->
-    <form  @submit.prevent="ADD_EVENT(event)">
+    <form  @submit.prevent="addEvent(event)">
+    <!-- <form  @submit.prevent="ADD_EVENT(event)"> -->
       <h2>Tell us about your event</h2>
 
       <label>Select a category</label>
@@ -34,7 +34,6 @@
 </template>
 
 <script>
-// import { mapState } from 'vuex'
 import { mapGetters } from 'vuex'
 import { mapMutations } from 'vuex'
 import Datepicker from 'vuejs-datepicker'
@@ -60,9 +59,6 @@ export default {
     }
   },
   computed: {
-    // username() {
-    //   return this.$store.state.user
-    // },
     ...mapGetters({
       categoryLength: 'getCategoriesLength',
       searchCategories: 'getCategoryByString'
@@ -71,22 +67,18 @@ export default {
   created() {
     var times = []
     for (var i = 1; i <= 24; i++) {
-      times.push(i)
+      times.push(i + ':00')
     }
-    times.map(time => {
-      time += ':00'
-      this.times.push(time)
-    })
   },
   mounted() {
     this.event.organizer = this.$store.state.user
     this.categories = this.$store.state.categories
   },
   methods: {
-    ...mapMutations(['ADD_EVENT'])
-    // addEvent() {
-    //   this.$store.commit('ADD_EVENT', this.event)
-    // }
+    // ...mapMutations(['ADD_EVENT'])
+    addEvent() {
+      this.$store.commit('ADD_EVENT', this.event)
+    }
   }
 }
 </script>

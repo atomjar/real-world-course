@@ -33,6 +33,7 @@ export default new Vuex.Store({
   },
   actions: {
     fetchEvents({ commit }) {
+      /// ??? EVAN: Any suggestions on Vue w/ axios?
       axios.get('http://localhost:3000/events')
         .then(response => {
           commit('STORE_EVENTS', response.data)
