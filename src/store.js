@@ -20,8 +20,12 @@ export default new Vuex.Store({
   },
   getters: {
     getEvent: (state) => (id) => {
-      return state.events.filter(event => event.id === id)
+      return state.events.filter(event => event.id === id)[0]
     }
+    // getAttendees: (state, getters) => (id) => {
+    //   console.log('getterAttendees', getters.getEvent(id).attendees)
+    //   return getters.getEvent(id).attendees
+    // }
   },
   mutations: {
     ADD_EVENT(state, event) {
@@ -34,7 +38,9 @@ export default new Vuex.Store({
     ADD_ATTENDEE(state, { eventId, user }) {
       const event = state.events.filter(event => event.id === eventId)
 
-      event[0].attendees[user.id] = user.username
+      Vue.set(event[0].attendees, user.id, user.username)
+      /// ??? EVAN: We'd love to capture your words on the array change caveat here.
+      // event[0].attendees[user.id] = user.username
     }
   },
   actions: {

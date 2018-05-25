@@ -3,7 +3,7 @@
     <span class="eyebrow">@{{ time }} on {{ date }}</span>
     <!-- <h4 class="title">{{ title | exclaimation  }}</h4> -->
    <h4 class="title">{{ title }}</h4>
-   <meta-field iconName="users">{{ attendeeCount }} people going</meta-field>
+   <meta-field iconName="users">{{ attendeeNumber }} attending</meta-field>
   </div>
 </template>
 
@@ -22,9 +22,13 @@ export default {
     date: [Date, String],
     title: String,
     id: Number,
-    attendeeCount: {
-      type: Number,
-      default: 0
+    attendees: {
+      type: Object
+    }
+  },
+  computed: {
+    attendeeNumber() {
+      return Object.values(this.attendees).length
     }
   },
   methods: {

@@ -3,7 +3,7 @@
 
     <div class="prompt-box -shadow">
       <h3 class="title">Are you going?
-        <meta-field iconName="users">{{ event.attendeeCount }} people going</meta-field></h3>
+        <meta-field iconName="users">{{ attendeeNumber }} attending</meta-field></h3>
       <Button :onClick="addAttendee" class="-fill-gradient">Yes</Button>
       <Button :onClick="notAttending" class="-fill-gray">No</Button>
     </div>
@@ -27,7 +27,7 @@
     <h2>Attendees
       <span class="badge -fill-gradient">10</span></h2>
     <ul class="list-group">
-      <li v-for="attendee in attendees" class="list-item">
+      <li v-for="attendee in event.attendees" class="list-item">
         <media-block :imagePath="attendee.avatar" class="-img-circle">
           <h5 slot="header">{{ attendee }}</h5>
           <meta-field slot="paragraph" iconName="user-check">
@@ -55,16 +55,25 @@ export default {
     MediaBlock,
     Icon
   },
-  data() {
-    return {
-      event: {},
-      attendees: []
+  // data() {
+  //   return {
+  // event: {}
+  //   }
+  // },
+  // mounted() {
+  /// ??? EVAN: We're aware this could be considered an anti-pattern, setting the data like so. So we're interested in capturing your words on this:
+  // this.event = this.$store.getters.getEvent(this.$route.params.id)
+  // },
+  computed: {
+    event() {
+      return this.$store.getters.getEvent(this.$route.params.id)
+    },
+    attendeeNumber() {
+      return Object.values(this.event.attendees).length
     }
-  },
-  mounted() {
-    this.event = this.$store.getters.getEvent(this.$route.params.id)[0]
-
-    this.attendees = Object.values(this.event.attendees)
+    // attendees() {
+    //   return this.$store.getters.getAttendees(this.$route.params.id)
+    // }
   },
   methods: {
     addAttendee() {
@@ -73,8 +82,6 @@ export default {
         eventId: this.$route.params.id,
         user: this.$store.state.user
       })
-      this.attendees.push(this.$store.state.user.username)
-      // ??? EVAN: What is best practice for updating the list of attendees when a user clicks "yes" and adds themself as an attendee? Should we *get* new attendee list from the store, or is this way fine?
     },
     notAttending() {
       console.log('Not attending')
