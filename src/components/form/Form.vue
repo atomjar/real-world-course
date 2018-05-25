@@ -1,6 +1,7 @@
 <template>
   <div>
    <form>
+     <!-- ??? EVAN: Any feedback on how we've constructed the form? -->
       <SelectInput 
         v-model="event.category" 
         label="Select a category" 
@@ -66,7 +67,8 @@ const EMPTY_EVENT = {
   location: '',
   date: '',
   time: ''
-} /// ??? EVAN: Thoughts on resetting the event data with a const like this?
+}
+/// ??? EVAN: Thoughts on resetting the event data with a const like this?
 
 export default {
   components: {
@@ -74,7 +76,8 @@ export default {
     Datepicker,
     Snackbar
   },
-  $times: times, // ??? EVAN: Do you recommend using custom options like this, and if so why or why not?
+  $times: times,
+  // ??? EVAN: Do you recommend using custom options like this, why or why not?
   data() {
     return {
       event: {

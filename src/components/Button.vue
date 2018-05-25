@@ -5,6 +5,8 @@
 </template>
 
 <script>
+/// ??? EVAN: Would you have done this button component differently?
+
 export default {
   props: {
     error: {

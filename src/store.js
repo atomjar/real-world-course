@@ -26,6 +26,7 @@ export default new Vuex.Store({
   mutations: {
     ADD_EVENT(state, event) {
       state.events.push({ ...event })
+      /// ??? EVAN: Thoughts on pushing event with spread operator like this?
     },
     STORE_EVENTS(state, events) {
       state.events = events
