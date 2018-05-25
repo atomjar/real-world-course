@@ -68,7 +68,6 @@ const EMPTY_EVENT = {
   date: '',
   time: ''
 }
-/// ??? EVAN: Thoughts on resetting the event data with a const like this?
 
 export default {
   components: {
