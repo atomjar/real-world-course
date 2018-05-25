@@ -38,6 +38,17 @@ import { mapGetters } from 'vuex'
 import { mapMutations } from 'vuex'
 import Datepicker from 'vuejs-datepicker'
 
+const EMPTY_EVENT = {
+  category: '',
+  organizer: {},
+  title: '',
+  description: '',
+  location: '',
+  date: '',
+  time: '',
+  attendeeCount: 1
+}
+
 export default {
   name: 'Create',
   components: {
@@ -52,7 +63,8 @@ export default {
         description: '',
         location: '',
         date: '',
-        time: ''
+        time: '',
+        attendeeCount: 1
       },
       categories: [],
       times: []
@@ -70,6 +82,7 @@ export default {
     for (var i = 1; i <= 24; i++) {
       times.push(i + ':00')
     }
+    this.times = times
   },
   mounted() {
     this.event.organizer = this.$store.state.user
@@ -79,6 +92,7 @@ export default {
     // ...mapMutations(['ADD_EVENT'])
     addEvent() {
       this.$store.commit('ADD_EVENT', this.event)
+      this.event = { ...EMPTY_EVENT }
     }
   }
 }

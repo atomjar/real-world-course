@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>Events Page</h1>
-    <EventCard v-for="event in events" :key="event.id" :events="{title: event.title, date: event.date, time: event.time, attendeeCount: event.attendeeCount}"/>
+    <EventCard v-for="event in events" :key="event.id" :event="event"/>
   </div>
 
 </template>
@@ -15,8 +15,11 @@ export default {
     EventCard
   },
   mounted() {
-    this.$store.dispatch('fetchEvents')
-    /// ??? EVAN: Would love your feedback on our fetchEvents Action implemention
+    // Added this guard for now since we can't add to db.json via json-server. Without the guard, an event added to store.state from Create.vue is erased when this component mounts.
+    if (!this.$store.state.events.length) {
+      this.$store.dispatch('fetchEvents')
+    }
+    /// ??? EVAN: Would love your feedback on our fetchEvents Action implemention.
   },
   computed: {
     events() {

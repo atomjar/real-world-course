@@ -1,11 +1,11 @@
 <template>
   <div class="event-card -shadow">
-    <span class="eyebrow">@{{ events.time }} on {{ events.date }}</span>
-    <h4 class="title">{{ events.title }}</h4>
+    <span class="eyebrow">@{{ event.time }} on {{ event.date }}</span>
+    <h4 class="title">{{ event.title }}</h4>
     <span class="meta">
       <svg class="icon" width="24" height="24">
         <use xlink:href="feather-sprite.svg#users"/></svg>
-      {{ events.attendeeCount }} people going</span>
+      {{ event.attendeeCount }} attending</span>
   </div>
 </template>
 
@@ -13,7 +13,7 @@
 export default {
   name: 'EventCard',
   props: {
-    events: Object
+    event: Object
   }
 }
 </script>
