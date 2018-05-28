@@ -1,33 +1,34 @@
 <template>
   <div>
     <h1>Events</h1>
-    <TextInput 
-      v-model="filter" 
+    <TextInput
+      v-model="filter"
+      class="-shadow"
+      type="search"
       placeholder="Type to filter events"/>
 
     <p v-show="errorMessage">{{ errorMessage }}</p>
 
-    <button
-      @click="selectedType = 'all'"
-      type="button"
+    <TabItem
+      @click.native="selectedType = 'all'"
       :class="{ 'active': selectedType === 'all' }"
-      name="button">
+      iconName="clock">
         All Events
-    </button>
-    <button
-      @click="selectedType = 'my'"
-      type="button"
+    </TabItem>
+
+    <TabItem
+      @click.native="selectedType = 'my'"
       :class="{ 'active': selectedType === 'my' }"
-      name="button">
+      iconName="calendar">
         My Events
-    </button>
-    <button
-      @click="selectedType = 'attending'"
-      type="button"
+    </TabItem>
+
+    <TabItem
+      @click.native="selectedType = 'attending'"
       :class="{ 'active': selectedType === 'attending' }"
-      name="button">
-        Attending
-    </button>
+      iconName="users">
+      Attending
+    </TabItem>
 
     <EventList :events="filteredEvents"/>
 
@@ -37,12 +38,14 @@
 <script>
 import EventCard from '@/components/events/EventCard.vue'
 import EventList from '@/components/events/EventList.vue'
+import TabItem from '@/components/TabItem.vue'
 
 export default {
   name: 'Events',
   components: {
     EventCard,
-    EventList
+    EventList,
+    TabItem
   },
   data() {
     return {
