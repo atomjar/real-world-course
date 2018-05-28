@@ -2,9 +2,9 @@
   <div>
    <form>
      <!-- ??? EVAN: Any feedback on how we've constructed the form? -->
-      <SelectInput 
-        v-model="event.category" 
-        label="Select a category" 
+      <SelectInput
+        v-model="event.category"
+        label="Select a category"
         :options="categories"/>
 
        <h3>Name & describe your event</h3>
@@ -40,14 +40,14 @@
        </Field>
 
 
-      <SelectInput 
-        v-model="event.time" 
-        label="Select a time" 
+      <SelectInput
+        v-model="event.time"
+        label="Select a time"
         :options="$options.$times"
         required/>
-        
+
       <!-- ??? EVAN: What is your preferred way to handle a Button component triggering a submit event?-->
-      <Button :onClick.prevent="addEvent">Submit</Button>
+      <Button :onClick.prevent="addEvent" class="-fill-gradient">Submit</Button>
     </form>
 
      <snackbar v-if="success" iconName="check-circle">
