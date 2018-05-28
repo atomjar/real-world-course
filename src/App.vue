@@ -1,9 +1,12 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Events</router-link> |
-      <router-link to="/create">Create</router-link>
-      <router-link to="/attend">Attend</router-link>
+    <div id="nav" class="nav">
+      <router-link to="/" class="brand">Vue World</router-link>
+      <nav>
+        <router-link to="/" class="nav-item">Events</router-link>
+        <router-link to="/attend" class="nav-item">Attend</router-link>
+        <router-link to="/create" class="nav-item">Create</router-link>
+      </nav>
     </div>
     <router-view/>
   </div>
@@ -24,7 +27,7 @@ body {
 #app {
   box-sizing: border-box;
   width: 500px;
-  padding: 0 20px;
+  padding: 0 20px 20px;
   margin: 0 auto;
 }
 hr {
@@ -97,6 +100,28 @@ small {
 .-shadow {
   box-shadow: 0 1px 2px 0 rgba(0,0,0,0.2), 0 1px 5px 0 rgba(0,0,0,0.13);
   border: 0;
+}
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 60px;
+}
+.nav > .brand {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700;
+  font-size: 1.5em;
+  text-decoration: none;
+}
+.nav .nav-item {
+  box-sizing: border-box;
+  margin: 0 5px;
+  color: rgba(0,0,0,0.5);
+  text-decoration: none;
+}
+.nav .nav-item.router-link-exact-active {
+  color: #39b982;
+  border-bottom: solid 2px #39b982;
 }
 .list-group {
   margin: 0;
@@ -271,7 +296,6 @@ select::ms-expand {
           transform: inherit;
   box-shadow: none;
 }
-button,
 .button {
   align-items: center;
   justify-content: space-between;
@@ -285,55 +309,44 @@ button,
   white-space: nowrap;
   transition: all 0.2s linear;
 }
-button:hover,
 .button:hover {
   -webkit-transform: scale(1.02);
           transform: scale(1.02);
   box-shadow: 0 7px 17px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
 }
-button:focus,
 .button:focus {
   outline: none;
 }
-button:active,
 .button:active {
   -webkit-transform: scale(1);
           transform: scale(1);
   box-shadow: none;
 }
-button.-fill-gradient,
 .button.-fill-gradient {
   background: linear-gradient(to right, #16c0b0, #84cf6a);
   color: #fff;
 }
-button.-fill-gray,
 .button.-fill-gray {
   background: rgba(0,0,0,0.5);
   color: #fff;
 }
-button.-size-small,
 .button.-size-small {
   height: 32px;
 }
-button.-icon-right,
 .button.-icon-right {
   text-align: left;
   padding: 0 20px;
 }
-button.-icon-right > .icon,
 .button.-icon-right > .icon {
   margin-left: 10px;
 }
-button.-icon-left,
 .button.-icon-left {
   text-align: right;
   padding: 0 20px;
 }
-button.-icon-left > .icon,
 .button.-icon-left > .icon {
   margin-right: 10px;
 }
-button.-icon-center,
 .button.-icon-center {
   padding: 0 20px;
 }
