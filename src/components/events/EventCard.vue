@@ -5,8 +5,7 @@
    <h4 class="title">{{ title }}</h4>
 
     <span class="meta">
-      <svg class="icon" width="24" height="24">
-        <use xlink:href="feather-sprite.svg#users"/></svg>
+      <Icon name="users" />
       {{ attendeeCount }} people going</span>
   </div>
 </template>
