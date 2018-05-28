@@ -1,6 +1,6 @@
 <template>
-  <button @click="onClick" :class="buttonClass">
-    <slot>Button</slot> <!-- default content: 'Buttton' -->
+  <button @click="onClick" class="button" :class="buttonClass">
+    <slot>Button</slot> <!-- default content: 'Button' -->
   </button>
 </template>
 
