@@ -15,12 +15,7 @@ export default {
 .field {
   margin-bottom: 24px;
 }
-
-.field label {
-  display: block;
-  margin-bottom: 10px;
-  text-transform: uppercase;
-  font-weight: bold;
-  letter-spacing: 0.5px;
+.field.-shadow input {
+  border: 0;
 }
 </style>
