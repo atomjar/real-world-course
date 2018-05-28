@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="event-list">
     <EventCard
       v-for="event in events"
       v-bind="event"
@@ -22,5 +22,8 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+.event-list {
+  margin-top: 24px;
+}
 </style>
