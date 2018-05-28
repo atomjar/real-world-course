@@ -3,7 +3,7 @@
     <span class="eyebrow">@{{ time }} on {{ date }}</span>
     <!-- <h4 class="title">{{ title | exclaimation  }}</h4> -->
    <h4 class="title">{{ title }}</h4>
-   <meta-field iconName="users">{{ attendeeCount }} people going</meta-field>
+   <meta-field iconName="users">{{ attendeeNumber }} attending</meta-field>
   </div>
 </template>
 
@@ -22,9 +22,13 @@ export default {
     date: [Date, String],
     title: String,
     id: Number,
-    attendeeCount: {
-      type: Number,
-      default: 0
+    attendees: {
+      type: Object
+    }
+  },
+  computed: {
+    attendeeNumber() {
+      return Object.values(this.attendees).length
     }
   },
   methods: {
@@ -32,6 +36,7 @@ export default {
       this.$router.push({ name: 'attend', params: { id } })
     }
   }
+  // Simple filter example
   // filters: {
   //   exclaimation(title) {
   //     return title + '!!!'
@@ -49,7 +54,7 @@ export default {
 }
 .event-card:hover {
   transform: scale(1.01);
-  box-shadow: 0 3px 12px 0 rgba(0, 0, 0, 0.20), 0 1px 15px 0 rgba(0, 0, 0, 0.19);
+  box-shadow: 0 3px 12px 0 rgba(0, 0, 0, 0.2), 0 1px 15px 0 rgba(0, 0, 0, 0.19);
 }
 .event-card > .title {
   margin: 0;

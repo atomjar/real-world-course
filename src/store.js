@@ -20,21 +20,27 @@ export default new Vuex.Store({
   },
   getters: {
     getEvent: (state) => (id) => {
-      return state.events.filter(event => event.id === id)
+      return state.events.filter(event => event.id === id)[0]
     }
+    // getAttendees: (state, getters) => (id) => {
+    //   console.log('getterAttendees', getters.getEvent(id).attendees)
+    //   return getters.getEvent(id).attendees
+    // }
   },
   mutations: {
     ADD_EVENT(state, event) {
       state.events.push({ ...event })
+      /// ??? EVAN: Thoughts on pushing event with spread operator like this?
     },
     STORE_EVENTS(state, events) {
       state.events = events
     },
     ADD_ATTENDEE(state, { eventId, user }) {
-      console.log('eventId in mutation is', eventId)
       const event = state.events.filter(event => event.id === eventId)
 
-      event[0].attendees[user.id] = user.username
+      Vue.set(event[0].attendees, user.id, user.username)
+      /// ??? EVAN: We'd love to capture your words on the array change caveat here.
+      // event[0].attendees[user.id] = user.username
     }
   },
   actions: {

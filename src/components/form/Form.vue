@@ -1,10 +1,11 @@
 <template>
   <div>
-    <form  @submit.prevent="addEvent">
-       <SelectInput
-         v-model="event.category"
-         label="Select a category"
-         :options="categories"/>
+   <form>
+     <!-- ??? EVAN: Any feedback on how we've constructed the form? -->
+      <SelectInput 
+        v-model="event.category" 
+        label="Select a category" 
+        :options="categories"/>
 
        <h3>Name & describe your event</h3>
        <TextInput
@@ -38,14 +39,16 @@
            required/>
        </Field>
 
-       <SelectInput
-         v-model="event.time"
-         label="Select a time"
-         :options="times"
-         required/>
 
-       <Button class="-fill-gradient">Submit</Button>
-     </form>
+      <SelectInput 
+        v-model="event.time" 
+        label="Select a time" 
+        :options="$options.$times"
+        required/>
+        
+      <!-- ??? EVAN: What is your preferred way to handle a Button component triggering a submit event?-->
+      <Button :onClick.prevent="addEvent">Submit</Button>
+    </form>
 
      <snackbar v-if="success" iconName="check-circle">
        <h4 slot="header">Success!</h4>
@@ -59,6 +62,7 @@ import SelectInput from './SelectInput.vue'
 import Datepicker from 'vuejs-datepicker'
 import Snackbar from '@/components/Snackbar.vue'
 import Field from '@/components/form/Field.vue'
+import times from '../../timesUtil'
 
 const EMPTY_EVENT = {
   category: '',
@@ -77,6 +81,8 @@ export default {
     Field,
     Snackbar
   },
+  $times: times,
+  // ??? EVAN: Do you recommend using custom options like this, why or why not?
   data() {
     return {
       event: {
@@ -90,19 +96,8 @@ export default {
         attendees: {}
       },
       categories: [],
-      times: [],
       success: false
     }
-  },
-  created() {
-    var times = []
-    for (var i = 1; i <= 24; i++) {
-      times.push(i)
-    }
-    times.map(time => {
-      time += ':00'
-      this.times.push(time)
-    })
   },
   mounted() {
     this.event.organizer = this.$store.state.user
