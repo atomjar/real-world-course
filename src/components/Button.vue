@@ -1,6 +1,6 @@
 <template>
-  <button :class="buttonClass">
-    <slot>Button</slot> <!-- default content: 'Buttton' -->
+  <button class="button" :class="buttonClass">
+    <slot>Button</slot> <!-- default content: 'Button' -->
   </button>
 </template>
 

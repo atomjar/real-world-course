@@ -271,7 +271,6 @@ select::ms-expand {
           transform: inherit;
   box-shadow: none;
 }
-button,
 .button {
   align-items: center;
   justify-content: space-between;
@@ -285,55 +284,44 @@ button,
   white-space: nowrap;
   transition: all 0.2s linear;
 }
-button:hover,
 .button:hover {
   -webkit-transform: scale(1.02);
           transform: scale(1.02);
   box-shadow: 0 7px 17px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
 }
-button:focus,
 .button:focus {
   outline: none;
 }
-button:active,
 .button:active {
   -webkit-transform: scale(1);
           transform: scale(1);
   box-shadow: none;
 }
-button.-fill-gradient,
 .button.-fill-gradient {
   background: linear-gradient(to right, #16c0b0, #84cf6a);
   color: #fff;
 }
-button.-fill-gray,
 .button.-fill-gray {
   background: rgba(0,0,0,0.5);
   color: #fff;
 }
-button.-size-small,
 .button.-size-small {
   height: 32px;
 }
-button.-icon-right,
 .button.-icon-right {
   text-align: left;
   padding: 0 20px;
 }
-button.-icon-right > .icon,
 .button.-icon-right > .icon {
   margin-left: 10px;
 }
-button.-icon-left,
 .button.-icon-left {
   text-align: right;
   padding: 0 20px;
 }
-button.-icon-left > .icon,
 .button.-icon-left > .icon {
   margin-right: 10px;
 }
-button.-icon-center,
 .button.-icon-center {
   padding: 0 20px;
 }
