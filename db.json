@@ -9,10 +9,11 @@
       "description": "Let's clean up this beach.",
       "organizer": "Adam Jahr",
       "category": "sustainability",
-      "attendeeCount": 10,
       "attendees": {
         "a": "Adam Jahr",
-        "b": "Gregg Pollack"
+        "b": "Gregg Pollack",
+        "c": "Beth Rothsan",
+        "d": "Joanne McMane"
       }
     },
     {
@@ -24,7 +25,6 @@
       "description": "We're going to clean up this park.",
       "organizer": "Adm Jahr",
       "category": "nature",
-      "attendeeCount": 20,
       "attendees": {
         "a": "Adam Jahr",
         "b": "Gregg Pollack"
@@ -39,7 +39,6 @@
       "description": "Help animals find new homes.",
       "organizer": "Adm Jahr",
       "category": "animal welfare",
-      "attendeeCount": 30,
       "attendees": {
         "b": "Gregg Pollack"
       }
