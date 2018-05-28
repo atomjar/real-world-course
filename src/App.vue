@@ -155,16 +155,6 @@ small {
   background: linear-gradient(to right, #16c0b0, #84cf6a);
   color: #fff;
 }
-.meta {
-  display: inline-flex;
-  align-items: center;
-  color: rgba(0,0,0,0.4);
-  font-size: 1rem;
-  font-weight: 600;
-}
-.meta .icon {
-  margin-right: 6px;
-}
 button,
 label,
 input,
