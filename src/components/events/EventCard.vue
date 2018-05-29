@@ -11,8 +11,13 @@
 </template>
 
 <script>
+import Icon from '@/components/Icon'
+
 export default {
   name: 'EventCard',
+  components: {
+    Icon
+  },
   props: {
     time: {
       type: String,
