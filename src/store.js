@@ -1,12 +1,14 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
+const fb = require('./firebaseConfig.js')
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    user: { id: 'a', username: 'Adam Jahr' },
+    currentUser: null,
+    userProfile: {},
     categories: [
       'sustainability',
       'nature',
@@ -22,15 +24,10 @@ export default new Vuex.Store({
     getEvent: (state) => (id) => {
       return state.events.filter(event => event.id === id)[0]
     }
-    // getAttendees: (state, getters) => (id) => {
-    //   console.log('getterAttendees', getters.getEvent(id).attendees)
-    //   return getters.getEvent(id).attendees
-    // }
   },
   mutations: {
     ADD_EVENT(state, event) {
       state.events.push({ ...event })
-      /// ??? EVAN: Thoughts on pushing event with spread operator like this?
     },
     STORE_EVENTS(state, events) {
       state.events = events
@@ -39,8 +36,12 @@ export default new Vuex.Store({
       const event = state.events.filter(event => event.id === eventId)
 
       Vue.set(event[0].attendees, user.id, user.username)
-      /// ??? EVAN: We'd love to capture your words on the array change caveat here.
-      // event[0].attendees[user.id] = user.username
+    },
+    setCurrentUser(state, user) {
+      state.currentUser = user
+    },
+    setUserProfile(state, profile) {
+      state.userProfile = profile
     }
   },
   actions: {
@@ -56,6 +57,13 @@ export default new Vuex.Store({
     },
     addEvent({ commit }, event) {
       commit('ADD_EVENT', event)
+    },
+    fetchUserProfile({ commit, state }) {
+      fb.usersCollection.doc(state.currentUser.uid).get().then(res => {
+        commit('setUserProfile', res.data())
+      }).catch(err => {
+        console.log(err)
+      })
     }
   }
 })

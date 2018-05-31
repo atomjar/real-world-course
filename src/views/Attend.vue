@@ -77,10 +77,9 @@ export default {
   },
   methods: {
     addAttendee() {
-      console.log('user', this.$store.state.user)
       this.$store.commit('ADD_ATTENDEE', {
         eventId: this.$route.params.id,
-        user: this.$store.state.user
+        user: this.$store.state.currentUser.user
       })
     },
     notAttending() {
