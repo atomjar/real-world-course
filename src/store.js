@@ -79,7 +79,6 @@ export default new Vuex.Store({
       fb.auth.signInWithEmailAndPassword(form.email, form.password)
         .then(
           user => {
-            console.log('uid', user.user.uid)
             fb.usersCollection.doc(user.user.uid).get()
               .then(res => {
                 const loggedInUser = {
