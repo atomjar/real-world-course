@@ -7,7 +7,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    currentUser: null,
+    user: null,
     userProfile: {},
     categories: [
       'sustainability',
@@ -37,8 +37,8 @@ export default new Vuex.Store({
 
       Vue.set(event[0].attendees, user.id, user.username)
     },
-    setCurrentUser(state, user) {
-      state.currentUser = user
+    setUser(state, user) {
+      state.user = user
     },
     setUserProfile(state, profile) {
       state.userProfile = profile
@@ -58,12 +58,43 @@ export default new Vuex.Store({
     addEvent({ commit }, event) {
       commit('ADD_EVENT', event)
     },
-    fetchUserProfile({ commit, state }) {
-      fb.usersCollection.doc(state.currentUser.uid).get().then(res => {
-        commit('setUserProfile', res.data())
-      }).catch(err => {
-        console.log(err)
-      })
+    userSignUp({ commit }, form) {
+      fb.auth.createUserWithEmailAndPassword(form.email, form.password)
+        .then(user => {
+          const newUser = {
+            id: user.user.uid,
+            name: form.name
+          }
+          commit('setUser', newUser)
+          fb.db.collection('users').doc(user.user.uid).set({
+            name: form.name
+          })
+          // this.$router.push('/')
+          // I'm getting TypeError: Cannot read property 'push' of undefined
+          // Why is router not defined if it's globally injected?
+        })
+        .catch(error => console.log(error))
+    },
+    userLogin({ commit }, form) {
+      fb.auth.signInWithEmailAndPassword(form.email, form.password)
+        .then(
+          user => {
+            console.log('uid', user.user.uid)
+            fb.usersCollection.doc(user.user.uid).get()
+              .then(res => {
+                const loggedInUser = {
+                  id: user.user.uid,
+                  name: res.data().name
+                }
+                commit('setUser', loggedInUser)
+                // this.$router.push('/')
+              }).catch(err => {
+                console.log(err)
+              })
+          }
+        )
+        .catch(error => console.log(error))
     }
   }
 })
+

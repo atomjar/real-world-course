@@ -5,11 +5,30 @@
       <nav>
         <router-link to="/" class="nav-item">Events</router-link>
         <router-link to="/create" class="nav-item">Create an event</router-link>
+        <a @click="logout">Log Out</a>
       </nav>
     </div>
     <router-view/>
   </div>
 </template>
+
+<script>
+import * as firebase from 'firebase'
+
+export default {
+  name: 'app',
+  methods: {
+    logout() {
+      firebase
+        .auth()
+        .signOut()
+        .then(() => {
+          this.$router.push('/')
+        })
+    }
+  }
+}
+</script>
 
 <style>
 html {

@@ -59,9 +59,8 @@
 </template>
 
 <script>
-const fb = require('../firebaseConfig.js')
-
 export default {
+  name: 'login',
   data() {
     return {
       loginForm: {
@@ -81,47 +80,10 @@ export default {
       this.showLoginForm = !this.showLoginForm
     },
     login() {
-      fb.auth
-        .signInWithEmailAndPassword(
-          this.loginForm.email,
-          this.loginForm.password
-        )
-        .then(user => {
-          this.$store.commit('setCurrentUser', user)
-          this.$store.dispatch('fetchUserProfile')
-          this.$router.push('/events')
-        })
-        .catch(err => {
-          console.log(err)
-        })
+      this.$store.dispatch('userLogin', this.loginForm)
     },
     signup() {
-      fb.auth
-        .createUserWithEmailAndPassword(
-          this.signupForm.email,
-          this.signupForm.password
-        )
-        .then(user => {
-          this.$store.commit('setCurrentUser', user)
-
-          // create user object
-          // doesn't seem to be working
-          fb.usersCollection
-            .doc(user.uid)
-            .set({
-              name: this.signupForm.name
-            })
-            .then(() => {
-              this.$store.dispatch('fetchUserProfile')
-              this.$router.push('/events')
-            })
-            .catch(err => {
-              console.log(err)
-            })
-        })
-        .catch(err => {
-          console.log(err)
-        })
+      this.$store.dispatch('userSignUp', this.signupForm)
     }
   }
 }
