@@ -80,10 +80,14 @@ export default {
       this.showLoginForm = !this.showLoginForm
     },
     login() {
-      this.$store.dispatch('userLogin', this.loginForm)
+      this.$store
+        .dispatch('userLogin', this.loginForm)
+        .then(this.$router.push('/'))
     },
     signup() {
-      this.$store.dispatch('userSignUp', this.signupForm)
+      this.$store
+        .dispatch('userSignUp', this.signupForm)
+        .then(this.$router.push('/'))
     }
   }
 }
