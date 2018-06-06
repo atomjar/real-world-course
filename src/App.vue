@@ -1,34 +1,20 @@
 <template>
   <div id="app">
-    <div id="nav" class="nav">
-      <router-link to="/" class="brand">Vue World</router-link>
-      <nav>
-        <router-link to="/" class="nav-item">Events</router-link>
-        <router-link to="/create" class="nav-item">Create an event</router-link>
-        <a @click="logout">Log Out</a>
-      </nav>
-    </div>
+    <NavBar/>
     <router-view/>
   </div>
 </template>
 
 <script>
-import * as firebase from 'firebase'
+import NavBar from '@/components/NavBar.vue'
 
 export default {
-  name: 'app',
-  methods: {
-    logout() {
-      firebase
-        .auth()
-        .signOut()
-        .then(() => {
-          this.$router.push('/')
-        })
-    }
+  components: {
+    NavBar
   }
 }
 </script>
+
 
 <style>
 html {

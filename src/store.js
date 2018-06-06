@@ -8,7 +8,6 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     user: null,
-    userProfile: {},
     categories: [
       'sustainability',
       'nature',
@@ -37,11 +36,8 @@ export default new Vuex.Store({
 
       Vue.set(event[0].attendees, user.id, user.username)
     },
-    setUser(state, user) {
+    SET_USER(state, user) {
       state.user = user
-    },
-    setUserProfile(state, profile) {
-      state.userProfile = profile
     }
   },
   actions: {
@@ -65,13 +61,10 @@ export default new Vuex.Store({
             id: user.user.uid,
             name: form.name
           }
-          commit('setUser', newUser)
+          commit('SET_USER', newUser)
           fb.db.collection('users').doc(user.user.uid).set({
             name: form.name
           })
-          // this.$router.push('/')
-          // I'm getting TypeError: Cannot read property 'push' of undefined
-          // Why is router not defined if it's globally injected?
         })
         .catch(error => console.log(error))
     },
@@ -85,8 +78,7 @@ export default new Vuex.Store({
                   id: user.user.uid,
                   name: res.data().name
                 }
-                commit('setUser', loggedInUser)
-                // this.$router.push('/')
+                commit('SET_USER', loggedInUser)
               }).catch(err => {
                 console.log(err)
               })
