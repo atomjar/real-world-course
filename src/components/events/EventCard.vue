@@ -1,7 +1,6 @@
 <template>
   <div @click="expandEvent(id)" class="event-card -shadow">
     <span class="eyebrow">@{{ time }} on {{ date }}</span>
-    <!-- <h4 class="title">{{ title | exclaimation  }}</h4> -->
    <h4 class="title">{{ title }}</h4>
    <meta-field iconName="users">{{ attendeeNumber }} attending</meta-field>
   </div>
@@ -36,12 +35,6 @@ export default {
       this.$router.push({ name: 'attend', params: { id } })
     }
   }
-  // Simple filter example
-  // filters: {
-  //   exclaimation(title) {
-  //     return title + '!!!'
-  //   }
-  // }
 }
 </script>
 

@@ -1,7 +1,6 @@
 <template>
   <div>
-   <form>
-     <!-- ??? EVAN: Any feedback on how we've constructed the form? -->
+   <form @submit.prevent>
       <SelectInput
         v-model="event.category"
         label="Select a category"
@@ -46,7 +45,6 @@
         :options="$options.$times"
         required/>
 
-      <!-- ??? EVAN: What is your preferred way to handle a Button component triggering a submit event?-->
       <Button :onClick.prevent="addEvent" class="-fill-gradient">Submit</Button>
     </form>
 
@@ -82,7 +80,6 @@ export default {
     Snackbar
   },
   $times: times,
-  // ??? EVAN: Do you recommend using custom options like this, why or why not?
   data() {
     return {
       event: {

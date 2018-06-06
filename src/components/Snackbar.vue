@@ -29,7 +29,7 @@ export default {
 .snackbar {
   display: flex;
   align-items: center;
-  margin: 0 0 1em;
+  margin: 1em 0 1em;
 }
 .snackbar > .body * {
   margin: 0;

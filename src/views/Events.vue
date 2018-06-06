@@ -30,7 +30,6 @@
       Attending
     </TabItem>
 
-    <!-- ??? EVAN: Do you have feedback on how we're handling the filtered tab-based event lists? See computed properties below. -->
     <EventList :events="filteredEvents"/>
 
   </div>
@@ -55,9 +54,9 @@ export default {
     }
   },
   mounted() {
-    if (!this.$store.state.events.length) {
-      this.$store.dispatch('fetchEvents')
-    }
+    // if (!this.$store.state.events.length) {
+    this.$store.dispatch('fetchEvents')
+    // }
   },
   computed: {
     events() {
@@ -65,7 +64,7 @@ export default {
     },
     myEvents() {
       return this.events.filter(
-        event => event.organizer === this.$store.state.user.username
+        event => event.organizer.id === this.$store.state.user.id
       )
     },
     attendingEvents() {
