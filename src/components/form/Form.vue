@@ -61,6 +61,7 @@ import Datepicker from 'vuejs-datepicker'
 import Snackbar from '@/components/Snackbar.vue'
 import Field from '@/components/form/Field.vue'
 import times from '../../timesUtil'
+const fb = require('@/firebaseConfig.js')
 
 const EMPTY_EVENT = {
   category: '',
@@ -83,6 +84,7 @@ export default {
   data() {
     return {
       event: {
+        id: Math.floor(Math.random() * 10000000),
         category: '',
         organizer: {},
         title: '',
@@ -102,8 +104,15 @@ export default {
   },
   methods: {
     addEvent() {
-      this.$store.dispatch('addEvent', this.event)
-      this.success = true
+      fb.eventsCollection
+        .doc(this.event.title)
+        .set(this.event)
+        .then(() => {
+          this.success = true
+        })
+        .catch(error => {
+          console.error('Error writing document: ', error)
+        })
       this.event = { ...EMPTY_EVENT }
     }
   }

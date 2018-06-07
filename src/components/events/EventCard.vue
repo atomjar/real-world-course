@@ -2,12 +2,13 @@
   <div @click="expandEvent(id)" class="event-card -shadow">
     <span class="eyebrow">@{{ time }} on {{ date }}</span>
    <h4 class="title">{{ title }}</h4>
-   <meta-field iconName="users">{{ attendeeNumber }} attending</meta-field>
+   <!-- <meta-field iconName="users">{{ attendeeNumber }} attending</meta-field> -->
   </div>
 </template>
 
 <script>
 import MetaField from '@/components/MetaField'
+
 export default {
   name: 'EventCard',
   components: {
@@ -18,12 +19,10 @@ export default {
       type: String,
       required: true
     },
-    date: [Date, String],
+    date: [Object, String, Date], //fix this format
     title: String,
-    id: Number,
-    attendees: {
-      type: Object
-    }
+    id: Number
+    // attendees: Object
   },
   computed: {
     attendeeNumber() {

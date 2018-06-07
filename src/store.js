@@ -25,18 +25,18 @@ export default new Vuex.Store({
     }
   },
   mutations: {
-    ADD_EVENT(state, event) {
-      fb.eventsCollection.add(event)
-      // state.events.push({ ...event })
+    // ADD_EVENT(state, event) {
+    //   fb.eventsCollection.add(event)
+    // state.events.push({ ...event })
+    // },
+    STORE_EVENTS(state, events) {
+      state.events = events
     },
-    STORE_EVENTS(state, event) {
-      state.events.push(event)
-    },
-    ADD_ATTENDEE(state, { eventId, user }) {
-      const event = state.events.filter(event => event.id === eventId)
+    // ADD_ATTENDEE(state, { eventId, user }) {
+    //   const event = state.events.filter(event => event.id === eventId)[0]
 
-      Vue.set(event[0].attendees, user.id, user.username)
-    },
+    //   Vue.set(event.attendees, user.id, user.name)
+    // },
     SET_USER(state, user) {
       state.user = user
     }
@@ -44,15 +44,12 @@ export default new Vuex.Store({
   actions: {
     fetchEvents({ commit }) {
       const eventsCollection = fb.eventsCollection.onSnapshot(querySnapshot => {
+        const fetchedEvents = []
         querySnapshot.forEach(event => {
-          commit('STORE_EVENTS', event.data())
-          console.log('event', event.data())
+          fetchedEvents.push(event.data())
+          commit('STORE_EVENTS', fetchedEvents)
         })
       })
-      console.log('eventsCollection is:', eventsCollection)
-      // const orderedEvents = eventsCollection.orderBy('date')
-
-
 
       // axios
       //   .get('http://localhost:3000/events')
@@ -62,9 +59,9 @@ export default new Vuex.Store({
       //   .catch(error => {
       //     console.log('There was an error:', error.response)
       //   })
-    },
-    addEvent({ commit }, event) {
-      commit('ADD_EVENT', event)
+      // },
+      // addEvent({ commit }, event) {
+      //   commit('ADD_EVENT', event)
     },
     userSignUp({ commit }, form) {
       fb.auth.createUserWithEmailAndPassword(form.email, form.password)

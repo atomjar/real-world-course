@@ -3,7 +3,8 @@
 
     <div class="prompt-box -shadow">
       <h3 class="title">Are you going?
-        <meta-field iconName="users">{{ attendeeNumber }} attending</meta-field></h3>
+        <!-- <meta-field iconName="users">{{ attendeeNumber }} attending</meta-field> -->
+      </h3>
       <Button :onClick="addAttendee" class="-fill-gradient">Yes</Button>
       <Button :onClick="notAttending" class="-fill-gray">No</Button>
     </div>
@@ -25,7 +26,7 @@
     <p>{{ event.description }}</p>
 
     <h2>Attendees
-      <span class="badge -fill-gradient">10</span></h2>
+      <span class="badge -fill-gradient">{{ attendeeNumber }}</span></h2>
     <ul class="list-group">
       <li v-for="attendee in event.attendees" class="list-item">
         <media-block :imagePath="attendee.avatar" class="-img-circle">
@@ -43,11 +44,12 @@
   </div>
 </template>
 
-
 <script>
 import MetaField from '@/components/MetaField'
 import MediaBlock from '@/components/MediaBlock'
 import Icon from '@/components/Icon'
+const fb = require('@/firebaseConfig.js')
+
 export default {
   name: 'Attend',
   components: {
@@ -55,32 +57,34 @@ export default {
     MediaBlock,
     Icon
   },
-  // data() {
-  //   return {
-  // event: {}
-  //   }
-  // },
-  // mounted() {
-  /// ??? EVAN: We're aware this could be considered an anti-pattern, setting the data like so. So we're interested in capturing your words on this:
-  // this.event = this.$store.getters.getEvent(this.$route.params.id)
-  // },
   computed: {
     event() {
       return this.$store.getters.getEvent(this.$route.params.id)
-    },
-    attendeeNumber() {
-      return Object.values(this.event.attendees).length
     }
+    // attendeeNumber() {
+    //   return Object.values(this.event.attendees).length
+    // },
     // attendees() {
     //   return this.$store.getters.getAttendees(this.$route.params.id)
     // }
   },
   methods: {
     addAttendee() {
-      this.$store.commit('ADD_ATTENDEE', {
-        eventId: this.$route.params.id,
-        user: this.$store.state.currentUser.user
-      })
+      const userId = this.$store.state.user.id
+      const userName = this.$store.state.user.name
+
+      fb.eventsCollection
+        .doc(this.event.title)
+        .collection('attendees')
+        .doc(userId)
+        .set({
+          name: userName
+        })
+
+      // this.$store.commit('ADD_ATTENDEE', {
+      //   eventId: this.$route.params.id,
+      //   user: this.$store.state.user
+      // })
     },
     notAttending() {
       console.log('Not attending')
