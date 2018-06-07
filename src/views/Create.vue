@@ -53,66 +53,41 @@ import { mapGetters } from 'vuex'
 import { mapMutations } from 'vuex'
 import Datepicker from 'vuejs-datepicker'
 
-const EMPTY_EVENT = {
-  category: '',
-  organizer: {},
-  title: '',
-  description: '',
-  location: '',
-  date: '',
-  time: '',
-  attendees: {}
-}
-
 export default {
   name: 'Create',
   components: {
     Datepicker
   },
   data() {
+    var times = []
+    for (var i = 1; i <= 24; i++) {
+      times.push(i + ':00')
+    }
     return {
-      event: {
+      event: this.createNewEvent(),
+      categories: this.$store.state.categories,
+      times
+    }
+  },
+  methods: {
+    addEvent() {
+      this.$store.commit('ADD_EVENT', this.event)
+      this.event = this.createNewEvent()
+    },
+    createNewEvent() {
+      const user = this.$store.state.user
+      return {
         category: '',
-        organizer: {},
+        organizer: user,
         title: '',
         description: '',
         location: '',
         date: '',
         time: '',
-        attendees: {}
-      },
-      categories: [],
-      times: []
-    }
-  },
-  // computed: {
-  //   ...mapGetters({
-  //     categoryLength: 'getCategoriesLength',
-  //     searchCategories: 'getCategoryByString'
-  //   })
-  // },
-  /// ??? EVAN: Is *created* the ideal hook to perform some logic a component depends on like this?
-  created() {
-    var times = []
-    for (var i = 1; i <= 24; i++) {
-      times.push(i + ':00')
-    }
-    this.times = times
-  },
-  mounted() {
-    /// ??? EVAN: Thoughts on doing this in *mounted* vs. a computed property?
-    this.event.organizer = this.$store.state.user
-    this.event.attendees[
-      this.$store.state.user.id
-    ] = this.$store.state.user.username
-    this.categories = this.$store.state.categories
-  },
-  methods: {
-    // ...mapMutations(['ADD_EVENT'])
-    addEvent() {
-      this.$store.commit('ADD_EVENT', this.event)
-      this.event = { ...EMPTY_EVENT }
-      /// ??? EVAN: Thoughts on clearing this.event out like this?
+        attendees: {
+          [user.id]: user.name
+        }
+      }
     }
   }
 }
