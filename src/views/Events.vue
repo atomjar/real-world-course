@@ -8,7 +8,7 @@
 
 <script>
 import EventCard from '@/components/EventCard.vue'
-import { mapGetters } from 'vuex'
+// import { mapGetters } from 'vuex'
 import axios from 'axios'
 
 export default {
