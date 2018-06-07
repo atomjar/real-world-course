@@ -1,13 +1,21 @@
-import Vue from "vue";
-import Vuex from "vuex";
+import Vue from 'vue'
+import Vuex from 'vuex'
 import axios from 'axios'
 
-Vue.use(Vuex);
+Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
     user: { id: 'abc', username: 'Adam Jahr' },
-    categories: ['sustainability', 'nature', 'animal welfare', 'housing', 'education', 'food', 'community'],
+    categories: [
+      'sustainability',
+      'nature',
+      'animal welfare',
+      'housing',
+      'education',
+      'food',
+      'community'
+    ],
     events: []
   },
   getters: {
@@ -32,7 +40,8 @@ export default new Vuex.Store({
   actions: {
     fetchEvents({ commit }) {
       /// ??? EVAN: Any suggestions on Vue w/ axios?
-      axios.get('http://localhost:3000/events')
+      axios
+        .get('http://localhost:3000/events')
         .then(response => {
           commit('STORE_EVENTS', response.data)
         })
@@ -41,5 +50,4 @@ export default new Vuex.Store({
         })
     }
   }
-});
-
+})
