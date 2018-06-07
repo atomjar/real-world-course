@@ -1,6 +1,6 @@
-<template lang="html">
-  <svg class="icon" v-bind="$props">
-    <use v-bind="{'xlink:href':'feather-sprite.svg#'+name}"/>
+<template>
+  <svg class='icon' v-bind='$props'>
+    <use v-bind='{'xlink:href':'feather-sprite.svg#'+name}'/>
   </svg>
 </template>
 
@@ -21,7 +21,7 @@ export default {
 }
 </script>
 
-<style lang="css" scoped>
+<style scoped>
 .icon {
   stroke: currentColor;
   stroke-width: 2;
