@@ -1,18 +1,19 @@
 <template>
   <div class="event-card -shadow">
     <span class="eyebrow">@{{ events.time }} on {{ events.date }}</span>
-    <!-- <h4 class="title">{{ events.title | exclaimation  }}</h4> -->
-   <h4  class="title">{{ events.title }}</h4>
-
-    <span class="meta">
-      <icon name="users"></icon>
-      {{ events.attendeeCount }} people going</span>
+    <h4 class="title">{{ events.title }}</h4>
+    <MetaField iconName="users">{{ events.attendeeCount }} attending</MetaField>
   </div>
 </template>
 
 <script>
+import MetaField from '@/components/MetaField.vue'
+
 export default {
   name: 'EventCard',
+  components: {
+    MetaField
+  },
   props: {
     events: Object
   }

@@ -1,7 +1,11 @@
 <template>
   <div class="snackbar -text-primary">
-    <icon v-if="hasIcon" :name="iconName" width="60" height="60"></icon>
-    <div>
+    <Icon
+      v-if="iconName"
+      :name="iconName"
+      width="60"
+      height="60" />
+    <div class="body">
       <slot name="header"></slot>
       <slot name="paragraph"></slot>
     </div>
@@ -12,14 +16,7 @@
 import Icon from '@/components/Icon'
 export default {
   name: 'Snackbar',
-  components: {
-    Icon
-  },
   props: {
-    hasIcon: {
-      type: Boolean,
-      default: false
-    },
     iconName: String
   }
 }
@@ -31,8 +28,7 @@ export default {
   align-items: center;
   margin: 0 0 1em;
 }
-.snackbar h4,
-.snackbar p {
+.snackbar > .body * {
   margin: 0;
 }
 .snackbar > .icon {
