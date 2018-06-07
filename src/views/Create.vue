@@ -3,7 +3,6 @@
     <h1>Create Page</h1>
 
     <form  @submit.prevent="addEvent(event)">
-    <!-- <form  @submit.prevent="ADD_EVENT(event)"> -->
       <h2>Tell us about your event</h2>
 
       <label>Select a category</label>
@@ -49,8 +48,6 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-import { mapMutations } from 'vuex'
 import Datepicker from 'vuejs-datepicker'
 
 export default {
