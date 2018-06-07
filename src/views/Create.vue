@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>Create Page</h1>
-    <p>User: {{ firstName }}</p>
+    <p>User: {{ name }}</p>
     <p>Amount of categories: {{ categoryLength }}</p>
     <p>{{ searchCategories('nature')}}</p>
   </div>
@@ -17,12 +17,12 @@ export default {
       return this.$store.state.user
     },
     ...mapGetters({
-      firstName: 'getFirstName',
+      firstName: 'getUserName',
       categoryLength: 'getCategoriesLength',
       searchCategories: 'getCategoryByString'
     })
-    // firstName() {
-    //   return this.$store.getters.getFirstName
+    // userName() {
+    //   return this.$store.getters.getUserName
     // },
     // categoriesLength() {
     //   return this.$store.getters.getCategoriesLength
