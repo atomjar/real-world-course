@@ -29,8 +29,7 @@ export default new Vuex.Store({
   },
   mutations: {
     ADD_EVENT(state, event) {
-      state.events.push({ ...event })
-      /// ??? EVAN: Thoughts on pushing event with spread operator like this?
+      state.events.push(event) // change in other files
     },
     STORE_EVENTS(state, events) {
       state.events = events
@@ -39,7 +38,6 @@ export default new Vuex.Store({
       const event = state.events.filter(event => event.id === eventId)
 
       Vue.set(event[0].attendees, user.id, user.username)
-      /// ??? EVAN: We'd love to capture your words on the array change caveat here.
       // event[0].attendees[user.id] = user.username
     }
   },
