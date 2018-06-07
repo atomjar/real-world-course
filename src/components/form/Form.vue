@@ -46,8 +46,11 @@
         :options="$options.$times"
         required/>
 
-      <!-- ??? EVAN: What is your preferred way to handle a Button component triggering a submit event?-->
-      <Button :onClick.prevent="addEvent" class="-fill-gradient">Submit</Button>
+      <Button 
+        @click="addEvent" 
+        class="-fill-gradient">
+        Submit
+      </Button>
     </form>
 
      <snackbar v-if="success" iconName="check-circle">
