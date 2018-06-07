@@ -1,6 +1,6 @@
 <template>
   <svg class='icon' v-bind='$props'>
-    <use v-bind='{'xlink:href':'feather-sprite.svg#'+name}'/>
+    <use v-bind="{'xlink:href':'feather-sprite.svg#'+name}"/>
   </svg>
 </template>
 
