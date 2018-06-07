@@ -2,16 +2,18 @@
   <div class="event-card -shadow">
     <span class="eyebrow">@{{ events.time }} on {{ events.date }}</span>
     <h4 class="title">{{ events.title }}</h4>
-    <span class="meta">
-      <svg class="icon" width="24" height="24">
-        <use xlink:href="feather-sprite.svg#users"/></svg>
-      {{ events.attendeeCount }} people going</span>
+    <MetaField iconName="users">{{ events.attendeeCount }} attending</MetaField>
   </div>
 </template>
 
 <script>
+import MetaField from '@/components/MetaField.vue'
+
 export default {
   name: 'EventCard',
+  components: {
+    MetaField
+  },
   props: {
     events: Object
   }
