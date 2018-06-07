@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>Create Page</h1>
-    <p>User: {{ username }}</p>
+    <p>User: {{ userName }}</p>
   </div>
 </template>
 
@@ -9,8 +9,8 @@
 export default {
   name: 'Create',
   computed: {
-    username() {
-      return this.$store.state.user
+    userName() {
+      return this.$store.state.user.name
     }
   }
 }
