@@ -6,13 +6,13 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    user: { firstName: 'Adam', lastName: 'Jahr' },
+    user: { id: 'abc', name: 'Jahr' },
     categories: ['sustainability', 'nature', 'animal welfare', 'housing', 'education', 'food', 'community'],
     events: []
   },
   getters: {
-    getFirstName: state => {
-      return state.user.firstName
+    getUserName: state => {
+      return state.user.name
     },
     getCategoriesLength: state => {
       return state.categories.length
