@@ -4,8 +4,6 @@ import Events from './views/Events.vue'
 import Create from './views/Create.vue'
 import Attend from './views/Attend.vue'
 
-
-
 Vue.use(Router)
 
 export default new Router({
