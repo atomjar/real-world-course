@@ -29,9 +29,9 @@
       <!-- <span class="badge -fill-gradient">{{ attendeeNumber }}</span> -->
     </h2>
     <ul class="list-group">
-      <li v-for="attendee in attendees" class="list-item">
+      <!-- <li v-for="attendee in attendees" class="list-item">
           <h5 slot="header">{{ attendee }}</h5>
-      </li>
+      </li> -->
     </ul>
 
   </div>
@@ -55,33 +55,51 @@ export default {
   computed: {
     event() {
       return this.$store.getters.getEvent(this.$route.params.id)
-    },
+    }
     // attendeeNumber() {
     //   return Object.values(this.event.attendees).length
     // },
-    attendees() {
-      const attendeesRef = fb.eventsCollection
-        .doc(this.event.title)
-        .collection('attendees')
+    // attendees() {
+    //   const attendeesRef = fb.eventsCollection
+    //     .doc(this.event.title)
+    //     .collection('attendees')
 
-      attendeesRef.get().then(doc => {
-        console.log('doc', doc.data())
-      })
-    }
+    //   attendeesRef.get().then(doc => {
+    //     console.log('doc', doc.data())
+    //   })
+    // }
     // return this.$store.getters.getAttendees(this.$route.params.id)
   },
   methods: {
     addAttendee() {
-      const userId = this.$store.state.user.id
-      const userName = this.$store.state.user.name
+      const user = this.$store.state.user
 
       fb.eventsCollection
         .doc(this.event.title)
         .collection('attendees')
-        .doc(userId)
-        .set({
-          name: userName
-        })
+        .add(user)
+
+      // eventsColl.get().then(function(doc) {
+      //   if (doc.exists) {
+      //     console.log(doc.data().attendees)
+
+      //     eventsColl.update(Object.assign(doc.data().attendees, user))
+      //   } else {
+      //     console.log('No such document!')
+      //   }
+      // })
+
+      // .update({
+      //   atendees: userName
+      // })
+
+      // fb.eventsCollection
+      //   .doc(this.event.title)
+      //   .collection('attendees')
+      //   .doc(userId)
+      //   .set({
+      //     name: userName
+      //   })
 
       // this.$store.commit('ADD_ATTENDEE', {
       //   eventId: this.$route.params.id,

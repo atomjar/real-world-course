@@ -48,6 +48,7 @@ export default new Vuex.Store({
         querySnapshot.forEach(event => {
           fetchedEvents.push(event.data())
           commit('STORE_EVENTS', fetchedEvents)
+          console.log('events', fetchedEvents)
         })
       })
 
