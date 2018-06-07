@@ -26,16 +26,11 @@
     <p>{{ event.description }}</p>
 
     <h2>Attendees
-      <span class="badge -fill-gradient">{{ attendeeNumber }}</span></h2>
+      <!-- <span class="badge -fill-gradient">{{ attendeeNumber }}</span> -->
+    </h2>
     <ul class="list-group">
-      <li v-for="attendee in event.attendees" class="list-item">
-        <media-block :imagePath="attendee.avatar" class="-img-circle">
+      <li v-for="attendee in attendees" class="list-item">
           <h5 slot="header">{{ attendee }}</h5>
-          <meta-field slot="paragraph" iconName="user-check">
-            <!-- iconName (type === organizer ? award : user-check) -->
-            {{ attendee.type }} <!-- organizer || member -->
-          </meta-field>
-        </media-block>
       </li>
     </ul>
 
@@ -60,13 +55,20 @@ export default {
   computed: {
     event() {
       return this.$store.getters.getEvent(this.$route.params.id)
-    }
+    },
     // attendeeNumber() {
     //   return Object.values(this.event.attendees).length
     // },
-    // attendees() {
-    //   return this.$store.getters.getAttendees(this.$route.params.id)
-    // }
+    attendees() {
+      const attendeesRef = fb.eventsCollection
+        .doc(this.event.title)
+        .collection('attendees')
+
+      attendeesRef.get().then(doc => {
+        console.log('doc', doc.data())
+      })
+    }
+    // return this.$store.getters.getAttendees(this.$route.params.id)
   },
   methods: {
     addAttendee() {
