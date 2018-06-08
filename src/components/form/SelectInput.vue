@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import Field from '@/components/Field.vue'
+import Field from '@/components/form/Field.vue'
 
 export default {
   name: 'SelectInput',

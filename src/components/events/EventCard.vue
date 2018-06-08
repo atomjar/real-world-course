@@ -16,9 +16,6 @@ export default {
   },
   props: {
     events: Object
-  },
-  components: {
-    Icon
   }
 }
 </script>

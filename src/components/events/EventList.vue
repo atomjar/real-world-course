@@ -1,16 +1,16 @@
 <template>
   <div>
-    <EventCard v-for="event in events" 
-               :events="{ time: event.time, 
-                         date: event.date, 
-                         title: event.title, 
+    <EventCard v-for="event in events"
+               :events="{ time: event.time,
+                         date: event.date,
+                         title: event.title,
                          attendeeCount: event.attendeeCount }"
                :key="event.title"/>
   </div>
 </template>
 
 <script>
-import EventCard from '@/components/EventCard.vue'
+import EventCard from '@/components/events/EventCard.vue'
 
 export default {
   name: 'EventList',
@@ -22,6 +22,3 @@ export default {
   }
 }
 </script>
-
-<style>
-</style>
