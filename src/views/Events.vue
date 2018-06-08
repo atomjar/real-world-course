@@ -49,6 +49,7 @@ export default {
             .includes(this.filter.toLowerCase())
 
           if (titleMatches === 0) {
+            // eslint-disable-next-line
             this.errorMessage = 'Nope'
           } else {
             return titleMatches + categoryMatches

@@ -13,7 +13,6 @@
 </template>
 
 <script>
-import Icon from '@/components/Icon'
 export default {
   name: 'Snackbar',
   props: {

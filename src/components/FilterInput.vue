@@ -1,14 +1,19 @@
 <template>
-  <div>
-    <input v-model="filter" 
-           type="text" 
+  <Field class="-shadow">
+    <input v-model="filter"
+           type="text"
            :placeholder="placeholder">
-  </div>
+  </Field>
 </template>
 
 <script>
+import Field from '@/components/Field.vue'
+
 export default {
   name: 'FilterInput',
+  components: {
+    Field
+  },
   props: {
     placeholder: String
   },
@@ -24,6 +29,3 @@ export default {
   }
 }
 </script>
-
-<style>
-</style>
