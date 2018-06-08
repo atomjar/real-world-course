@@ -1,22 +1,18 @@
 <template>
-  <div class="input-inline -button-right">
+  <Field class="-shadow">
     <input v-model="filter"
            type="text"
-           :placeholder="placeholder"
-           class="-shadow">
-
-    <base-button class="-text-gray -icon-center">
-      <icon name="search"></icon>
-    </base-button>
-  </div>
+           :placeholder="placeholder">
+  </Field>
 </template>
 
 <script>
-import Icon from '@/components/Icon'
+import Field from '@/components/Field.vue'
+
 export default {
   name: 'FilterInput',
   components: {
-    Icon
+    Field
   },
   props: {
     placeholder: String
@@ -33,6 +29,3 @@ export default {
   }
 }
 </script>
-
-<style>
-</style>

@@ -2,60 +2,79 @@
   <div>
     <h1>Create an Event</h1>
 
-    <form  @submit.prevent="addEvent">
+    <form @submit.prevent="addEvent">
 
       <h2>Tell us about your event</h2>
 
-      <option-select v-model="event.category" label="Select a category" :options="categories"></option-select>
+      <SelectInput
+        v-model="event.category"
+        label="Select a category"
+        :options="categories"/>
 
+      <h3>Name &amp; describe your event</h3>
 
-      <h3>Name & describe your event</h3>
+      <TextInput
+         v-model="event.title"
+         label="Title"
+         type="text"
+         placeholder="Add an event title"
+         required/>
 
-      <input-field v-model="event.title" type="text" placeholder="Add an event title" required></input-field>
-
-      <input-field v-model="event.description" type="text" placeholder="Add a description"></input-field>
+      <TextInput
+        v-model="event.description"
+        label="Description"
+        type="text"
+        placeholder="Add a description"
+        required />
 
       <h3>Where is your event?</h3>
-      <input-field v-model="event.location" type="text" placeholder="Add a location" required></input-field>
 
-      <BaseField>
-        <label>Location</label>
-        <BaseInput v-model="event.location" placeholder="Add a location" />
-      </BaseField>
+      <TextInput
+         v-model="event.location"
+         label="Location"
+         type="text"
+         placeholder="Add a location"
+         required
+         error="This is an imaginary location"/>
 
       <h3>When is your event?</h3>
 
-      <BaseField>
-        <label>Date</label>
-        <datepicker v-model="event.date" placeholder="Select a date"/>
-      </BaseField>
+      <Field label="Date">
+         <Datepicker
+           v-model="event.date"
+           placeholder="Select a date"
+           required/>
+       </Field>
 
-      <option-select v-model="event.time" label="Select a time" :options="times"></option-select>
-    
-      <!-- <input type="submit" value="Submit"/> -->
-      <base-button>Submit</base-button>
+       <SelectInput
+         v-model="event.time"
+         label="Select a time"
+         :options="times"
+         required/>
+
+      <Button class="-fill-gradient">Submit</Button>
     </form>
 
-    <snackbar v-if="success">
+    <Snackbar v-if="success" iconName="check-circle">
       <h4 slot="header">Success!</h4>
       <p slot="paragraph">Your event has been created.</p>
-    </snackbar>
+    </Snackbar>
 
   </div>
 </template>
 
 <script>
 import Datepicker from 'vuejs-datepicker'
-import InputField from '@/components/InputField.vue'
-import OptionSelect from '@/components/OptionSelect.vue'
+import SelectInput from '@/components/SelectInput.vue'
+import Field from '@/components/Field.vue'
 import Snackbar from '@/components/Snackbar.vue'
 
 export default {
   name: 'Create',
   components: {
     Datepicker,
-    InputField,
-    OptionSelect,
+    Field,
+    SelectInput,
     Snackbar
   },
   data() {
@@ -102,6 +121,3 @@ export default {
   }
 }
 </script>
-
-<style>
-</style>
