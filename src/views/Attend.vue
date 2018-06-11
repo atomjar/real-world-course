@@ -3,7 +3,7 @@
 
     <div class="prompt-box -shadow">
       <h3 class="title">Are you going?
-        <!-- <meta-field iconName="users">{{ attendeeNumber }} attending</meta-field> -->
+        <meta-field iconName="users">{{ event.attendees.length }} attending</meta-field>
       </h3>
       <Button :onClick="addAttendee" class="-fill-gradient">Yes</Button>
       <Button :onClick="notAttending" class="-fill-gray">No</Button>
@@ -14,7 +14,7 @@
       <span class="eyebrow">@{{ event.time }} on {{ event.date }}</span>
       <h1 class="title">{{ event.title }}</h1>
       <media-block>
-        <h5 slot="header">Organized by {{ event.organizer }}</h5>
+        <h5 slot="header">Organized by {{ event.organizer.name }}</h5>
         <meta-field slot="paragraph" iconName="tag">Category: {{ event.category }}</meta-field>
       </media-block>
     </div>
@@ -29,9 +29,9 @@
       <!-- <span class="badge -fill-gradient">{{ attendeeNumber }}</span> -->
     </h2>
     <ul class="list-group">
-      <!-- <li v-for="attendee in attendees" class="list-item">
-          <h5 slot="header">{{ attendee }}</h5>
-      </li> -->
+      <li v-for="attendee in event.attendees" class="list-item">
+          <h5 slot="header">{{ attendee.name }}</h5>
+      </li>
     </ul>
 
   </div>
@@ -73,34 +73,22 @@ export default {
   methods: {
     addAttendee() {
       const user = this.$store.state.user
+      const thisEvent = fb.eventsCollection.doc(this.event.title)
 
-      fb.eventsCollection
-        .doc(this.event.title)
-        .collection('attendees')
-        .add(user)
-
-      // eventsColl.get().then(function(doc) {
-      //   if (doc.exists) {
-      //     console.log(doc.data().attendees)
-
-      //     eventsColl.update(Object.assign(doc.data().attendees, user))
-      //   } else {
-      //     console.log('No such document!')
-      //   }
-      // })
-
-      // .update({
-      //   atendees: userName
-      // })
-
-      // fb.eventsCollection
-      //   .doc(this.event.title)
-      //   .collection('attendees')
-      //   .doc(userId)
-      //   .set({
-      //     name: userName
-      //   })
-
+      thisEvent
+        .get()
+        .then(doc => {
+          if (doc.exists) {
+            let attendeesWithNewUser = doc.data().attendees
+            attendeesWithNewUser.push(user)
+            theEvent.set({ attendees: attendeesWithNewUser }, { merge: true })
+          } else {
+            console.log('Error fetching Event Doc!')
+          }
+        })
+        .catch(error => {
+          console.log('Error fetching Document:', error)
+        })
       // this.$store.commit('ADD_ATTENDEE', {
       //   eventId: this.$route.params.id,
       //   user: this.$store.state.user

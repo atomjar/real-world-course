@@ -2,7 +2,7 @@
   <div @click="expandEvent(id)" class="event-card -shadow">
     <span class="eyebrow">@{{ time }} on {{ date }}</span>
    <h4 class="title">{{ title }}</h4>
-   <!-- <meta-field iconName="users">{{ attendeeNumber }} attending</meta-field> -->
+   <meta-field iconName="users">{{ attendees.length }} attending</meta-field>
   </div>
 </template>
 
@@ -21,13 +21,8 @@ export default {
     },
     date: [Object, String, Date], //fix this format
     title: String,
-    id: Number
-    // attendees: Object
-  },
-  computed: {
-    attendeeNumber() {
-      return Object.values(this.attendees).length
-    }
+    id: String,
+    attendees: Array
   },
   methods: {
     expandEvent(id) {
