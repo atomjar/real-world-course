@@ -15,6 +15,13 @@ Vue.config.productionTip = false
 
 let app
 fb.auth.onAuthStateChanged(user => {
+  if (user) {
+    const loggedInUser = {
+      id: user.uid,
+      name: user.displayName
+    }
+    store.commit('SET_USER', loggedInUser)
+  }
   if (!app) {
     app = new Vue({
       router,

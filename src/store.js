@@ -57,11 +57,15 @@ export default new Vuex.Store({
     userSignUp({ commit }, form) {
       fb.auth.createUserWithEmailAndPassword(form.email, form.password)
         .then(user => {
-          const newUser = {
+          const newUser = fb.auth.currentUser
+          newUser.updateProfile({ displayName: form.name })
+
+          const userToStore = {
             id: user.user.uid,
             name: form.name
           }
-          commit('SET_USER', newUser)
+
+          commit('SET_USER', userToStore)
           fb.db.collection('users').doc(user.user.uid).set({
             name: form.name
           })
