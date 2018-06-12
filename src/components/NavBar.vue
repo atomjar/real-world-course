@@ -3,7 +3,7 @@
     <router-link to="/" class="brand">Vue World</router-link>
     <nav>
       <router-link to="/" class="nav-item">Events</router-link>
-      <router-link to="/create" class="nav-item">Create an event</router-link>
+      <router-link to="/create" class="nav-item">Create an Event</router-link>
       <router-link v-if="!loggedIn" to="/login">Login / Sign Up</router-link>
       <a v-else @click="logout">Log Out</a>
     </nav>
