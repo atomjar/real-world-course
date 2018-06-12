@@ -1,7 +1,9 @@
 <template>
   <div>
 
-    <div class="prompt-box -shadow">
+    <div 
+      v-if="event.organizer.name !== this.$store.state.user.name" 
+      class="prompt-box -shadow">
       <h3 class="title">Are you going?
         <meta-field iconName="users">{{ event.attendees.length }} attending</meta-field>
       </h3>
@@ -26,7 +28,7 @@
     <p>{{ event.description }}</p>
 
     <h2>Attendees
-      <!-- <span class="badge -fill-gradient">{{ attendeeNumber }}</span> -->
+      <span class="badge -fill-gradient">{{ event.attendees.length }}</span>
     </h2>
     <ul class="list-group">
       <li v-for="attendee in event.attendees" class="list-item">
@@ -52,36 +54,31 @@ export default {
     MediaBlock,
     Icon
   },
+  mounted() {
+    console.log('organizer', this.event.organizer)
+  },
   computed: {
     event() {
       return this.$store.getters.getEvent(this.$route.params.id)
     }
-    // attendeeNumber() {
-    //   return Object.values(this.event.attendees).length
-    // },
-    // attendees() {
-    //   const attendeesRef = fb.eventsCollection
-    //     .doc(this.event.title)
-    //     .collection('attendees')
-
-    //   attendeesRef.get().then(doc => {
-    //     console.log('doc', doc.data())
-    //   })
-    // }
-    // return this.$store.getters.getAttendees(this.$route.params.id)
   },
   methods: {
     addAttendee() {
-      const user = this.$store.state.user
+      const user = {
+        id: this.$store.state.user.id,
+        name: this.$store.state.user.name
+      }
+
       const thisEvent = fb.eventsCollection.doc(this.event.title)
 
       thisEvent
         .get()
         .then(doc => {
           if (doc.exists) {
-            let attendeesWithNewUser = doc.data().attendees
-            attendeesWithNewUser.push(user)
-            theEvent.set({ attendees: attendeesWithNewUser }, { merge: true })
+            let attendees = doc.data().attendees
+            attendees.push(user)
+
+            thisEvent.set({ attendees: attendees }, { merge: true })
           } else {
             console.log('Error fetching Event Doc!')
           }
@@ -89,10 +86,6 @@ export default {
         .catch(error => {
           console.log('Error fetching Document:', error)
         })
-      // this.$store.commit('ADD_ATTENDEE', {
-      //   eventId: this.$route.params.id,
-      //   user: this.$store.state.user
-      // })
     },
     notAttending() {
       console.log('Not attending')

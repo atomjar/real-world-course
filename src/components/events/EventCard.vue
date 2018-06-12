@@ -21,7 +21,7 @@ export default {
     },
     date: [Object, String, Date], //fix this format
     title: String,
-    id: String,
+    id: [String, Number],
     attendees: Array
   },
   methods: {

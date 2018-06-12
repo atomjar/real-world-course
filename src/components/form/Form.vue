@@ -86,21 +86,17 @@ export default {
       event: {
         id: Math.floor(Math.random() * 10000000),
         category: '',
-        organizer: {},
+        organizer: this.$store.state.user,
         title: '',
         description: '',
         location: '',
         date: '',
         time: '',
-        attendees: {}
+        attendees: [this.$store.state.user]
       },
-      categories: [],
+      categories: this.$store.state.categories,
       success: false
     }
-  },
-  mounted() {
-    this.event.organizer = this.$store.state.user
-    this.categories = this.$store.state.categories
   },
   methods: {
     addEvent() {
