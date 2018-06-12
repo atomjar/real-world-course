@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class='event-list'>
     <EventCard v-for="event in events"
                :events="{ time: event.time,
                          date: event.date,
@@ -22,3 +22,9 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.event-list {
+  margin-top: 24px;
+}
+</style>
