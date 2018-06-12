@@ -3,19 +3,19 @@
 
     <div class="prompt-box -shadow">
       <h3 class="title">Are you going?
-        <meta-field iconName="users">{{ attendeeNumber }} attending</meta-field></h3>
+        <MetaField iconName="users">{{ attendeeNumber }} attending</MetaField></h3>
       <Button :onClick="addAttendee" class="-fill-gradient">Yes</Button>
       <Button :onClick="notAttending" class="-fill-gray">No</Button>
     </div>
 
   <div>
     <div class="event-header">
-      <span class="eyebrow">@{{ event.time }} on {{ event.date }}</span>
+      <span class="eyebrow">@{{event.time}} on {{ event.date }}</span>
       <h1 class="title">{{ event.title }}</h1>
-      <media-block>
-        <h5 slot="header">Organized by {{ event.organizer }}</h5>
-        <meta-field slot="paragraph" iconName="tag">Category: {{ event.category }}</meta-field>
-      </media-block>
+      <MediaBlock>
+        <h5 slot="header">Organized by {{ event.organizer.name }}</h5>
+        <MetaField slot="paragraph" iconName="tag">Category: {{ event.category }}</MetaField>
+      </MediaBlock>
     </div>
 
     <h3 class="location">Location <icon name="map"></icon></h3>
@@ -25,16 +25,12 @@
     <p>{{ event.description }}</p>
 
     <h2>Attendees
-      <span class="badge -fill-gradient">10</span></h2>
+      <span class="badge -fill-gradient">{{ attendeeNumber }}</span></h2>
     <ul class="list-group">
       <li v-for="attendee in event.attendees" class="list-item">
-        <media-block :imagePath="attendee.avatar" class="-img-circle">
+        <MediaBlock>
           <h5 slot="header">{{ attendee }}</h5>
-          <meta-field slot="paragraph" iconName="user-check">
-            <!-- iconName (type === organizer ? award : user-check) -->
-            {{ attendee.type }} <!-- organizer || member -->
-          </meta-field>
-        </media-block>
+        </MediaBlock>
       </li>
     </ul>
 
@@ -43,17 +39,15 @@
   </div>
 </template>
 
-
 <script>
-import MetaField from '@/components/MetaField'
-import MediaBlock from '@/components/MediaBlock'
-import Icon from '@/components/Icon'
+import MetaField from '@/components/MetaField.vue'
+import MediaBlock from '@/components/MediaBlock.vue'
+
 export default {
   name: 'Attend',
   components: {
     MetaField,
-    MediaBlock,
-    Icon
+    MediaBlock
   },
   // data() {
   //   return {
@@ -114,5 +108,14 @@ export default {
 }
 .event-header > .title {
   margin: 0;
+}
+.list-group {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.list-group > .list-item {
+  padding: 1em 0;
+  border-bottom: solid 1px #e5e5e5;
 }
 </style>

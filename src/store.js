@@ -20,7 +20,7 @@ export default new Vuex.Store({
     events: []
   },
   getters: {
-    getEvent: (state) => (id) => {
+    getEvent: state => id => {
       return state.events.filter(event => event.id === id)[0]
     }
   },
@@ -55,7 +55,8 @@ export default new Vuex.Store({
       commit('ADD_EVENT', event)
     },
     userSignUp({ commit }, form) {
-      fb.auth.createUserWithEmailAndPassword(form.email, form.password)
+      fb.auth
+        .createUserWithEmailAndPassword(form.email, form.password)
         .then(user => {
           const newUser = fb.auth.currentUser
           newUser.updateProfile({ displayName: form.name })
@@ -66,30 +67,34 @@ export default new Vuex.Store({
           }
 
           commit('SET_USER', userToStore)
-          fb.db.collection('users').doc(user.user.uid).set({
-            name: form.name
-          })
+          fb.db
+            .collection('users')
+            .doc(user.user.uid)
+            .set({
+              name: form.name
+            })
         })
         .catch(error => console.log(error))
     },
     userLogin({ commit }, form) {
-      fb.auth.signInWithEmailAndPassword(form.email, form.password)
-        .then(
-          user => {
-            fb.usersCollection.doc(user.user.uid).get()
-              .then(res => {
-                const loggedInUser = {
-                  id: user.user.uid,
-                  name: res.data().name
-                }
-                commit('SET_USER', loggedInUser)
-              }).catch(err => {
-                console.log(err)
-              })
-          }
-        )
+      fb.auth
+        .signInWithEmailAndPassword(form.email, form.password)
+        .then(user => {
+          fb.usersCollection
+            .doc(user.user.uid)
+            .get()
+            .then(res => {
+              const loggedInUser = {
+                id: user.user.uid,
+                name: res.data().name
+              }
+              commit('SET_USER', loggedInUser)
+            })
+            .catch(err => {
+              console.log(err)
+            })
+        })
         .catch(error => console.log(error))
     }
   }
 })
-

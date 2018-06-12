@@ -1,6 +1,6 @@
 <template>
-  <div id="app">
-    <NavBar/>
+  <div id='app'>
+    <NavBar />
     <router-view/>
   </div>
 </template>
@@ -14,7 +14,6 @@ export default {
   }
 }
 </script>
-
 
 <style>
 html {
@@ -103,45 +102,6 @@ small {
 }
 .-shadow {
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.13);
-  border: 0;
-}
-.nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 60px;
-}
-.nav > .brand {
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 700;
-  font-size: 1.5em;
-  text-decoration: none;
-}
-.nav .nav-item {
-  box-sizing: border-box;
-  margin: 0 5px;
-  color: rgba(0, 0, 0, 0.5);
-  text-decoration: none;
-}
-.nav .nav-item.router-link-exact-active {
-  color: #39b982;
-  border-bottom: solid 2px #39b982;
-}
-.list-group {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-.list-group > .list-item {
-  padding: 1em 0;
-  border-bottom: solid 1px #e5e5e5;
-}
-.icon {
-  stroke: currentColor;
-  stroke-width: 2;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  fill: none;
 }
 .badge {
   display: inline-flex;
@@ -230,7 +190,8 @@ textarea {
 }
 [type='text'],
 [type='number'],
-[type='search'] {
+[type='search'],
+[type='password'] {
   height: 52px;
   width: 100%;
   padding: 0 10px;
@@ -238,7 +199,8 @@ textarea {
 }
 [type='text']:focus,
 [type='number']:focus,
-[type='search']:focus {
+[type='search']:focus,
+[type='password']:focus {
   border-color: #39b982;
 }
 ::-webkit-file-upload-button {
@@ -273,77 +235,5 @@ select:focus::ms-value {
 }
 select::ms-expand {
   opacity: 0;
-}
-.input-inline {
-  position: relative;
-}
-.input-inline input {
-  position: relative;
-  padding-right: 70px;
-}
-.input-inline.-button-right button {
-  position: absolute;
-  top: 0;
-  right: 0;
-  cursor: pointer;
-}
-.input-inline.-button-right button:hover {
-  -webkit-transform: inherit;
-  transform: inherit;
-  box-shadow: none;
-}
-.button {
-  align-items: center;
-  justify-content: space-between;
-  height: 52px;
-  padding: 0 40px;
-  background: transparent;
-  border: none;
-  border-radius: 6px;
-  text-align: center;
-  font-weight: 600;
-  white-space: nowrap;
-  transition: all 0.2s linear;
-}
-.button:hover {
-  -webkit-transform: scale(1.02);
-  transform: scale(1.02);
-  box-shadow: 0 7px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
-.button:focus {
-  outline: none;
-}
-.button:active {
-  -webkit-transform: scale(1);
-  transform: scale(1);
-  box-shadow: none;
-}
-.button.-fill-gradient {
-  background: linear-gradient(to right, #16c0b0, #84cf6a);
-  color: #fff;
-}
-.button.-fill-gray {
-  background: rgba(0, 0, 0, 0.5);
-  color: #fff;
-}
-.button.-size-small {
-  height: 32px;
-}
-.button.-icon-right {
-  text-align: left;
-  padding: 0 20px;
-}
-.button.-icon-right > .icon {
-  margin-left: 10px;
-}
-.button.-icon-left {
-  text-align: right;
-  padding: 0 20px;
-}
-.button.-icon-left > .icon {
-  margin-right: 10px;
-}
-.button.-icon-center {
-  padding: 0 20px;
 }
 </style>

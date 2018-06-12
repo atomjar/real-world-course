@@ -71,7 +71,6 @@ export default {
     attendingEvents() {
       return this.events.filter(event => {
         const attendeesIds = Object.keys(event.attendees)
-
         return attendeesIds.indexOf(this.$store.state.user.id) !== -1
       })
     },
@@ -116,9 +115,3 @@ export default {
   }
 }
 </script>
-
-<style>
-.active {
-  color: green;
-}
-</style>

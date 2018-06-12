@@ -28,9 +28,6 @@ export default {
     options: {
       type: Array,
       required: true
-    },
-    label: {
-      type: String
     }
   }
 }

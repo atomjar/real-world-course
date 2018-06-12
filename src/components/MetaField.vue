@@ -6,12 +6,8 @@
 </template>
 
 <script>
-import Icon from '@/components/Icon'
 export default {
   name: 'MetaField',
-  components: {
-    Icon
-  },
   props: {
     iconName: String
   }
