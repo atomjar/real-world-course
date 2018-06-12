@@ -13,10 +13,9 @@
       </div>
 
       <h3>Name &amp; describe your event</h3>
-
       <div class="field">
         <label>Title</label>
-        <input type="text" v-model="event.title" placeholder="Add an event title" />
+        <input v-model="event.title" type="text" placeholder="Add an event title"/>
       </div>
 
       <div class="field">
@@ -30,8 +29,6 @@
         <label>Location</label>
         <input type="text" v-model="event.location" placeholder="Add a location" />
       </div>
-
-      <h3>When is your event?</h3>
 
       <div class="field">
         <label>Date</label>
@@ -55,6 +52,7 @@
 import { mapGetters } from 'vuex'
 // import { mapMutations } from 'vuex'
 import Datepicker from 'vuejs-datepicker'
+// import { mapGetters } from 'vuex'
 
 export default {
   name: 'Create',
@@ -62,46 +60,44 @@ export default {
     Datepicker
   },
   data() {
+    var times = []
+    for (var i = 1; i <= 24; i++) {
+      times.push(i + ':00')
+    }
     return {
-      event: {
+      event: this.createNewEvent(),
+      categories: this.$store.state.categories,
+      times
+    }
+  },
+  // computed: {
+  // username() {
+  //   return this.$store.state.user
+  // },
+  //   ...mapGetters({
+  //     categoryLength: 'getCategoriesLength',
+  //     searchCategories: 'getCategoryByString'
+  //   })
+  // },
+  methods: {
+    addEvent() {
+      this.$store.commit('ADD_EVENT', this.event)
+      this.event = this.createNewEvent()
+    },
+    createNewEvent() {
+      const user = this.$store.state.user
+      return {
         category: '',
-        organizer: {},
+        organizer: user,
         title: '',
         description: '',
         location: '',
         date: '',
-        time: ''
-      },
-      categories: [],
-      times: []
-    }
-  },
-  computed: {
-    // username() {
-    //   return this.$store.state.user
-    // },
-    ...mapGetters({
-      categoryLength: 'getCategoriesLength',
-      searchCategories: 'getCategoryByString'
-    })
-  },
-  created() {
-    var times = []
-    for (var i = 1; i <= 24; i++) {
-      times.push(i)
-    }
-    times.map(time => {
-      time += ':00'
-      this.times.push(time)
-    })
-  },
-  mounted() {
-    this.event.organizer = this.$store.state.user
-    this.categories = this.$store.state.categories
-  },
-  methods: {
-    addEvent() {
-      this.$store.commit('ADD_EVENT', this.event)
+        time: '',
+        attendees: {
+          [user.id]: user.name
+        }
+      }
     }
   }
 }
