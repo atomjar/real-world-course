@@ -45,6 +45,7 @@ a {
 }
 img {
   border-style: none;
+  width: 100%;
 }
 h1,
 h2,
@@ -114,7 +115,7 @@ small {
   font-weight: 400;
   line-height: 26px;
 }
-.badge.-gradient {
+.badge.-fill-gradient {
   background: linear-gradient(to right, #16c0b0, #84cf6a);
   color: #fff;
 }
@@ -189,7 +190,8 @@ textarea {
 }
 [type='text'],
 [type='number'],
-[type='search'] {
+[type='search'],
+[type='password'] {
   height: 52px;
   width: 100%;
   padding: 0 10px;
@@ -197,7 +199,8 @@ textarea {
 }
 [type='text']:focus,
 [type='number']:focus,
-[type='search']:focus {
+[type='search']:focus,
+[type='password']:focus {
   border-color: #39b982;
 }
 ::-webkit-file-upload-button {
@@ -232,23 +235,5 @@ select:focus::ms-value {
 }
 select::ms-expand {
   opacity: 0;
-}
-.input-inline {
-  position: relative;
-}
-.input-inline input {
-  position: relative;
-  padding-right: 70px;
-}
-.input-inline.-button-right button {
-  position: absolute;
-  top: 0;
-  right: 0;
-  cursor: pointer;
-}
-.input-inline.-button-right button:hover {
-  -webkit-transform: inherit;
-  transform: inherit;
-  box-shadow: none;
 }
 </style>
