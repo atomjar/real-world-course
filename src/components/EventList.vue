@@ -1,9 +1,9 @@
 <template>
-  <div>
-    <EventCard v-for="event in events" 
-              :events="{ time: event.time, 
-                         date: event.date, 
-                         title: event.title, 
+  <div class='event-list'>
+    <EventCard v-for="event in events"
+              :events="{ time: event.time,
+                         date: event.date,
+                         title: event.title,
                          attendeeCount: event.attendeeCount }"
               :key="event.title"/>
   </div>
@@ -23,5 +23,8 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+.event-list {
+  margin-top: 24px;
+}
 </style>

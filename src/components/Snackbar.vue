@@ -1,20 +1,36 @@
 <template>
-  <div class="snackbar">
-    <slot name="header"></slot>
-    <slot name="paragraph"></slot>
+  <div class="snackbar -text-primary">
+    <Icon
+      v-if="iconName"
+      :name="iconName"
+      width="60"
+      height="60" />
+    <div class="body">
+      <slot name="header"></slot>
+      <slot name="paragraph"></slot>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'Snackbar'
+  name: 'Snackbar',
+  props: {
+    iconName: String
+  }
 }
 </script>
 
 <style scoped>
 .snackbar {
-  border-width: 1px;
-  border-style: solid;
-  background-color: aquamarine;
+  display: flex;
+  align-items: center;
+  margin: 0 0 1em;
+}
+.snackbar > .body * {
+  margin: 0;
+}
+.snackbar > .icon {
+  margin-right: 1em;
 }
 </style>
