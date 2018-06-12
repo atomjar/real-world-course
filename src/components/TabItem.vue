@@ -8,10 +8,8 @@
 </template>
 
 <script>
-import Icon from '@/components/Icon.vue'
 export default {
   name: 'tab',
-  components: { Icon },
   props: {
     iconName: String
   }
@@ -38,8 +36,8 @@ export default {
   outline: 0;
 }
 .tab-item.active {
-  color: #39B982;
-  border-bottom: solid 2px #39B982;
+  color: #39b982;
+  border-bottom: solid 2px #39b982;
 }
 .tab-item > .icon {
   margin-left: 10px;
