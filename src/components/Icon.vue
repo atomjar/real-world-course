@@ -1,11 +1,12 @@
 <template>
-  <svg class="icon" v-bind="$props">
-    <use v-bind="{'xlink:href':'feather-sprite.svg#'+name}"/></svg>
+  <svg class='icon' v-bind='$props'>
+    <use v-bind="{'xlink:href':'feather-sprite.svg#'+name}"/>
   </svg>
 </template>
 
 <script>
 export default {
+  name: 'Icon',
   props: {
     name: String,
     width: {
@@ -20,5 +21,12 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+.icon {
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill: none;
+}
 </style>
