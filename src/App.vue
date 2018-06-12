@@ -28,6 +28,7 @@ body {
   line-height: 1.5;
 }
 #app {
+  box-sizing: border-box;
   width: 500px;
   padding: 0 20px 20px;
   margin: 0 auto;
@@ -44,6 +45,7 @@ a {
 }
 img {
   border-style: none;
+  width: 100%;
 }
 h1,
 h2,
@@ -95,6 +97,9 @@ small {
 .-text-base {
   color: #000;
 }
+.-text-gray {
+  color: rgba(0, 0, 0, 0.5);
+}
 .-shadow {
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.13);
 }
@@ -110,19 +115,9 @@ small {
   font-weight: 400;
   line-height: 26px;
 }
-.badge.-gradient {
+.badge.-fill-gradient {
   background: linear-gradient(to right, #16c0b0, #84cf6a);
   color: #fff;
-}
-.meta {
-  display: inline-flex;
-  align-items: center;
-  color: rgba(0, 0, 0, 0.4);
-  font-size: 1rem;
-  font-weight: 600;
-}
-.meta .icon {
-  margin-right: 6px;
 }
 button,
 label,
@@ -195,7 +190,8 @@ textarea {
 }
 [type='text'],
 [type='number'],
-[type='search'] {
+[type='search'],
+[type='password'] {
   height: 52px;
   width: 100%;
   padding: 0 10px;
@@ -203,7 +199,8 @@ textarea {
 }
 [type='text']:focus,
 [type='number']:focus,
-[type='search']:focus {
+[type='search']:focus,
+[type='password']:focus {
   border-color: #39b982;
 }
 ::-webkit-file-upload-button {
@@ -238,23 +235,5 @@ select:focus::ms-value {
 }
 select::ms-expand {
   opacity: 0;
-}
-.input-inline {
-  position: relative;
-}
-.input-inline input {
-  position: relative;
-  padding-right: 70px;
-}
-.input-inline.-button-right button {
-  position: absolute;
-  top: 0;
-  right: 0;
-  cursor: pointer;
-}
-.input-inline.-button-right button:hover {
-  -webkit-transform: inherit;
-  transform: inherit;
-  box-shadow: none;
 }
 </style>
