@@ -5,7 +5,8 @@
 
           <TextInput
             v-model="loginForm.email"
-            type="text" placeholder="you@email.com"
+            type="text"
+            placeholder="you@email.com"
             label="Email"/>
 
           <TextInput
@@ -16,13 +17,14 @@
 
           <Button
             :onClick="login"
-            class="">
+            class="-fill-gradient">
             Log In
           </Button>
 
-          <div class="extras">
-              <a @click="toggleForm">Create an Account</a>
-          </div>
+          <Button
+            @click="toggleForm">
+            Create an Account
+          </Button>
       </form>
 
       <form v-else @submit.prevent>
@@ -32,28 +34,30 @@
           v-model.trim="signupForm.name"
           type="text"
           placeholder="Your Name"
-          label="name"/>
+          label="Name"/>
 
         <TextInput
           v-model.trim="signupForm.email"
           type="text" placeholder="you@email.com"
-          label="email"/>
+          label="Email"/>
 
         <TextInput
           v-model.trim="signupForm.password"
           type="password"
           placeholder="*****"
-          label="password"/>
+          label="Password"/>
 
         <Button
           :onClick="signup"
-          class="button">
+          class="-fill-gradient">
           Sign Up
         </Button>
 
-        <div class="extras">
-            <a @click="toggleForm">Back to Log In</a>
-        </div>
+        <Button
+          @click="toggleForm">
+          Back to Log In
+        </Button>
+
       </form>
   </div>
 </template>
