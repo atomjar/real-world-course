@@ -47,6 +47,12 @@ export default {
   transform: scale(1);
   box-shadow: none;
 }
+.button:focus {
+  outline: 0;
+}
+.button + .button {
+  margin-left: 1em;
+}
 .button.-fill-gradient {
   background: linear-gradient(to right, #16c0b0, #84cf6a);
   color: #ffffff;
