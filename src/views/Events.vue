@@ -70,9 +70,11 @@ export default {
     },
     attendingEvents() {
       return this.events.filter(event => {
-        const attendeesIds = Object.keys(event.attendees)
+        const attendees = event.attendees
 
-        return attendeesIds.indexOf(this.$store.state.user.id) !== -1
+        return attendees.map(
+          attendee => attendee.id === this.$store.state.user.id
+        )
       })
     },
     filteredEvents() {

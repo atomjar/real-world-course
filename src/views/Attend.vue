@@ -64,10 +64,7 @@ export default {
   },
   methods: {
     addAttendee() {
-      const user = {
-        id: this.$store.state.user.id,
-        name: this.$store.state.user.name
-      }
+      const user = this.$store.state.user
 
       const thisEvent = fb.eventsCollection.doc(this.event.title)
 
