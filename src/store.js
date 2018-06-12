@@ -57,15 +57,16 @@ export default new Vuex.Store({
     userSignUp({ commit }, form) {
       fb.auth.createUserWithEmailAndPassword(form.email, form.password)
         .then(user => {
-          const newUser = fb.auth.currentUser
-          newUser.updateProfile({ displayName: form.name })
-
-          const userToStore = {
+          const newUser = {
             id: user.user.uid,
             name: form.name
           }
 
-          commit('SET_USER', userToStore)
+          commit('SET_USER', newUser)
+
+          const authenticatedUser = fb.auth.currentUser
+          authenticatedUser.updateProfile({ displayName: form.name })
+
           fb.db.collection('users').doc(user.user.uid).set({
             name: form.name
           })
@@ -76,16 +77,11 @@ export default new Vuex.Store({
       fb.auth.signInWithEmailAndPassword(form.email, form.password)
         .then(
           user => {
-            fb.usersCollection.doc(user.user.uid).get()
-              .then(res => {
-                const loggedInUser = {
-                  id: user.user.uid,
-                  name: res.data().name
-                }
-                commit('SET_USER', loggedInUser)
-              }).catch(err => {
-                console.log(err)
-              })
+            const loggedInUser = {
+              id: user.user.uid,
+              name: user.user.displayName
+            }
+            commit('SET_USER', loggedInUser)
           }
         )
         .catch(error => console.log(error))
