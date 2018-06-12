@@ -236,22 +236,4 @@ select:focus::ms-value {
 select::ms-expand {
   opacity: 0;
 }
-.input-inline {
-  position: relative;
-}
-.input-inline input {
-  position: relative;
-  padding-right: 70px;
-}
-.input-inline.-button-right button {
-  position: absolute;
-  top: 0;
-  right: 0;
-  cursor: pointer;
-}
-.input-inline.-button-right button:hover {
-  -webkit-transform: inherit;
-  transform: inherit;
-  box-shadow: none;
-}
 </style>
