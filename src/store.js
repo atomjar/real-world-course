@@ -19,7 +19,7 @@ export default new Vuex.Store({
     events: []
   },
   getters: {
-    getEvent: (state) => (id) => {
+    getEvent: state => id => {
       return state.events.filter(event => event.id === id)[0]
     }
     // getAttendees: (state, getters) => (id) => {
