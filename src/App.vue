@@ -190,7 +190,8 @@ textarea {
 }
 [type='text'],
 [type='number'],
-[type='search'] {
+[type='search'],
+[type='password'] {
   height: 52px;
   width: 100%;
   padding: 0 10px;
@@ -198,7 +199,8 @@ textarea {
 }
 [type='text']:focus,
 [type='number']:focus,
-[type='search']:focus {
+[type='search']:focus,
+[type='password']:focus {
   border-color: #39b982;
 }
 ::-webkit-file-upload-button {
