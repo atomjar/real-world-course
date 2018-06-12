@@ -4,7 +4,6 @@ import router from './router'
 import store from './store'
 const fb = require('./firebaseConfig.js')
 
-
 import Icon from '@/components/Icon.vue'
 import Button from '@/components/Button.vue'
 import TextInput from '@/components/TextInput.vue'

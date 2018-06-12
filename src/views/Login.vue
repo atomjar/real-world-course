@@ -1,21 +1,21 @@
 <template>
   <div>
       <form v-if="showLoginForm" @submit.prevent>
-          <h1>Login</h1>  
+          <h1>Login</h1>
 
-          <TextInput 
+          <TextInput
             v-model="loginForm.email"
-            type="text" placeholder="you@email.com" 
+            type="text" placeholder="you@email.com"
             label="Email"/>
 
-          <TextInput 
-            v-model="loginForm.password" 
-            type="password" 
-            placeholder="******" 
+          <TextInput
+            v-model="loginForm.password"
+            type="password"
+            placeholder="******"
             label="Password"/>
 
-          <Button 
-            :onClick="login" 
+          <Button
+            :onClick="login"
             class="">
             Log In
           </Button>
@@ -28,25 +28,25 @@
       <form v-else @submit.prevent>
         <h1>Sign up</h1>
 
-        <TextInput 
-          v-model.trim="signupForm.name" 
-          type="text" 
+        <TextInput
+          v-model.trim="signupForm.name"
+          type="text"
           placeholder="Your Name"
           label="name"/>
 
-        <TextInput 
-          v-model.trim="signupForm.email" 
+        <TextInput
+          v-model.trim="signupForm.email"
           type="text" placeholder="you@email.com"
           label="email"/>
 
-        <TextInput 
-          v-model.trim="signupForm.password" 
-          type="password" 
+        <TextInput
+          v-model.trim="signupForm.password"
+          type="password"
           placeholder="*****"
           label="password"/>
 
-        <Button 
-          :onClick="signup" 
+        <Button
+          :onClick="signup"
           class="button">
           Sign Up
         </Button>

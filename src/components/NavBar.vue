@@ -36,27 +36,6 @@ export default {
 }
 </script>
 
-<style>
-</style>
-
-
-<template>
-  <div id='nav' class='nav'>
-    <router-link to='/' class='brand'>Vue World</router-link>
-    <nav>
-      <router-link to='/' class='nav-item'>Events</router-link>
-      <router-link to='/attend' class='nav-item'>Attend</router-link>
-      <router-link to='/create' class='nav-item'>Create</router-link>
-    </nav>
-  </div>
-</template>
-
-<script>
-export default {
-  name: 'NavBar'
-}
-</script>
-
 <style scoped>
 .nav {
   display: flex;
