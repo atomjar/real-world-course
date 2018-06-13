@@ -8,11 +8,25 @@
       "location": "Daytona Beach",
       "description": "Let's clean up this beach.",
       "organizer": "Adam Jahr",
-      "category": {
-        "sustainability": true,
-        "nature": true
-      },
-      "attendeeCount": 10
+      "category": "sustainability",
+      "attendees": [
+        {
+          "id": "abc123",
+          "name": "Adam Jahr"
+        },
+        {
+          "id": "def456",
+          "name": "Gregg Pollack"
+        },
+        {
+          "id": "ghi789",
+          "name": "Beth Swanson"
+        },
+        {
+          "id": "jkl101",
+          "name": "Mary Gordon"
+        }
+      ]
     },
     {
       "id": 2,
@@ -21,12 +35,18 @@
       "time": "12:00",
       "location": "132 N Magnolia Street, Orlando, Florida",
       "description": "We're going to clean up this park.",
-      "organizer": "Adam Jahr",
-      "category": {
-        "sustainability": true,
-        "nature": true
-      },
-      "attendeeCount": 20
+      "organizer": "Adm Jahr",
+      "category": "nature",
+      "attendees": [
+        {
+          "id": "ghi",
+          "name": "Beth Swanson"
+        },
+        {
+          "id": "jkl",
+          "name": "Mary Gordon"
+        }
+      ]
     },
     {
       "id": 3,
@@ -35,11 +55,22 @@
       "time": "12:00",
       "location": "132 N Magnolia Street, Orlando, Florida",
       "description": "Help animals find new homes.",
-      "organizer": "Adam Jahr",
-      "category": {
-        "animals": true
-      },
-      "attendeeCount": 30
+      "organizer": "Adm Jahr",
+      "category": "animal welfare",
+      "attendees": [
+        {
+          "id": "abc",
+          "name": "Adam Jahr"
+        },
+        {
+          "id": "ghi",
+          "name": "Beth Swanson"
+        },
+        {
+          "id": "jkl",
+          "name": "Mary Gordon"
+        }
+      ]
     }
   ]
 }

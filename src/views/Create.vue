@@ -4,6 +4,11 @@
     <p>User: {{ name }}</p>
     <p>Amount of categories: {{ categoryLength }}</p>
     <p>{{ searchCategories('nature')}}</p>
+    <p>User: {{ userName }}</p>
+
+    <ul>
+      <li v-for="category in categories">{{ category }}</li>
+    </ul>
   </div>
 </template>
 
@@ -13,6 +18,12 @@ import { mapGetters } from 'vuex'
 export default {
   name: 'Create',
   computed: {
+    userName() {
+      return this.$store.state.user.name
+    },
+    categories() {
+      return this.$store.state.categories
+    }
     username() {
       return this.$store.state.user
     },
