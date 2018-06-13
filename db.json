@@ -9,12 +9,24 @@
       "description": "Let's clean up this beach.",
       "organizer": "Adam Jahr",
       "category": "sustainability",
-      "attendees": {
-        "a": "Adam Jahr",
-        "b": "Gregg Pollack",
-        "c": "Beth Rothsan",
-        "d": "Joanne McMane"
-      }
+      "attendees": [
+        {
+          "id": "abc",
+          "name": "Adam Jahr"
+        },
+        {
+          "id": "def",
+          "name": "Gregg Pollack"
+        },
+        {
+          "id": "ghi",
+          "name": "Beth Swanson"
+        },
+        {
+          "id": "jkl",
+          "name": "Mary Gordon"
+        }
+      ]
     },
     {
       "id": 2,
@@ -25,10 +37,16 @@
       "description": "We're going to clean up this park.",
       "organizer": "Adm Jahr",
       "category": "nature",
-      "attendees": {
-        "a": "Adam Jahr",
-        "b": "Gregg Pollack"
-      }
+      "attendees": [
+        {
+          "id": "ghi",
+          "name": "Beth Swanson"
+        },
+        {
+          "id": "jkl",
+          "name": "Mary Gordon"
+        }
+      ]
     },
     {
       "id": 3,
@@ -39,9 +57,20 @@
       "description": "Help animals find new homes.",
       "organizer": "Adm Jahr",
       "category": "animal welfare",
-      "attendees": {
-        "b": "Gregg Pollack"
-      }
+      "attendees": [
+        {
+          "id": "abc",
+          "name": "Adam Jahr"
+        },
+        {
+          "id": "ghi",
+          "name": "Beth Swanson"
+        },
+        {
+          "id": "jkl",
+          "name": "Mary Gordon"
+        }
+      ]
     }
   ]
 }

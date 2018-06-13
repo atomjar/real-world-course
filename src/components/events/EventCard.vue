@@ -22,9 +22,7 @@ export default {
     date: [Date, String],
     title: String,
     id: Number,
-    attendees: {
-      type: Object
-    }
+    attendees: Array
   },
   computed: {
     attendeeNumber() {
