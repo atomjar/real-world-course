@@ -41,7 +41,7 @@
       <SelectInput
         v-model="event.time"
         label="Select a time"
-        :options="$options.$times"
+        :options="categories"
         required/>
 
       <Button 
@@ -79,13 +79,15 @@ export default {
     return {
       event: this.createNewEvent(),
       categories: this.$store.state.categories,
-      times
+      times,
+      success: false
     }
   },
   methods: {
     addEvent() {
       this.$store.commit('ADD_EVENT', this.event)
       this.event = this.createNewEvent()
+      this.success = true
     },
     createNewEvent() {
       const user = this.$store.state.user

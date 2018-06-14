@@ -1,11 +1,10 @@
 <template>
-  <div>
-    <EventCard v-for="event in events" 
-               :events="{ time: event.time, 
-                         date: event.date, 
-                         title: event.title, 
-                         attendeeCount: event.attendeeCount }"
-               :key="event.title"/>
+  <div class="event-list">
+    <EventCard
+      v-for="event in events"
+      v-bind="event"
+      :key="event.title"
+    />
   </div>
 </template>
 
