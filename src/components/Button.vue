@@ -1,20 +1,15 @@
 <template>
-  <button @click="onClick" class="button" :class="buttonClass">
+  <button @click.prevent="$emit('click', $event)" class="button" :class="buttonClass">
     <slot>Button</slot> <!-- default content: 'Button' -->
   </button>
 </template>
 
 <script>
-/// ??? EVAN: Would you have done this button component differently?
-
 export default {
   props: {
     error: {
       type: Boolean,
       default: false
-    },
-    onClick: {
-      type: Function
     }
   },
   computed: {
