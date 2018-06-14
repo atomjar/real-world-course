@@ -8,6 +8,9 @@ import TextInput from '@/components/TextInput.vue'
 //registered globally
 Vue.component('Button', Button)
 Vue.component('TextInput', TextInput)
+import Icon from '@/components/Icon.vue'
+//registered globally
+Vue.component('Icon', Icon)
 
 Vue.config.productionTip = false
 

@@ -2,12 +2,16 @@
   <div @click="expandEvent(id)" class="event-card -shadow">
     <span class="eyebrow">@{{ time }} on {{ date }}</span>
    <h4 class="title">{{ title }}</h4>
-   <meta-field iconName="users">{{ attendees.length }} attending</meta-field>
+    <span class="meta">
+      <svg class="icon" width="24" height="24">
+        <use xlink:href="feather-sprite.svg#users"/>
+      </svg>
+      {{ attendees.length }} attending
+    </span>
   </div>
 </template>
 
 <script>
-import MetaField from '@/components/MetaField'
 export default {
   name: 'EventCard',
   components: {
