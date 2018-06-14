@@ -1,14 +1,14 @@
 <template>
   <div @click="expandEvent(id)" class="event-card -shadow">
     <span class="eyebrow">@{{ time }} on {{ date }}</span>
-    <!-- <h4 class="title">{{ title | exclaimation  }}</h4> -->
    <h4 class="title">{{ title }}</h4>
-   <meta-field iconName="users">{{ attendeeNumber }} attending</meta-field>
+   <meta-field iconName="users">{{ attendees.length }} attending</meta-field>
   </div>
 </template>
 
 <script>
 import MetaField from '@/components/MetaField'
+
 export default {
   name: 'EventCard',
   components: {
@@ -22,26 +22,13 @@ export default {
     date: [Date, String],
     title: String,
     id: Number,
-    attendees: {
-      type: Object
-    }
-  },
-  computed: {
-    attendeeNumber() {
-      return Object.values(this.attendees).length
-    }
+    attendees: Array
   },
   methods: {
     expandEvent(id) {
       this.$router.push({ name: 'attend', params: { id } })
     }
   }
-  // Simple filter example
-  // filters: {
-  //   exclaimation(title) {
-  //     return title + '!!!'
-  //   }
-  // }
 }
 </script>
 

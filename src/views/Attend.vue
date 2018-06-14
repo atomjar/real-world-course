@@ -2,8 +2,13 @@
   <div>
 
     <div class="prompt-box -shadow">
+
       <h3 class="title">Are you going?
-        <meta-field iconName="users">{{ attendeeNumber }} attending</meta-field></h3>
+        <meta-field iconName="users">
+        {{ event.attendees.length }} attending
+        </meta-field>
+      </h3>
+
       <Button :onClick="addAttendee" class="-fill-gradient">Yes</Button>
       <Button :onClick="notAttending" class="-fill-gray">No</Button>
     </div>
@@ -25,15 +30,11 @@
     <p>{{ event.description }}</p>
 
     <h2>Attendees
-      <span class="badge -fill-gradient">10</span></h2>
+      <span class="badge -fill-gradient">{{ event.attendees.length }}</span></h2>
     <ul class="list-group">
       <li v-for="attendee in event.attendees" class="list-item">
         <media-block :imagePath="attendee.avatar" class="-img-circle">
-          <h5 slot="header">{{ attendee }}</h5>
-          <meta-field slot="paragraph" iconName="user-check">
-            <!-- iconName (type === organizer ? award : user-check) -->
-            {{ attendee.type }} <!-- organizer || member -->
-          </meta-field>
+          <h5 slot="header">{{ attendee.name }}</h5>
         </media-block>
       </li>
     </ul>
@@ -55,25 +56,10 @@ export default {
     MediaBlock,
     Icon
   },
-  // data() {
-  //   return {
-  // event: {}
-  //   }
-  // },
-  // mounted() {
-  /// ??? EVAN: We're aware this could be considered an anti-pattern, setting the data like so. So we're interested in capturing your words on this:
-  // this.event = this.$store.getters.getEvent(this.$route.params.id)
-  // },
   computed: {
     event() {
       return this.$store.getters.getEvent(this.$route.params.id)
-    },
-    attendeeNumber() {
-      return Object.values(this.event.attendees).length
     }
-    // attendees() {
-    //   return this.$store.getters.getAttendees(this.$route.params.id)
-    // }
   },
   methods: {
     addAttendee() {

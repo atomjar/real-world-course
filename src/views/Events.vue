@@ -30,7 +30,6 @@
       Attending
     </TabItem>
 
-    <!-- ??? EVAN: Do you have feedback on how we're handling the filtered tab-based event lists? See computed properties below. -->
     <EventList :events="filteredEvents"/>
 
   </div>
@@ -70,9 +69,12 @@ export default {
     },
     attendingEvents() {
       return this.events.filter(event => {
-        const attendeesIds = Object.keys(event.attendees)
+        const attendees = event.attendees
 
-        return attendeesIds.indexOf(this.$store.state.user.id) !== -1
+        var i
+        for (i = 0; i < attendees.length; i++) {
+          if (attendees[i].id === this.$store.state.user.id) return true
+        }
       })
     },
     filteredEvents() {
