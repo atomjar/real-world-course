@@ -6,21 +6,11 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    user: { id: 'abc', name: 'Adam Jahr' },
+    user: { id: 'abc123', name: 'Adam Jahr', city: 'Orlando' },
     categories: ['sustainability', 'nature', 'animal welfare', 'housing', 'education', 'food', 'community'],
     events: []
   },
-  getters: {
-    getFirstName: state => {
-      return state.user.firstName
-    },
-    getCategoriesLength: state => {
-      return state.categories.length
-    },
-    getCategoryByString: state => string => {
-      return state.categories.find(cat => cat === string)
-    }
-  },
+  getters: {},
   mutations: {
     ADD_EVENT(state, event) {
       state.events.push(event)
