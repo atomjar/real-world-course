@@ -1,10 +1,10 @@
 <template>
   <div class="event-card -shadow">
-    <span class="eyebrow">@{{ events.time }} on {{ events.date }}</span>
-    <h4 class="title">{{ events.title }}</h4>
+    <span class="eyebrow">@{{ time }} on {{ date }}</span>
+    <h4 class="title">{{ title }}</h4>
     <span class="meta">
       <Icon name="users" />
-      {{ events.attendeeCount }} people going</span>
+      {{ attendees.length }} attending</span>
   </div>
 </template>
 
@@ -12,7 +12,11 @@
 export default {
   name: 'EventCard',
   props: {
-    events: Object
+    time: String,
+    date: [Date, String],
+    title: String,
+    id: Number,
+    attendees: Array
   }
 }
 </script>

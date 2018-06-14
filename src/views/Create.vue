@@ -1,9 +1,16 @@
 <template>
   <div>
     <h1>Create Page</h1>
-    <p>User: {{ name }}</p>
+
+    <p>User: {{ userName }}</p>
+    <p>City: {{ userCity }}</p>
+
     <p>Amount of categories: {{ categoryLength }}</p>
     <p>{{ searchCategories('nature')}}</p>
+
+    <ul>
+      <li v-for="category in categories">{{ category }}</li>
+    </ul>
   </div>
 </template>
 
@@ -13,11 +20,14 @@ import { mapGetters } from 'vuex'
 export default {
   name: 'Create',
   computed: {
-    username() {
-      return this.$store.state.user
+    userName() {
+      return this.$store.state.user.name
+    },
+    categories() {
+      return this.$store.state.categories
     },
     ...mapGetters({
-      firstName: 'getUserName',
+      userCity: 'getUserCity',
       categoryLength: 'getCategoriesLength',
       searchCategories: 'getCategoryByString'
     })
