@@ -1,10 +1,12 @@
 <template>
   <div>
     <h1>Create Page</h1>
-    <p>User: {{ name }}</p>
+
+    <p>User: {{ userName }}</p>
+    <p>City: {{ userCity }}</p>
+
     <p>Amount of categories: {{ categoryLength }}</p>
     <p>{{ searchCategories('nature')}}</p>
-    <p>User: {{ userName }}</p>
 
     <ul>
       <li v-for="category in categories">{{ category }}</li>
@@ -23,12 +25,9 @@ export default {
     },
     categories() {
       return this.$store.state.categories
-    }
-    username() {
-      return this.$store.state.user
     },
     ...mapGetters({
-      firstName: 'getUserName',
+      userCity: 'getUserCity',
       categoryLength: 'getCategoriesLength',
       searchCategories: 'getCategoryByString'
     })
