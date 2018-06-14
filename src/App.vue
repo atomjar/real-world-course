@@ -25,6 +25,7 @@ body {
   line-height: 1.5;
 }
 #app {
+  box-sizing: border-box;
   width: 500px;
   padding: 0 20px 20px;
   margin: 0 auto;
@@ -41,6 +42,7 @@ a {
 }
 img {
   border-style: none;
+  width: 100%;
 }
 h1,
 h2,
@@ -92,8 +94,12 @@ small {
 .-text-base {
   color: #000;
 }
+.-text-gray {
+  color: rgba(0,0,0,0.5);
+}
 .-shadow {
   box-shadow: 0 1px 2px 0 rgba(0,0,0,0.2), 0 1px 5px 0 rgba(0,0,0,0.13);
+  border: 0;
 }
 .nav {
   display: flex;
@@ -117,6 +123,15 @@ small {
   color: #39b982;
   border-bottom: solid 2px #39b982;
 }
+.list-group {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.list-group > .list-item {
+  padding: 1em 0;
+  border-bottom: solid 1px #e5e5e5;
+}
 .icon {
   stroke: currentColor;
   stroke-width: 2;
@@ -136,19 +151,9 @@ small {
   font-weight: 400;
   line-height: 26px;
 }
-.badge.-gradient {
+.badge.-fill-gradient {
   background: linear-gradient(to right, #16c0b0, #84cf6a);
   color: #fff;
-}
-.meta {
-  display: inline-flex;
-  align-items: center;
-  color: rgba(0,0,0,0.4);
-  font-size: 1rem;
-  font-weight: 600;
-}
-.meta .icon {
-  margin-right: 6px;
 }
 button,
 label,
@@ -282,7 +287,6 @@ select::ms-expand {
   box-shadow: none;
 }
 .button {
-  display: inline-flex;
   align-items: center;
   justify-content: space-between;
   height: 52px;
@@ -299,6 +303,9 @@ select::ms-expand {
   -webkit-transform: scale(1.02);
           transform: scale(1.02);
   box-shadow: 0 7px 17px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+.button:focus {
+  outline: none;
 }
 .button:active {
   -webkit-transform: scale(1);

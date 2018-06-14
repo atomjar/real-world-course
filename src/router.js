@@ -21,7 +21,7 @@ export default new Router({
       component: Create
     },
     {
-      path: "/attend",
+      path: "/attend/event/:id",
       name: "attend",
       component: Attend
     }

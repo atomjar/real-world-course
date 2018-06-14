@@ -5,6 +5,8 @@
       v-for="event in events"
       v-bind="event" 
       :key="event.id"/>
+
+    <!-- <p v-if="error">{{ error }}</p> --> 
   </div>
 </template>
 
@@ -16,8 +18,15 @@ export default {
   components: {
     EventCard
   },
+  // data() {
+  //   return {
+  //     error: '' // How to handle error
+  //   }
+  // },
   mounted() {
-    this.$store.dispatch('fetchEvents')
+    if (!this.$store.state.events.length) {
+      this.$store.dispatch('fetchEvents')
+    }
   },
   computed: {
     events() {
@@ -28,4 +37,7 @@ export default {
 </script>
 
 <style>
+.active {
+  color: green;
+}
 </style>

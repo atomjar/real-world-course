@@ -21,18 +21,12 @@ export default {
     id: Number,
     attendees: Array
   }
-  // filters: {
-  //   exclaimation(title) {
-  //     return title + '!!!'
-  //   }
-  // }
 }
 </script>
 
 <style>
 .event-card {
   padding: 20px;
-  margin-bottom: 24px;
 }
 .event-card > .title {
   margin: 0;

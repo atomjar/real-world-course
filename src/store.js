@@ -1,8 +1,8 @@
-import Vue from "vue";
-import Vuex from "vuex";
+import Vue from 'vue'
+import Vuex from 'vuex'
 import axios from 'axios'
 
-Vue.use(Vuex);
+Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
@@ -13,8 +13,7 @@ export default new Vuex.Store({
   getters: {},
   mutations: {
     ADD_EVENT(state, event) {
-      state.events.push(event)
-
+      state.events.push(event) // change in other files
     },
     STORE_EVENTS(state, events) {
       state.events = events
@@ -22,7 +21,8 @@ export default new Vuex.Store({
   },
   actions: {
     fetchEvents({ commit }) {
-      axios.get('http://localhost:3000/events')
+      axios
+        .get('http://localhost:3000/events')
         .then(response => {
           commit('STORE_EVENTS', response.data)
         })
@@ -35,6 +35,4 @@ export default new Vuex.Store({
       commit('ADD_EVENT', event)
     }
   }
-
-});
-
+})
