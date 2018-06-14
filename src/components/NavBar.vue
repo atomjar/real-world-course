@@ -4,7 +4,7 @@
     <nav>
       <router-link to='/' class='nav-item'>Events</router-link>
       <router-link to='/attend' class='nav-item'>Attend</router-link>
-      <router-link to='/create' class='nav-item'>Create</router-link>
+      <router-link to='/create' class='nav-item'>Create an event</router-link>
     </nav>
   </div>
 </template>
