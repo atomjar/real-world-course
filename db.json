@@ -11,19 +11,19 @@
       "category": "sustainability",
       "attendees": [
         {
-          "id": "abc",
+          "id": "abc123",
           "name": "Adam Jahr"
         },
         {
-          "id": "def",
+          "id": "def456",
           "name": "Gregg Pollack"
         },
         {
-          "id": "ghi",
+          "id": "ghi789",
           "name": "Beth Swanson"
         },
         {
-          "id": "jkl",
+          "id": "jkl101",
           "name": "Mary Gordon"
         }
       ]

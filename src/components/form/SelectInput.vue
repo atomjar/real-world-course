@@ -18,11 +18,11 @@
 </template>
 
 <script>
-import inputFieldMixin from '@/mixins/inputFieldMixin'
+// import inputFieldMixin from '@/mixins/inputFieldMixin'
 
 export default {
   name: 'SelectInput',
-  mixins: [inputFieldMixin],
+  // mixins: [inputFieldMixin],
   inheritAttrs: false,
   props: {
     options: {

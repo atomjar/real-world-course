@@ -1,58 +1,28 @@
 <template>
   <div>
-    <h1>Events</h1>
-    <TextInput
-      v-model="filter"
-      class="-shadow"
-      type="search"
-      placeholder="Type to filter events"/>
+    <h1>Events Page</h1>
+    <EventCard 
+      v-for="event in events"
+      v-bind="event" 
+      :key="event.id"/>
 
-    <p v-show="errorMessage">{{ errorMessage }}</p>
-
-    <TabItem
-      @click.native="selectedType = 'all'"
-      :class="{ 'active': selectedType === 'all' }"
-      iconName="clock">
-        All Events
-    </TabItem>
-
-    <TabItem
-      @click.native="selectedType = 'my'"
-      :class="{ 'active': selectedType === 'my' }"
-      iconName="calendar">
-        My Events
-    </TabItem>
-
-    <TabItem
-      @click.native="selectedType = 'attending'"
-      :class="{ 'active': selectedType === 'attending' }"
-      iconName="users">
-      Attending
-    </TabItem>
-
-    <EventList :events="filteredEvents"/>
-
+    <!-- <p v-if="error">{{ error }}</p> --> 
   </div>
 </template>
 
 <script>
-import EventCard from '@/components/events/EventCard.vue'
-import EventList from '@/components/events/EventList.vue'
-import TabItem from '@/components/TabItem.vue'
+import EventCard from '@/components/EventCard.vue'
 
 export default {
   name: 'Events',
   components: {
-    EventCard,
-    EventList,
-    TabItem
+    EventCard
   },
-  data() {
-    return {
-      filter: '',
-      selectedType: 'all'
-    }
-  },
+  // data() {
+  //   return {
+  //     error: '' // How to handle error
+  //   }
+  // },
   mounted() {
     if (!this.$store.state.events.length) {
       this.$store.dispatch('fetchEvents')
@@ -93,27 +63,6 @@ export default {
       return this.filteredEvents.length || !this.filter
         ? ''
         : 'No events matching the search query.'
-    }
-  },
-  methods: {
-    updateFilter(filter) {
-      this.filter = filter
-    },
-    applySearch(events) {
-      if (!this.filter) {
-        return events
-      } else {
-        const searchQuery = this.filter.toLowerCase()
-
-        return events.filter(event => {
-          const titleMatches = event.title.toLowerCase().includes(searchQuery)
-          const categoryMatches = event.category
-            .toLowerCase()
-            .includes(searchQuery)
-
-          return titleMatches || categoryMatches
-        })
-      }
     }
   }
 }
