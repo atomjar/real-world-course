@@ -11,7 +11,7 @@
       "category": "sustainability",
       "attendees": [
         {
-          "id": "abc",
+          "id": "abc123",
           "name": "Adam Jahr"
         },
         {
@@ -59,7 +59,7 @@
       "category": "animal welfare",
       "attendees": [
         {
-          "id": "abc",
+          "id": "abc123",
           "name": "Adam Jahr"
         },
         {
