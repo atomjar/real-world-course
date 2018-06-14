@@ -13,7 +13,6 @@
 
 <script>
 import EventCard from '@/components/EventCard.vue'
-// import { mapGetters } from 'vuex'
 import axios from 'axios'
 
 export default {
@@ -36,15 +35,6 @@ export default {
       .catch(err => {
         this.error = 'There was an error:' + err.response
       })
-  },
-  computed: {
-    // events() {
-    //   return this.$store.state.events
-    // },
-    // ...mapGetters(['totalEvents', 'largeEvents'])
-    // totalEvents() {
-    //   return this.$store.getters.totalEvents
-    // }
   }
 }
 </script>
