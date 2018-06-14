@@ -4,14 +4,14 @@
     <h4 class="title">{{ event.title }}</h4>
     <span class="meta">
       <Icon name="users" />
-      {{ attendeeCount }} people going</span>
-      <svg class="icon" width="24" height="24">
-        <use xlink:href="feather-sprite.svg#users"/></svg>
-      {{ event.attendeeCount }} people going</span>
+      {{ event.attendees.length }} attending
+    </span>
   </div>
 </template>
 
 <script>
+import Icon from '@/components/Icon'
+
 export default {
   name: 'EventCard',
   data() {
@@ -20,7 +20,7 @@ export default {
         title: 'Park Cleanup',
         date: 'Tue May 15 2018',
         time: '6:00',
-        attendeeCount: 10
+        attendees: [{ id: 'abc123', name: 'Adam Jahr' }]
       }
     }
   }
