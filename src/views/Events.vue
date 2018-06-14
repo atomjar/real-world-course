@@ -1,12 +1,12 @@
 <template>
   <div>
-    <h1>Events</h1>
-    <FilterInput @filter-emitted="updateFilter" placeholder="Type to filter events"/>
+    <h1>Events Page</h1>
+    <EventCard 
+      v-for="event in events"
+      v-bind="event" 
+      :key="event.id"/>
 
-    <p v-show="errorMessage">{{ errorMessage }}</p>
-
-    <EventList :events="filteredEvents"/>
-
+    <p v-if="error">{{ error }}</p>
   </div>
 </template>
 
@@ -24,8 +24,8 @@ export default {
   },
   data() {
     return {
-      filter: '',
-      errorMessage: ''
+      events: [],
+      error: ''
     }
   },
   mounted() {

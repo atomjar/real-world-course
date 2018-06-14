@@ -6,7 +6,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    user: { id: 'abc', name: 'Adam Jahr' },
+    user: { id: 'abc123', name: 'Adam Jahr', city: 'Orlando' },
     categories: ['sustainability', 'nature', 'animal welfare', 'housing', 'education', 'food', 'community'],
     events: []
   },
@@ -28,6 +28,7 @@ export default new Vuex.Store({
         })
         .catch(error => {
           console.log('There was an error:', error.response)
+          // DAMIAN - How to handle error here?
         })
     },
     addEvent({ commit }, event) {
