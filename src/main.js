@@ -4,10 +4,12 @@ import router from './router'
 import store from './store'
 
 import Button from '@/components/Button.vue'
+import TextInput from '@/components/TextInput.vue'
+//registered globally
+Vue.component('Button', Button)
+Vue.component('TextInput', TextInput)
 
 Vue.config.productionTip = false
-//registered globally
-Vue.component('base-button', Button)
 
 new Vue({
   router,

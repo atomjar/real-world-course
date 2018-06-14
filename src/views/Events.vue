@@ -8,7 +8,6 @@
 
     <p v-if="error">{{ error }}</p>
   </div>
-
 </template>
 
 <script>
@@ -18,7 +17,9 @@ import axios from 'axios'
 export default {
   name: 'Events',
   components: {
-    EventCard
+    EventCard,
+    EventList,
+    TabItem
   },
   data() {
     return {
@@ -40,4 +41,7 @@ export default {
 </script>
 
 <style>
+.active {
+  color: green;
+}
 </style>
