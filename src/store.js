@@ -9,17 +9,7 @@ export default new Vuex.Store({
     categories: ['sustainability', 'nature', 'animal welfare', 'housing', 'education', 'food', 'community'],
     events: []
   },
-  getters: {
-    getUserCity: state => {
-      return state.user.city
-    },
-    getCategoriesLength: state => {
-      return state.categories.length
-    },
-    getCategoryByString: state => string => {
-      return state.categories.find(cat => cat === string)
-    }
-  },
+  getters: {},
   mutations: {
     ADD_EVENT(state, event) {
       state.events.push(event)

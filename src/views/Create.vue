@@ -49,7 +49,6 @@
 
 <script>
 import Datepicker from 'vuejs-datepicker'
-// import { mapGetters } from 'vuex'
 
 export default {
   name: 'Create',
@@ -67,15 +66,6 @@ export default {
       times
     }
   },
-  // computed: {
-  // username() {
-  //   return this.$store.state.user
-  // },
-  //   ...mapGetters({
-  //     categoryLength: 'getCategoriesLength',
-  //     searchCategories: 'getCategoryByString'
-  //   })
-  // },
   methods: {
     addEvent() {
       this.$store.commit('ADD_EVENT', this.event)
