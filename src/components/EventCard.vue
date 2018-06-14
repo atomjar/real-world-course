@@ -4,7 +4,7 @@
     <h4 class="title">{{ title }}</h4>
     <span class="meta">
       <Icon name="users" />
-      {{ event.attendees.length }} attending
+      {{ attendees.length }} attending
     </span>
   </div>
 </template>
