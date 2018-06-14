@@ -1,9 +1,8 @@
 <template>
   <div @click="expandEvent(id)" class="event-card -shadow">
     <span class="eyebrow">@{{ time }} on {{ date }}</span>
-    <!-- <h4 class="title">{{ title | exclaimation  }}</h4> -->
    <h4 class="title">{{ title }}</h4>
-   <meta-field iconName="users">{{ attendeeNumber }} attending</meta-field>
+   <meta-field iconName="users">{{ attendees.length }} attending</meta-field>
   </div>
 </template>
 
@@ -19,27 +18,16 @@ export default {
       type: String,
       required: true
     },
-    date: [Date, String],
+    date: [Object, String, Date], //fix this format
     title: String,
-    id: Number,
+    id: [String, Number],
     attendees: Array
-  },
-  computed: {
-    attendeeNumber() {
-      return Object.values(this.attendees).length
-    }
   },
   methods: {
     expandEvent(id) {
       this.$router.push({ name: 'attend', params: { id } })
     }
   }
-  // Simple filter example
-  // filters: {
-  //   exclaimation(title) {
-  //     return title + '!!!'
-  //   }
-  // }
 }
 </script>
 
