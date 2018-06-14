@@ -27,6 +27,7 @@ export default new Vuex.Store({
         })
         .catch(error => {
           console.log('There was an error:', error.response)
+          // DAMIAN - How to handle error here?
         })
     }
   }
