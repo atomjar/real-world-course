@@ -93,20 +93,20 @@ export default {
           console.error('Error writing document: ', error)
         })
       this.event = this.createNewEvent()
-    }
-  },
-  createNewEvent() {
-    const user = this.$store.state.user
-    return {
-      id: Math.floor(Math.random() * 10000000),
-      category: '',
-      organizer: user,
-      title: '',
-      description: '',
-      location: '',
-      date: '',
-      time: '',
-      attendees: []
+    },
+    createNewEvent() {
+      const user = this.$store.state.user
+      return {
+        id: Math.floor(Math.random() * 10000000),
+        category: '',
+        organizer: user,
+        title: '',
+        description: '',
+        location: '',
+        date: '',
+        time: '',
+        attendees: []
+      }
     }
   }
 }
