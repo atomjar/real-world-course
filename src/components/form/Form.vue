@@ -60,18 +60,7 @@ import SelectInput from './SelectInput.vue'
 import Datepicker from 'vuejs-datepicker'
 import Snackbar from '@/components/Snackbar.vue'
 import Field from '@/components/form/Field.vue'
-import times from '../../timesUtil'
 const fb = require('@/firebaseConfig.js')
-
-const EMPTY_EVENT = {
-  category: '',
-  organizer: {},
-  title: '',
-  description: '',
-  location: '',
-  date: '',
-  time: ''
-}
 
 export default {
   components: {
