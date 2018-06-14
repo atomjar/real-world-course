@@ -32,11 +32,6 @@ export default new Vuex.Store({
     STORE_EVENTS(state, events) {
       state.events = events
     },
-    // ADD_ATTENDEE(state, { eventId, user }) {
-    //   const event = state.events.filter(event => event.id === eventId)[0]
-
-    //   Vue.set(event.attendees, user.id, user.name)
-    // },
     SET_USER(state, user) {
       state.user = user
     }

@@ -42,7 +42,7 @@
       <SelectInput
         v-model="event.time"
         label="Select a time"
-        :options="$options.$times"
+        :options="categories"
         required/>
 
       <Button :onClick.prevent="addEvent" class="-fill-gradient">Submit</Button>
@@ -80,21 +80,15 @@ export default {
     Field,
     Snackbar
   },
-  $times: times,
   data() {
+    var times = []
+    for (var i = 1; i <= 24; i++) {
+      times.push(i + ':00')
+    }
     return {
-      event: {
-        id: Math.floor(Math.random() * 10000000),
-        category: '',
-        organizer: this.$store.state.user,
-        title: '',
-        description: '',
-        location: '',
-        date: '',
-        time: '',
-        attendees: [this.$store.state.user]
-      },
+      event: this.createNewEvent(),
       categories: this.$store.state.categories,
+      times,
       success: false
     }
   },
@@ -109,7 +103,21 @@ export default {
         .catch(error => {
           console.error('Error writing document: ', error)
         })
-      this.event = { ...EMPTY_EVENT }
+      this.event = this.createNewEvent()
+    }
+  },
+  createNewEvent() {
+    const user = this.$store.state.user
+    return {
+      id: Math.floor(Math.random() * 10000000),
+      category: '',
+      organizer: user,
+      title: '',
+      description: '',
+      location: '',
+      date: '',
+      time: '',
+      attendees: []
     }
   }
 }
@@ -117,3 +125,6 @@ export default {
 
 <style>
 </style>
+
+
+
