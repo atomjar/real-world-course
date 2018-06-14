@@ -2,30 +2,44 @@
   <div>
     <h1>Create Page</h1>
 
-    <form  @submit.prevent="addEvent">
-
+    <form  @submit.prevent="addEvent(event)">
       <h2>Tell us about your event</h2>
 
       <option-select v-model="event.category" label="Select a category" :options="categories"></option-select>
 
 
       <h3>Name & describe your event</h3>
+      <div class="field">
+        <label>Title</label>
+        <input v-model="event.title" type="text" placeholder="Add an event title"/>
+      </div>
 
-      <input-field v-model="event.title" type="text" placeholder="Add an event title" required></input-field>
-
-      <input-field v-model="event.description" type="text" placeholder="Add a description"></input-field>
+      <div class="field">
+        <label>Description</label>
+        <input v-model="event.description" type="text" placeholder="Add a description"/>
+      </div>
 
       <h3>Where is your event?</h3>
-      <input-field v-model="event.location" type="text" placeholder="Add a location" required></input-field>
+      <div class="field">
+        <label>Location</label>
+        <input v-model="event.location" type="text" placeholder="Add a location"/>
+      </div>
 
       <h3>When is your event?</h3>
 
-      <datepicker v-model="event.date" placeholder="Select a date"/>
+      <div class="field">
+        <label>Date</label>
+        <datepicker v-model="event.date" placeholder="Select a date"/>
+      </div>
 
-      <option-select v-model="event.time" label="Select a time" :options="times"></option-select>
-    
-      <!-- <input type="submit" value="Submit"/> -->
-      <base-button>Submit</base-button>
+      <div class="field">
+        <label>Select a time</label>
+        <select v-model="event.time">
+          <option v-for="time in times" :key="time">{{ time }}</option>
+        </select>
+      </div>
+
+      <input type="submit" class="button -fill-gradient" value="Submit"/>
     </form>
 
     <snackbar v-if="success">
@@ -51,49 +65,42 @@ export default {
     Snackbar
   },
   data() {
+    var times = []
+    for (var i = 1; i <= 24; i++) {
+      times.push(i + ':00')
+    }
     return {
-      event: {
+      event: this.createNewEvent(),
+      categories: this.$store.state.categories,
+      times
+    }
+  },
+  methods: {
+    addEvent() {
+      this.$store.commit('ADD_EVENT', this.event)
+      this.event = this.createNewEvent()
+    },
+    createNewEvent() {
+      const user = this.$store.state.user
+      return {
         category: '',
-        organizer: {},
+        organizer: user,
         title: '',
         description: '',
         location: '',
         date: '',
-        time: ''
-      },
-      categories: [],
-      times: [],
-      success: false
-    }
-  },
-  // computed: {
-  //   ...mapGetters({
-  //     categoryLength: 'getCategoriesLength',
-  //     searchCategories: 'getCategoryByString'
-  //   })
-  // },
-  created() {
-    var times = []
-    for (var i = 1; i <= 24; i++) {
-      times.push(i)
-    }
-    times.map(time => {
-      time += ':00'
-      this.times.push(time)
-    })
-  },
-  mounted() {
-    this.event.organizer = this.$store.state.user
-    this.categories = this.$store.state.categories
-  },
-  methods: {
-    addEvent() {
-      this.$store.dispatch('addEvent', this.event)
-      this.success = true
+        time: '',
+        attendees: {
+          [user.id]: user.name
+        }
+      }
     }
   }
 }
 </script>
 
-<style>
+<style scoped>
+.field {
+  margin-bottom: 24px;
+}
 </style>
