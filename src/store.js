@@ -6,7 +6,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    user: { id: 'abc', username: 'Adam Jahr' },
+    user: { id: 'abc123', name: 'Adam Jahr' },
     categories: [
       'sustainability',
       'nature',
@@ -22,10 +22,6 @@ export default new Vuex.Store({
     getEvent: (state) => (id) => {
       return state.events.filter(event => event.id === id)[0]
     }
-    // getAttendees: (state, getters) => (id) => {
-    //   console.log('getterAttendees', getters.getEvent(id).attendees)
-    //   return getters.getEvent(id).attendees
-    // }
   },
   mutations: {
     ADD_EVENT(state, event) {
@@ -33,12 +29,6 @@ export default new Vuex.Store({
     },
     STORE_EVENTS(state, events) {
       state.events = events
-    },
-    ADD_ATTENDEE(state, { eventId, user }) {
-      const event = state.events.filter(event => event.id === eventId)
-
-      Vue.set(event[0].attendees, user.id, user.username)
-      // event[0].attendees[user.id] = user.username
     }
   },
   actions: {

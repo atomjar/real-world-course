@@ -64,7 +64,7 @@ export default {
     },
     myEvents() {
       return this.events.filter(
-        event => event.organizer === this.$store.state.user.username
+        event => event.organizer === this.$store.state.user.name
       )
     },
     attendingEvents() {
