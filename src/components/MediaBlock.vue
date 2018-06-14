@@ -1,7 +1,7 @@
 <template>
   <div class="media-block">
-    <div class="media">
-      <img v-if="imagePath" :src="imagePath">
+    <div class="media" v-if="imagePath">
+      <img :src="imagePath">
     </div>
     <div class="body">
       <slot name="header"></slot>
@@ -22,14 +22,6 @@ export default {
 <style scoped>
 .media-block {
   display: flex;
-}
-.media-block.-img-circle > .media > img {
-  border-radius: 50%;
-}
-.media-block > .media {
-  max-width: 60px;
-  max-height: 60px;
-  margin-right: 1em;
 }
 .media-block > .body {
   display: flex;

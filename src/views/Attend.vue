@@ -1,24 +1,23 @@
 <template>
   <div>
 
-    <div 
-      v-if="event.organizer.name !== this.$store.state.user.name" 
+    <div
+      v-if="event.organizer.name !== this.$store.state.user.name"
       class="prompt-box -shadow">
       <h3 class="title">Are you going?
-        <meta-field iconName="users">{{ event.attendees.length }} attending</meta-field>
-      </h3>
+        <MetaField iconName="users">{{ event.attendees.length }} attending</MetaField></h3>
       <Button :onClick="addAttendee" class="-fill-gradient">Yes</Button>
       <Button :onClick="notAttending" class="-fill-gray">No</Button>
     </div>
 
   <div>
     <div class="event-header">
-      <span class="eyebrow">@{{ event.time }} on {{ event.date }}</span>
+      <span class="eyebrow">@{{event.time}} on {{ event.date }}</span>
       <h1 class="title">{{ event.title }}</h1>
-      <media-block>
+      <MediaBlock>
         <h5 slot="header">Organized by {{ event.organizer.name }}</h5>
         <meta-field slot="paragraph" iconName="tag">Category: {{ event.category }}</meta-field>
-      </media-block>
+      </MediaBlock>
     </div>
 
     <h3 class="location">Location <icon name="map"></icon></h3>
@@ -28,11 +27,12 @@
     <p>{{ event.description }}</p>
 
     <h2>Attendees
-      <span class="badge -fill-gradient">{{ event.attendees.length }}</span>
-    </h2>
+      <span class="badge -fill-gradient">{{ event.attendees.length }}</span></h2>
     <ul class="list-group">
       <li v-for="attendee in event.attendees" class="list-item">
+        <MediaBlock>
           <h5 slot="header">{{ attendee.name }}</h5>
+        </MediaBlock>
       </li>
     </ul>
 
@@ -51,8 +51,7 @@ export default {
   name: 'Attend',
   components: {
     MetaField,
-    MediaBlock,
-    Icon
+    MediaBlock
   },
   mounted() {
     console.log('organizer', this.event.organizer)
@@ -116,5 +115,14 @@ export default {
 }
 .event-header > .title {
   margin: 0;
+}
+.list-group {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.list-group > .list-item {
+  padding: 1em 0;
+  border-bottom: solid 1px #e5e5e5;
 }
 </style>

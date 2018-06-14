@@ -20,7 +20,7 @@ export default new Vuex.Store({
     events: []
   },
   getters: {
-    getEvent: (state) => (id) => {
+    getEvent: state => id => {
       return state.events.filter(event => event.id === id)[0]
     }
   },
@@ -65,7 +65,8 @@ export default new Vuex.Store({
       //   commit('ADD_EVENT', event)
     },
     userSignUp({ commit }, form) {
-      fb.auth.createUserWithEmailAndPassword(form.email, form.password)
+      fb.auth
+        .createUserWithEmailAndPassword(form.email, form.password)
         .then(user => {
           const newUser = {
             id: user.user.uid,
@@ -98,4 +99,3 @@ export default new Vuex.Store({
     }
   }
 })
-

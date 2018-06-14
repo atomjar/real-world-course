@@ -1,5 +1,5 @@
-import Vue from "vue";
-import Router from "vue-router";
+import Vue from 'vue'
+import Router from 'vue-router'
 import Events from './views/Events.vue'
 import Create from './views/Create.vue'
 import Attend from './views/Attend.vue'
