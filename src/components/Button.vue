@@ -1,7 +1,6 @@
 <template>
-  <button :class="buttonClass">
-    <!-- default content displayed will be text 'Button' -->
-    <slot>Button</slot>
+  <button @click.prevent="$emit('click', $event)" class="button" :class="buttonClass">
+    <slot>Button</slot> <!-- default content: 'Button' -->
   </button>
 </template>
 
