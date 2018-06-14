@@ -81,9 +81,7 @@ export default {
         location: '',
         date: '',
         time: '',
-        attendees: {
-          [user.id]: user.name
-        }
+        attendees: []
       }
     }
   }
