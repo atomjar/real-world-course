@@ -42,16 +42,11 @@
       <SelectInput
         v-model="event.time"
         label="Select a time"
-        :options="categories"
+        :options="times"
         required/>
 
-      <Button :onClick.prevent="addEvent" class="-fill-gradient">Submit</Button>
+      <Button @click="addEvent" class="-fill-gradient">Submit</Button>
     </form>
-
-     <snackbar v-if="success" iconName="check-circle">
-       <h4 slot="header">Success!</h4>
-       <p slot="paragraph">Your event has been created.</p>
-     </snackbar>
    </div>
 </template>
 
@@ -87,7 +82,11 @@ export default {
         .doc(this.event.title)
         .set(this.event)
         .then(() => {
-          this.success = true
+          this.$store.commit('ADD_NOTIFICATION', {
+            type: 'success',
+            requireUserAction: false,
+            message: 'Your event has been created.'
+          })
         })
         .catch(error => {
           console.error('Error writing document: ', error)
@@ -97,7 +96,7 @@ export default {
     createNewEvent() {
       const user = this.$store.state.user
       return {
-        id: Math.floor(Math.random() * 10000000),
+        id: `${Math.floor(Math.random() * 10000000)}`,
         category: '',
         organizer: user,
         title: '',
@@ -114,6 +113,3 @@ export default {
 
 <style>
 </style>
-
-
-
