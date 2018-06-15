@@ -44,8 +44,8 @@
         :options="$options.$times"
         required/>
 
-      <Button 
-        @click="addEvent" 
+      <Button
+        @click="addEvent"
         class="-fill-gradient">
         Submit
       </Button>
@@ -59,7 +59,7 @@
 </template>
 
 <script>
-import SelectInput from './SelectInput.vue'
+import SelectInput from '@/components/form/SelectInput.vue'
 import Datepicker from 'vuejs-datepicker'
 import Snackbar from '@/components/Snackbar.vue'
 import Field from '@/components/form/Field.vue'
@@ -90,6 +90,7 @@ export default {
     createNewEvent() {
       const user = this.$store.state.user
       return {
+        id: 0,
         category: '',
         organizer: user,
         title: '',
@@ -106,5 +107,3 @@ export default {
 
 <style>
 </style>
-
-

@@ -1,17 +1,17 @@
 <template>
   <div>
     <h1>Create an event</h1>
-    <Form/>
+    <CreateEventForm/>
   </div>
 </template>
 
 <script>
-import Form from '@/components/form/Form.vue'
+import CreateEventForm from '@/components/events/CreateEventForm.vue'
 
 export default {
   name: 'Create',
   components: {
-    Form
+    CreateEventForm
   }
 }
 </script>

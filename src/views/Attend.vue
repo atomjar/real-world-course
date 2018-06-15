@@ -9,8 +9,8 @@
         </meta-field>
       </h3>
 
-      <Button :onClick="addAttendee" class="-fill-gradient">Yes</Button>
-      <Button :onClick="notAttending" class="-fill-gray">No</Button>
+      <Button @click="addAttendee" class="-fill-gradient">Yes</Button>
+      <Button @click="notAttending" class="-fill-gray">No</Button>
     </div>
 
   <div>
@@ -32,7 +32,11 @@
     <h2>Attendees
       <span class="badge -fill-gradient">{{ event.attendees.length }}</span></h2>
     <ul class="list-group">
-      <li v-for="attendee in event.attendees" class="list-item">
+      <li
+        :key="attendee.id"
+        v-for="attendee in event.attendees"
+        class="list-item"
+      >
         <media-block :imagePath="attendee.avatar" class="-img-circle">
           <h5 slot="header">{{ attendee.name }}</h5>
         </media-block>
@@ -61,6 +65,9 @@ export default {
       return this.$store.getters.getEvent(this.$route.params.id)
     }
   },
+  created() {
+    this.$store.dispatch('fetchEvents')
+  },
   methods: {
     addAttendee() {
       // console.log('user', this.$store.state.user)
@@ -75,6 +82,48 @@ export default {
   }
 }
 </script>
+<!--
+<script>
+import MetaField from '@/components/MetaField'
+import MediaBlock from '@/components/MediaBlock'
+import Icon from '@/components/Icon'
+export default {
+  name: 'Attend',
+  components: {
+    MetaField,
+    MediaBlock,
+    Icon
+  },
+  data() {
+    return {
+      event: null
+    }
+  },
+  // computed: {
+  //   event() {
+  //     return this.$store.getters.getEvent(this.$route.params.id)
+  //   }
+  // },
+  async created() {
+    const response = await axios.get('path/to/api/events', {
+      id: this.$route.params.id
+    })
+    this.event = response.data
+  },
+  methods: {
+    addAttendee() {
+      // console.log('user', this.$store.state.user)
+      // this.$store.commit('ADD_ATTENDEE', {
+      //   eventId: this.$route.params.id,
+      //   user: this.$store.state.user
+      // })
+    },
+    notAttending() {
+      console.log('Not attending')
+    }
+  }
+}
+</script> -->
 
 <style scoped>
 .prompt-box {
