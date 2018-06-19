@@ -17,7 +17,6 @@ import inputFieldMixin from '@/mixins/inputFieldMixin'
 export default {
   name: 'TextInput',
   mixins: [inputFieldMixin],
-  // ??? EVAN: Thoughts on using a mixin for extending this (and the SelectInput) component?
   inheritAttrs: false
 }
 </script>

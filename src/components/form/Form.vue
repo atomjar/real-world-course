@@ -6,38 +6,37 @@
         label="Select a category"
         :options="categories"/>
 
-       <h3>Name & describe your event</h3>
-       <TextInput
-         v-model="event.title"
-         label="Title"
-         type="text"
-         placeholder="Add an event title"
-         required/>
+      <h3>Name & describe your event</h3>
+      <TextInput
+        v-model="event.title"
+        label="Title"
+        type="text"
+        placeholder="Add an event title"
+        required/>
 
-       <TextInput
-         v-model="event.description"
-         label="Description"
-         type="text"
-         placeholder="Add a description"
-         required/>
+      <TextInput
+        v-model="event.description"
+        label="Description"
+        type="text"
+        placeholder="Add a description"
+        required/>
 
-       <h3>Where is your event?</h3>
-       <TextInput
-         v-model="event.location"
-         label="Location"
-         type="text"
-         placeholder="Add a location"
-         required
-         error="This is an imaginary location"/>
+      <h3>Where is your event?</h3>
+      <TextInput
+        v-model="event.location"
+        label="Location"
+        type="text"
+        placeholder="Add a location"
+        required
+        error="This is an imaginary location"/>
 
-       <h3>When is your event?</h3>
-       <Field label="Date">
-         <Datepicker
-           v-model="event.date"
-           placeholder="Select a date"
-           required/>
-       </Field>
-
+      <h3>When is your event?</h3>
+      <Field label="Date">
+        <Datepicker
+          v-model="event.date"
+          placeholder="Select a date"
+          required/>
+      </Field>
 
       <SelectInput
         v-model="event.time"
@@ -113,3 +112,5 @@ export default {
 
 <style>
 </style>
+
+

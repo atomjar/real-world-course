@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
-const fb = require('./firebaseConfig.js')
+import fb from './firebaseConfig.js'
 
 Vue.use(Vuex)
 
@@ -90,17 +90,13 @@ export default new Vuex.Store({
         })
         .catch(error => console.log(error))
     },
-    userLogin({ commit }, form) {
+    userLogin(context, form) {
       fb.auth
         .signInWithEmailAndPassword(form.email, form.password)
-        .then(user => {
-          const loggedInUser = {
-            id: user.user.uid,
-            name: user.user.displayName
-          }
-          commit('SET_USER', loggedInUser)
-        })
         .catch(error => console.log(error))
+    },
+    userLogout() {
+      return fb.auth.signOut()
     }
   }
 })
