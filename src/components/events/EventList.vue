@@ -3,9 +3,9 @@
     <transition-group
       appear
       name="staggered-events"
-      v-on:before-enter="beforeEnter"
-      v-on:enter="enter"
-      v-on:leave="leave"
+      @before-enter="beforeEnter"
+      @enter="enter"
+      @leave="leave"
       :css="false">
       <EventCard
         v-for="(event, index) in events"
@@ -29,12 +29,12 @@ export default {
     events: Array
   },
   methods: {
-    beforeEnter: function (el) {
+    beforeEnter(el) {
       // Hide and offset to the left
       el.style.opacity = 0
       el.style.transform = 'translateX(-50px)'
     },
-    enter: function (el, done) {
+    enter(el, done) {
       // Stagger entrance (especially for onload)
       var delay = el.dataset.index * 150
       setTimeout(function () {
@@ -45,7 +45,7 @@ export default {
         )
       }, delay)
     },
-    leave: function (el, done) {
+    leave(el, done) {
       // Leave to the right (not staggered, looks buggy)
       Velocity(
         el,
