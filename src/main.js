@@ -12,6 +12,8 @@ Vue.component('TextInput', TextInput)
 Vue.config.productionTip = false
 
 fb.auth.onAuthStateChanged(user => {
+  console.log('user is', user)
+
   if (!user) {
     store.commit('SET_USER', null)
     return

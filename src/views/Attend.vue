@@ -8,7 +8,9 @@
         v-if="event.organizer.name !== this.$store.state.user.name"
         class="prompt-box -shadow">
         <h3 class="title">Are you going?
-          <meta-field iconName="users">{{ event.attendees.length }} attending</meta-field>
+          <meta-field iconName="users">
+          {{ event.attendees.length }} attending
+          </meta-field>
         </h3>
         <Button @click="addAttendee" class="-fill-gradient">Yes</Button>
         <Button @click="notAttending" class="-fill-gray">No</Button>
@@ -16,7 +18,7 @@
 
       <div>
         <div class="event-header">
-          <span class="eyebrow">@{{ event.time }} on {{ event.date }}</span>
+          <span class="eyebrow">@{{ event.time }} on {{ parsedDate }}</span>
           <h1 class="title">{{ event.title }}</h1>
           <media-block>
             <h5 slot="header">Organized by {{ event.organizer.name }}</h5>
@@ -47,7 +49,22 @@
 import MetaField from '@/components/MetaField'
 import MediaBlock from '@/components/MediaBlock'
 import Icon from '@/components/Icon'
-const fb = require('@/firebaseConfig.js')
+import fb from '@/firebaseConfig.js'
+
+const MONTHS = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December'
+]
 
 export default {
   name: 'Attend',
@@ -58,56 +75,47 @@ export default {
   },
   data() {
     return {
-      event: null
+      event: null,
+      docRef: null
     }
   },
   created() {
-    fb.eventsCollection
-      .where('id', '==', this.$route.params.id)
+    var docRef = fb.eventsCollection.doc(this.$route.params.id)
+    this.docRef = docRef
+
+    docRef
       .get()
-      .then(querySnapshot => {
-        querySnapshot.forEach(doc => (this.event = doc.data()))
+      .then(doc => {
+        if (doc.exists) {
+          this.event = doc.data()
+        } else {
+          console.log('No such document!')
+        }
+      })
+      .catch(error => {
+        console.log('Error getting document:', error)
       })
   },
+  computed: {
+    parsedDate() {
+      const eventDate = new Date(this.event.date.seconds * 1000)
+      return `${
+        MONTHS[eventDate.getMonth() - 1]
+      } ${eventDate.getDay()}, ${eventDate.getFullYear()}`
+    }
+  },
   methods: {
-    updateAttendees(newAttendees) {
-      const eventDoc = fb.eventsCollection.doc(this.event.title)
-
-      eventDoc
-        .get()
-        .then(doc => {
-          if (doc.exists) {
-            // Would love to use the event doc that we get inside the
-            // created hook, sadly the one we get by using `.where`
-            // located in the querySnapshot doesn’t have a `.set` method
-            // when accessed after saving it to state
-            eventDoc.set({ attendees: newAttendees }, { merge: true })
-          } else {
-            console.log('Error fetching Event Doc!')
-          }
-        })
-        .catch(error => {
-          console.log('Error fetching Document:', error)
-        })
-    },
     addAttendee() {
       const user = this.$store.state.user
-      const userAlreadyAttendsTheEvent = this.event.attendees.find(
-        attendee => attendee.id === user.id
-      )
-      if (userAlreadyAttendsTheEvent) return
+      const newAttendees = this.event.attendees
+      newAttendees.push(user)
 
-      this.event.attendees.push(user)
+      this.docRef.set({ attendees: newAttendees }, { merge: true })
 
-      this.updateAttendees(this.event.attendees)
+      this.event.attendees = newAttendees
     },
     notAttending() {
-      const user = this.$store.state.user
-      this.event.attendees = this.event.attendees.filter(
-        attendee => attendee.id !== user.id
-      )
-
-      this.updateAttendees(this.event.attendees)
+      console.log('Not attending')
     }
   }
 }

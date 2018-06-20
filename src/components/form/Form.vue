@@ -54,7 +54,7 @@ import SelectInput from './SelectInput.vue'
 import Datepicker from 'vuejs-datepicker'
 import Snackbar from '@/components/Snackbar.vue'
 import Field from '@/components/form/Field.vue'
-const fb = require('@/firebaseConfig.js')
+import fb from '@/firebaseConfig.js'
 
 export default {
   components: {
@@ -75,16 +75,24 @@ export default {
       success: false
     }
   },
+  mounted() {
+    const error = 'POOP!'
+    this.$store.commit('ADD_NOTIFICATION', {
+      message: 'Error fetching events: ' + error,
+      icon: 'x-circle',
+      type: 'error'
+    })
+  },
   methods: {
     addEvent() {
       fb.eventsCollection
-        .doc(this.event.title)
+        .doc(this.event.id)
         .set(this.event)
         .then(() => {
           this.$store.commit('ADD_NOTIFICATION', {
-            type: 'success',
-            requireUserAction: false,
-            message: 'Your event has been created.'
+            message: 'Your event has been created.',
+            icon: 'check-circle',
+            type: 'success'
           })
         })
         .catch(error => {

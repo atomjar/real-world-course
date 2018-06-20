@@ -1,9 +1,10 @@
 <template lang="html">
   <div class="notification-container">
     <NotificationBar
-      v-for="notification of notifications"
+      v-for="notification in notifications"
       :key="notification.message"
       :notification="notification"
+      :iconName="notification.icon"
       @close="removeNotification"
     />
   </div>
@@ -32,5 +33,6 @@ export default {
   position: fixed;
   bottom: 0;
   right: 0;
+  padding-right: 40px;
 }
 </style>

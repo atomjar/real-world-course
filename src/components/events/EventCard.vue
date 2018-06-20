@@ -34,10 +34,10 @@ export default {
       type: String,
       required: true
     },
-    date: [Object, String, Date], //fix this format
+    date: [Object], //fix this format
     title: String,
     id: [String, Number],
-    attendees: Array
+    attendees: [Array, Object]
   },
   computed: {
     parsedDate() {

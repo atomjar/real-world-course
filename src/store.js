@@ -26,10 +26,6 @@ export default new Vuex.Store({
     }
   },
   mutations: {
-    // ADD_EVENT(state, event) {
-    //   fb.eventsCollection.add(event)
-    // state.events.push({ ...event })
-    // },
     STORE_EVENTS(state, events) {
       state.events = events
     },
@@ -54,18 +50,6 @@ export default new Vuex.Store({
         })
         commit('STORE_EVENTS', fetchedEvents)
       })
-
-      // axios
-      //   .get('http://localhost:3000/events')
-      //   .then(response => {
-      //     commit('STORE_EVENTS', response.data)
-      //   })
-      //   .catch(error => {
-      //     console.log('There was an error:', error.response)
-      //   })
-      // },
-      // addEvent({ commit }, event) {
-      //   commit('ADD_EVENT', event)
     },
     userSignUp({ commit }, form) {
       fb.auth
@@ -80,6 +64,8 @@ export default new Vuex.Store({
 
           const authenticatedUser = fb.auth.currentUser
           authenticatedUser.updateProfile({ displayName: form.name })
+
+          console.log('authenticatedUser is', authenticatedUser)
 
           fb.db
             .collection('users')
