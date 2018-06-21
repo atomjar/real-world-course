@@ -97,6 +97,9 @@ small {
 .-text-base {
   color: #000;
 }
+.-text-error {
+  color: tomato;
+}
 .-text-gray {
   color: rgba(0, 0, 0, 0.5);
 }
