@@ -1,6 +1,6 @@
 <template>
   <div @click="expandEvent(id)" class="event-card -shadow">
-    <span class="eyebrow">@{{ time }} on {{ date }}</span>
+    <span class="eyebrow">@{{ time }} on {{ parsedDate }}</span>
    <h4 class="title">{{ title }}</h4>
    <meta-field iconName="users">{{ attendees.length }} attending</meta-field>
   </div>
@@ -8,6 +8,21 @@
 
 <script>
 import MetaField from '@/components/MetaField'
+
+const MONTHS = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December'
+]
 
 export default {
   name: 'EventCard',
@@ -19,10 +34,18 @@ export default {
       type: String,
       required: true
     },
-    date: [Object, String, Date], //fix this format
+    date: [Object], //fix this format
     title: String,
     id: [String, Number],
-    attendees: Array
+    attendees: [Array, Object]
+  },
+  computed: {
+    parsedDate() {
+      const eventDate = new Date(this.date.seconds * 1000)
+      return `${
+        MONTHS[eventDate.getMonth() - 1]
+      } ${eventDate.getDay()}, ${eventDate.getFullYear()}`
+    }
   },
   methods: {
     expandEvent(id) {

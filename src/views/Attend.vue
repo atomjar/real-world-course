@@ -17,47 +17,59 @@
         </transition-group>
       </div>
 
+      <div>
+        <div class="event-header">
+          <span class="eyebrow">@{{ event.time }} on {{ parsedDate }}</span>
+          <h1 class="title">{{ event.title }}</h1>
+          <media-block>
+            <h5 slot="header">Organized by {{ event.organizer.name }}</h5>
+            <meta-field slot="paragraph" iconName="tag">Category: {{ event.category }}</meta-field>
+          </media-block>
+        </div>
       <Snackbar v-else barState="!attend ? 'success' : 'info'">
         <h5 slot="header">{{ !attend ? 'Attending' : 'Not Attending' }}</h5>
       </Snackbar>
     </transition-group>
 
-    <div>
-      <div class="event-header">
-        <span class="eyebrow">@{{event.time}} on {{ event.date }}</span>
-        <h1 class="title">{{ event.title }}</h1>
-        <MediaBlock>
-          <h5 slot="header">Organized by {{ event.organizer.name }}</h5>
-          <meta-field slot="paragraph" iconName="tag">Category: {{ event.category }}</meta-field>
-        </MediaBlock>
+        <h3 class="location">Location <icon name="map"></icon></h3>
+        <address>{{ event.location }}</address>
+
+        <h2>Event details</h2>
+        <p>{{ event.description }}</p>
+
+        <h2>Attendees
+          <span class="badge -fill-gradient">{{ event.attendees.length }}</span>
+        </h2>
+        <ul class="list-group">
+          <li v-for="attendee in event.attendees" class="list-item">
+              <h5 slot="header">{{ attendee.name }}</h5>
+          </li>
+        </ul>
       </div>
-
-      <h3 class="location">Location <icon name="map"></icon></h3>
-      <address>{{ event.location }}</address>
-
-      <h2>Event details</h2>
-      <p>{{ event.description }}</p>
-
-      <h2>Attendees
-        <span class="badge -fill-gradient">{{ event.attendees.length }}</span></h2>
-      <ul class="list-group">
-        <li v-for="attendee in event.attendees" class="list-item">
-          <MediaBlock>
-            <h5 slot="header">{{ attendee.name }}</h5>
-          </MediaBlock>
-        </li>
-      </ul>
-
     </div>
-
   </div>
 </template>
 
 <script>
 import MetaField from '@/components/MetaField'
 import MediaBlock from '@/components/MediaBlock'
-import Snackbar from '@/components/Snackbar'
-const fb = require('@/firebaseConfig.js')
+import Icon from '@/components/Icon'
+import fb from '@/firebaseConfig.js'
+
+const MONTHS = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December'
+]
 
 export default {
   name: 'Attend',
@@ -68,46 +80,44 @@ export default {
   },
   data() {
     return {
-      showPrompt: false,
-      attend: true,
-      notattend: true
+      event: null,
+      docRef: null
     }
   },
-  mounted() {
-    if (event.organizer.name !== this.$store.state.user.name) {
-      this.showPrompt = true
-    }
-    console.log('organizer', this.event.organizer)
+  created() {
+    var docRef = fb.eventsCollection.doc(this.$route.params.id)
+    this.docRef = docRef
+
+    docRef
+      .get()
+      .then(doc => {
+        if (doc.exists) {
+          this.event = doc.data()
+        } else {
+          console.log('No such document!')
+        }
+      })
+      .catch(error => {
+        console.log('Error getting document:', error)
+      })
   },
   computed: {
-    event() {
-      return this.$store.getters.getEvent(this.$route.params.id)
+    parsedDate() {
+      const eventDate = new Date(this.event.date.seconds * 1000)
+      return `${
+        MONTHS[eventDate.getMonth() - 1]
+      } ${eventDate.getDay()}, ${eventDate.getFullYear()}`
     }
   },
   methods: {
     addAttendee() {
       const user = this.$store.state.user
+      const newAttendees = this.event.attendees
+      newAttendees.push(user)
 
-      const thisEvent = fb.eventsCollection.doc(this.event.title)
+      this.docRef.set({ attendees: newAttendees }, { merge: true })
 
-      thisEvent
-        .get()
-        .then(doc => {
-          if (doc.exists) {
-            let attendees = doc.data().attendees
-            attendees.push(user)
-
-            thisEvent.set({ attendees: attendees }, { merge: true })
-          } else {
-            console.log('Error fetching Event Doc!')
-          }
-        })
-        .catch(error => {
-          console.log('Error fetching Document:', error)
-        })
-
-      this.attend = false
-
+      this.event.attendees = newAttendees
     },
     notAttending() {
       this.notattend = false

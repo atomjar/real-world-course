@@ -16,7 +16,7 @@
             label="Password"/>
 
           <Button
-            :onClick="login"
+            @click="login"
             class="-fill-gradient">
             Log In
           </Button>
@@ -48,7 +48,7 @@
           label="Password"/>
 
         <Button
-          :onClick="signup"
+          @click="signup"
           class="-fill-gradient">
           Sign Up
         </Button>

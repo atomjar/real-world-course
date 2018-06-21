@@ -11,8 +11,6 @@
 </template>
 
 <script>
-import * as firebase from 'firebase'
-
 export default {
   name: 'NavBar',
   computed: {
@@ -24,13 +22,8 @@ export default {
   },
   methods: {
     logout() {
-      firebase
-        .auth()
-        .signOut()
-        .then(() => {
-          this.$store.state.user = null
-          this.$router.push('/login')
-        })
+      this.$store.dispatch('userLogout')
+      this.$router.push('/login')
     }
   }
 }

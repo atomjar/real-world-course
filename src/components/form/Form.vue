@@ -41,17 +41,12 @@
       <SelectInput
         v-model="event.time"
         label="Select a time"
-        :options="categories"
+        :options="times"
         required/>
 
-      <Button :onClick.prevent="addEvent" class="-fill-gradient">Submit</Button>
+      <Button @click="addEvent" class="-fill-gradient">Submit</Button>
     </form>
-
-    <snackbar v-if="success" iconName="check-circle">
-      <h4 slot="header">Success!</h4>
-      <p slot="paragraph">Your event has been created.</p>
-    </snackbar>
-  </div>
+   </div>
 </template>
 
 <script>
@@ -59,7 +54,7 @@ import SelectInput from './SelectInput.vue'
 import Datepicker from 'vuejs-datepicker'
 import Snackbar from '@/components/Snackbar.vue'
 import Field from '@/components/form/Field.vue'
-const fb = require('@/firebaseConfig.js')
+import fb from '@/firebaseConfig.js'
 
 export default {
   components: {
@@ -80,13 +75,25 @@ export default {
       success: false
     }
   },
+  mounted() {
+    const error = 'POOP!'
+    this.$store.commit('ADD_NOTIFICATION', {
+      message: 'Error fetching events: ' + error,
+      icon: 'x-circle',
+      type: 'error'
+    })
+  },
   methods: {
     addEvent() {
       fb.eventsCollection
-        .doc(this.event.title)
+        .doc(this.event.id)
         .set(this.event)
         .then(() => {
-          this.success = true
+          this.$store.commit('ADD_NOTIFICATION', {
+            message: 'Your event has been created.',
+            icon: 'check-circle',
+            type: 'success'
+          })
         })
         .catch(error => {
           console.error('Error writing document: ', error)
@@ -96,7 +103,7 @@ export default {
     createNewEvent() {
       const user = this.$store.state.user
       return {
-        id: Math.floor(Math.random() * 10000000),
+        id: `${Math.floor(Math.random() * 10000000)}`,
         category: '',
         organizer: user,
         title: '',
