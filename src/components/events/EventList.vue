@@ -11,7 +11,7 @@
         v-for="(event, index) in events"
         v-bind="event"
         v-bind:data-index="index"
-        :key="event.title" />
+        :key="index" />
     </transition-group>
   </div>
 </template>

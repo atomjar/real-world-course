@@ -1,5 +1,5 @@
 <template>
-  <div class="snackbar -text-primary">
+  <div class="snackbar" :class="[snackbar -text-primary]">
     <Icon
       v-if="iconName"
       :name="iconName"
@@ -16,7 +16,22 @@
 export default {
   name: 'Snackbar',
   props: {
-    iconName: String
+    iconName: String,
+    barState: String
+  },
+  computed: {
+    stateColor() {
+      switch (this.barState) {
+        case 'success':
+          return '-text-primary'
+        case 'error':
+          return '-text-error'
+        case 'info':
+          return '-text-gray'
+        default:
+          return '-text-gray'
+      }
+    }
   }
 }
 </script>
