@@ -1,4 +1,4 @@
-<template lang="html">
+<template>
   <div class="field">
     <label :for="label" v-if="label">{{ label }}</label>
     <slot/>
@@ -7,11 +7,12 @@
 
 <script>
 export default {
+  name: 'Field',
   props: ['label']
 }
 </script>
 
-<style lang="css">
+<style>
 .field {
   margin-bottom: 24px;
 }

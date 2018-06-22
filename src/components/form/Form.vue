@@ -6,7 +6,7 @@
         label="Select a category"
         :options="categories"/>
 
-      <h3>Name & describe your event</h3>
+      <h3>Name &amp; describe your event</h3>
       <TextInput
         v-model="event.title"
         label="Title"
@@ -117,8 +117,3 @@ export default {
   }
 }
 </script>
-
-<style>
-</style>
-
-

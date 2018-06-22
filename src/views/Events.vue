@@ -118,9 +118,3 @@ export default {
   }
 }
 </script>
-
-<style>
-.active {
-  color: green;
-}
-</style>

@@ -1,55 +1,59 @@
 <template lang="html">
-  <div class="notificationBar">
-    <Icon
-      v-if="iconName"
-      :name="iconName"
-      width="60"
-      height="60"/>
-    <p :class="notificationClass">{{ notification.message }}</p>
-  </div>
+  <transition name="slide" v-if="show">
+    <div class="notification-bar" :class="notificationClass">
+      <Icon
+        v-if="iconName"
+        :name="iconName"
+        width="60"
+        height="60"/>
+      <p>{{ notification.message }}</p>
+    </div>
+  </transition>
 </template>
 
 <script>
-import Icon from '@/components/Icon.vue'
-
 export default {
-  components: {
-    Icon
-  },
   props: {
     notification: Object,
     iconName: String
   },
+  data() {
+    return {
+      show: true
+    }
+  },
   computed: {
     notificationClass() {
-      return `notification-${this.notification.type}`
+      return `-text-${this.notification.type}`
     }
   },
   mounted() {
     setTimeout(() => {
-      this.$emit('close', this.notification)
-    }, 2500)
+      this.show = false
+      console.log('pop')
+    }, 4000)
   }
 }
 </script>
 
 <style lang="css">
-.notificationBar {
+.notification-bar {
   display: flex;
   align-items: center;
   margin: 1em 0 1em;
 }
-.notificationBar > .body * {
-  margin: 0;
+.notification-bar > .body * {
+  margin: 0 0;
 }
-.notificationBar > .icon {
+.notification-bar > .icon {
   margin-right: 1em;
 }
 
-.notification-error {
-  color: black;
+.slide-enter-active, .slide-leave-active {
+  transition: all 1s ease-in-out;
 }
-.notification-success {
-  color: #39b982;
+.slide-enter, .slide-leave-to {
+  transform: translateX(150%);
+  opacity: 0
 }
 </style>
