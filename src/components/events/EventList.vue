@@ -37,21 +37,13 @@ export default {
     enter(el, done) {
       // Stagger entrance (especially for onload)
       var delay = el.dataset.index * 150
-      setTimeout(function () {
-        Velocity(
-          el,
-          { opacity: 1, translateX: '0' },
-          { complete: done }
-        )
+      setTimeout(() => {
+        Velocity(el, { opacity: 1, translateX: '0' }, { complete: done })
       }, delay)
     },
     leave(el, done) {
       // Leave to the right (not staggered, looks buggy)
-      Velocity(
-        el,
-        { opacity: 0, translateX: '50px' },
-        { complete: done }
-      )
+      Velocity(el, { opacity: 0, translateX: '50px' }, { complete: done })
     }
   }
 }
