@@ -3,6 +3,7 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import fb from './firebaseConfig.js'
+import Icon from '@/components/Icon'
 import Button from '@/components/Button.vue'
 import TextInput from '@/components/TextInput.vue'
 //registered globally
