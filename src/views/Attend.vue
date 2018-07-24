@@ -4,21 +4,24 @@
       <p>Loading...</p>
     </div>
     <div v-else>
-      <transition name='fade-close' v-if="this.event.organizer.name !== this.$store.state.user.name">
-        <div v-if='showPrompt'
-            class="prompt-box -shadow">
-          <h3 class="title">Are you going?
-            <MetaField iconName="users">{{ event.attendees.length }} attending</MetaField></h3>
+      <div v-if="this.event.organizer.name !== this.$store.state.user.name" class="prompt-box -shadow">
+        <h3 class="title">Are you going?
+          <MetaField iconName="users">{{ event.attendees.length }} attending</MetaField></h3>
 
-          <Button @click="addAttendee" class="-fill-gradient">Yes</Button>
-          <Button @click="notAttending" class="-fill-gray">No</Button>
+        <div class="actions">
+          <transition mode="in-out">
+            <Button v-if="attend" class="-text-primary -icon-left" disabled>
+              <icon name="check-circle"/> Attending</Button>
+            <Button v-else @click="addAttendee" class="-fill-gradient">Yes</Button>
+          </transition>
 
-          <transition name="cover" @after-enter="hidePrompt">
-            <span v-if='attend' key='attend' class="banner -confirm"></span>
-            <span v-if='notattend' key='notattend' class="banner -deny"></span>
+          <transition mode="in-out">
+            <Button v-if="notattend" class="-text-error -icon-left" disabled>
+              <icon name="x-circle"/> Not Attending</Button>
+            <Button v-else @click="notAttending" class="-fill-gray">No</Button>
           </transition>
         </div>
-      </transition>
+      </div>
 
       <div class="event-header">
         <span class="eyebrow">@{{ event.time }} on {{ parsedDate }}</span>
@@ -118,15 +121,18 @@ export default {
       this.event.attendees = newAttendees
 
       this.attend = true
+      this.notattend = false
     },
     notAttending() {
       this.notattend = true
-    },
-    hidePrompt() {
-      setTimeout(() => {
-        this.showPrompt = false
-      }, 400)
+      this.attend = false
     }
+    // If you choose to hide prompt after selecting an answer
+    // hidePrompt() {
+    //   setTimeout(() => {
+    //     this.showPrompt = false
+    //   }, 400)
+    // }
   }
 }
 </script>
@@ -145,47 +151,15 @@ export default {
 .prompt-box > .title > .meta {
   margin-left: 10px;
 }
+.prompt-box > .actions {
+  display: flex;
+  align-items: center;
+}
 .prompt-box > button {
   margin-right: 0.5em;
 }
 .prompt-box > button:last-of-type {
   margin-right: 0;
-}
-.prompt-box > .banner {
-  position: absolute;
-  display: flex;
-  width: 250%;
-  height: 500px;
-  overflow: hidden;
-  border-radius: 50%;
-  -webkit-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
-}
-.prompt-box > .banner.-confirm {
-  background: #39b982;
-}
-.prompt-box > .banner.-deny {
-  background: tomato;
-}
-/* Cover Transition CSS */
-.cover-enter-active.banner {
-  transition: width 0.4s ease-in-out, height 0.4s ease-in-out;
-}
-.cover-enter.banner {
-  width: 0;
-  height: 0;
-}
-.cover-enter-to.banner {
-  width: 250%;
-  height: 500px;
-}
-/* Prompt Box Close Transition CSS */
-.fade-close-leave-active {
-  transition: all 1s;
-}
-.fade-close-leave-to {
-  transform: scaleY(0);
-  opacity: 0;
 }
 .location {
   margin-bottom: 0;
